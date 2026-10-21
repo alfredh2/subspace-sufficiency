@@ -57,3 +57,46 @@ def capture_residual(model, residual_index: int, sink: list):
         yield
     finally:
         handle.remove()
+
+
+@contextmanager
+def residual_patch(model, residual_index: int, U: torch.Tensor, source_h: torch.Tensor, position: str = "all",
+                   complement: bool = False):
+    """Activation patching restricted to span(U) (Phase 0.5, Exp. 3).
+
+    Target residual h, cached source residual s (same layer, same batch order):
+        patch (default):  h' = h + U U^T (s - h)      -> coordinates in the MVS come from the source,
+                                                         the orthogonal complement stays the target's
+        complement=True:  h' = h + (I - U U^T)(s - h) -> everything EXCEPT the MVS comes from the source
+    The mean mu cancels, so it is not needed. `position`: "all" (needs source_h of shape (B,T,d), same T as the
+    target) or "last" (only the final token position; source_h may be (B,d) or (B,T,d)). Out of place, fp32 math.
+    """
+    if position not in ("all", "last"):
+        raise ValueError(position)
+    module = _target_module(model, residual_index)
+    Uf = U.float()
+
+    def hook(_mod, _inp, out):
+        h = out[0] if isinstance(out, tuple) else out
+        hf = h.float()
+        if position == "last":
+            s = source_h if source_h.dim() == 2 else source_h[:, -1]
+            diff = s.float().to(hf.device) - hf[:, -1]
+            comp = (diff @ Uf) @ Uf.T
+            delta = diff - comp if complement else comp
+            new = hf.clone()
+            new[:, -1] = hf[:, -1] + delta
+        else:
+            if source_h.shape != h.shape:
+                raise ValueError(f"source {tuple(source_h.shape)} and target {tuple(h.shape)} residuals must have equal shape")
+            diff = source_h.float().to(hf.device) - hf
+            comp = (diff @ Uf) @ Uf.T
+            new = hf + (diff - comp if complement else comp)
+        new = new.to(h.dtype)
+        return (new,) + tuple(out[1:]) if isinstance(out, tuple) else new
+
+    handle = module.register_forward_hook(hook)
+    try:
+        yield
+    finally:
+        handle.remove()

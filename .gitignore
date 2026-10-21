@@ -14,3 +14,5 @@ results/*
 *.safetensors
 !results/phase0_robustness/
 !results/phase0_robustness/**
+!results/phase05/
+!results/phase05/**

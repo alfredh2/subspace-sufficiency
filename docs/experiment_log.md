@@ -55,3 +55,9 @@ Intact (.945/.977/.953) is seed-independent.
 * **Answer-channel pattern** (post-hoc interpretation, not tested): ablation produces constant "1" on the three tasks whose "1" is the affirmative verdict (valid / true / English sentence) and whose gold=2 requires a rejecting verdict (logic seeds 0,2; PrOntoQA seeds 0,2 (.46,.45; seed 1 .65 non-constant); localizer all seeds).
   Tasks without a verdict structure (word recall, Stroop, MMLU-binary, MSIT, multiplication) are unaffected. PrOntoQA is reported separately as logic-adjacent; localizer is the non-logical case.
 * Caveats: 3 seeds; control items re-created; random control uses 10+10 subspaces at one location; "constant-1" is measured under teacher-free first-token scoring only.
+
+## 2026-10-21 — Phase 0.5 (verdict/answer-token confound; no retraining)
+Scripts: `phase05_formats_bias.py` (Exp 1+4), `phase05_directions.py` (Exp 2), `phase05_patching.py` (Exp 3), `phase05_patching_nonverdict.py` (Exp 3b), `phase05_report.py` (tables).
+Narrative + numbers: `docs/phase05_report.md`; tables: `results/phase05/report_tables.md`. Headline: retention is bound to the 1→valid mapping; ablation = shift toward the
+affirmative verdict with ranking (AUC≥0.95) preserved; same signature on the language localizer and PrOntoQA; the shared rank-1 direction alone reproduces the collapse across seeds;
+MVS patching transfers a verdict-like signal on matched pairs (random subspaces: nothing) but also on localizer/PrOntoQA, and not on verdict-free tasks.
