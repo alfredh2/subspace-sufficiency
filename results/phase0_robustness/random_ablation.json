@@ -1,0 +1,586 @@
+{
+  "run_name": "mvs_rank2_seed0",
+  "residual_index": 23,
+  "random": [
+    {
+      "kind": "gaussian",
+      "seed": 1000,
+      "overlap_with_learned": [
+        0.032154662417458145,
+        0.016196489638494568
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.9765625,
+        "nonwords": 0.953125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.765625,
+        "mmlu_binary": 0.8125,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.0016026567391236313
+      }
+    },
+    {
+      "kind": "gaussian",
+      "seed": 1001,
+      "overlap_with_learned": [
+        0.036822447122281665,
+        0.005300325118201548
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.9765625,
+        "nonwords": 0.94921875
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.765625,
+        "mmlu_binary": 0.8046875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.0027900678833248094
+      }
+    },
+    {
+      "kind": "gaussian",
+      "seed": 1002,
+      "overlap_with_learned": [
+        0.01228575287980382,
+        0.004839868682823615
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.9765625,
+        "nonwords": 0.953125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7578125,
+        "mmlu_binary": 0.828125,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.003339463524753228
+      }
+    },
+    {
+      "kind": "gaussian",
+      "seed": 1003,
+      "overlap_with_learned": [
+        0.05500184722982578,
+        0.0059315121838532285
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.9765625,
+        "nonwords": 0.95703125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7578125,
+        "mmlu_binary": 0.8046875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.002944967898656614
+      }
+    },
+    {
+      "kind": "gaussian",
+      "seed": 1004,
+      "overlap_with_learned": [
+        0.005791258389551579,
+        0.0008822821492074053
+      ],
+      "logic": {
+        "items": 0.94140625,
+        "families": 0.9765625,
+        "nonwords": 0.94921875
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7421875,
+        "mmlu_binary": 0.8203125,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.002212924628111068
+      }
+    },
+    {
+      "kind": "gaussian",
+      "seed": 1005,
+      "overlap_with_learned": [
+        0.026322560826447648,
+        0.005626105753996416
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.98046875,
+        "nonwords": 0.95703125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.78125,
+        "mmlu_binary": 0.828125,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.002022060907620471
+      }
+    },
+    {
+      "kind": "gaussian",
+      "seed": 1006,
+      "overlap_with_learned": [
+        0.026827748354547508,
+        0.009882575957972066
+      ],
+      "logic": {
+        "items": 0.94140625,
+        "families": 0.9765625,
+        "nonwords": 0.94921875
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7421875,
+        "mmlu_binary": 0.8046875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.0014607267585233785
+      }
+    },
+    {
+      "kind": "gaussian",
+      "seed": 1007,
+      "overlap_with_learned": [
+        0.017273901256032613,
+        0.009345087754519947
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.9765625,
+        "nonwords": 0.95703125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7578125,
+        "mmlu_binary": 0.8046875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.004345391076640226
+      }
+    },
+    {
+      "kind": "gaussian",
+      "seed": 1008,
+      "overlap_with_learned": [
+        0.024897890490940842,
+        0.010636282104995974
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.9765625,
+        "nonwords": 0.953125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7421875,
+        "mmlu_binary": 0.8046875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.0020387412296258844
+      }
+    },
+    {
+      "kind": "gaussian",
+      "seed": 1009,
+      "overlap_with_learned": [
+        0.00846639041948072,
+        0.0023678258304063444
+      ],
+      "logic": {
+        "items": 0.94140625,
+        "families": 0.9765625,
+        "nonwords": 0.9453125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7421875,
+        "mmlu_binary": 0.8125,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.0035866235702997074
+      }
+    },
+    {
+      "kind": "topvar",
+      "seed": 1000,
+      "overlap_with_learned": [
+        0.031386554884588566,
+        0.00039676144681401437
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.9765625,
+        "nonwords": 0.953125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.75,
+        "mmlu_binary": 0.8046875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.003841709767584689
+      }
+    },
+    {
+      "kind": "topvar",
+      "seed": 1001,
+      "overlap_with_learned": [
+        0.02976505434590602,
+        0.008710404276297636
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.98046875,
+        "nonwords": 0.95703125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.75,
+        "mmlu_binary": 0.828125,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.0023355090525001287
+      }
+    },
+    {
+      "kind": "topvar",
+      "seed": 1002,
+      "overlap_with_learned": [
+        0.015169776517261492,
+        0.008190991002302923
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.98046875,
+        "nonwords": 0.95703125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7734375,
+        "mmlu_binary": 0.796875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.002516214575734921
+      }
+    },
+    {
+      "kind": "topvar",
+      "seed": 1003,
+      "overlap_with_learned": [
+        0.01870503363702845,
+        0.002032679954853306
+      ],
+      "logic": {
+        "items": 0.94140625,
+        "families": 0.9765625,
+        "nonwords": 0.94921875
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.75,
+        "mmlu_binary": 0.8046875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.001522230486443732
+      }
+    },
+    {
+      "kind": "topvar",
+      "seed": 1004,
+      "overlap_with_learned": [
+        0.03586405829133571,
+        0.021061938146330682
+      ],
+      "logic": {
+        "items": 0.94140625,
+        "families": 0.9765625,
+        "nonwords": 0.94921875
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7421875,
+        "mmlu_binary": 0.8046875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.006892408739076927
+      }
+    },
+    {
+      "kind": "topvar",
+      "seed": 1005,
+      "overlap_with_learned": [
+        0.024857894798316696,
+        0.004170688034450993
+      ],
+      "logic": {
+        "items": 0.94140625,
+        "families": 0.9765625,
+        "nonwords": 0.953125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7421875,
+        "mmlu_binary": 0.796875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.002345374450669624
+      }
+    },
+    {
+      "kind": "topvar",
+      "seed": 1006,
+      "overlap_with_learned": [
+        0.016129442111394117,
+        0.008583518074701122
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.98046875,
+        "nonwords": 0.95703125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 0.9921875,
+        "prontoqa": 0.78125,
+        "mmlu_binary": 0.8125,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.0021432895882753655
+      }
+    },
+    {
+      "kind": "topvar",
+      "seed": 1007,
+      "overlap_with_learned": [
+        0.015543416577649414,
+        0.00037332512397393597
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.98046875,
+        "nonwords": 0.953125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.765625,
+        "mmlu_binary": 0.8046875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.001927314056956675
+      }
+    },
+    {
+      "kind": "topvar",
+      "seed": 1008,
+      "overlap_with_learned": [
+        0.052548782482326535,
+        0.027655269536420956
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.9765625,
+        "nonwords": 0.95703125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.765625,
+        "mmlu_binary": 0.8046875,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.0019223967174184509
+      }
+    },
+    {
+      "kind": "topvar",
+      "seed": 1009,
+      "overlap_with_learned": [
+        0.0396923547924425,
+        0.00230429633451388
+      ],
+      "logic": {
+        "items": 0.9453125,
+        "families": 0.98046875,
+        "nonwords": 0.95703125
+      },
+      "logic_invalid": {
+        "items": 0.0,
+        "families": 0.0,
+        "nonwords": 0.0
+      },
+      "controls": {
+        "word_recall_8": 1.0,
+        "word_recall_48": 1.0,
+        "language_localizer": 1.0,
+        "prontoqa": 0.7578125,
+        "mmlu_binary": 0.8125,
+        "stroop": 0.8984375,
+        "msit": 1.0,
+        "multiplication_1digit": 1.0,
+        "lm_kl": 0.0035290251398691908
+      }
+    }
+  ]
+}

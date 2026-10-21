@@ -1,0 +1,129 @@
+idx,text,gold,intact_pred_s0,intact_p1_s0,ablate_pred_s0,ablate_p1_s0,retain_pred_s0,retain_p1_s0,intact_pred_s1,intact_p1_s1,ablate_pred_s1,ablate_p1_s1,retain_pred_s1,retain_p1_s1,intact_pred_s2,intact_p1_s2,ablate_pred_s2,ablate_p1_s2,retain_pred_s2,retain_p1_s2
+0,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+1,"""Ths decududs to beild aen woodenen fenen aroin the girds.""",2,2,0.0032,1,1.0,2,0.026,2,0.0032,1,0.9997,2,0.023,2,0.0032,1,1.0,1,0.622
+2,"""Shes opined thed winded tas leen in soen frashs aars.""",2,2,0.0,1,1.0,2,0.0002,2,0.0,1,0.9999,2,0.0007,2,0.0,1,1.0,2,0.018
+3,"""She opunod the wundiws ti leted in se fross aied.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9997,2,0.0004,2,0.0,1,1.0,2,0.018
+4,"""The committee will announce its decision next week.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+5,"""The committee will announce its decision next week.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+6,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+7,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+8,"""As sma do chess thed bolled acrusen ths gras fuolded.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9998,2,0.0005,2,0.0,1,1.0,2,0.018
+9,"""The train arrived late because of the heavy snow.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+10,"""Aed smaed du chesed ths bied acros ths gres fielden.""",2,2,0.0,1,1.0,2,0.0008,2,0.0,1,0.9627,2,0.0017,2,0.0,1,1.0,2,0.0758
+11,"""She opened the window to let in some fresh air.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+12,"""Aed small doged chesiden thaen balen acreed thed greined fies.""",2,2,0.0,1,1.0,2,0.0,2,0.0,1,0.9933,2,0.0002,2,0.0,1,1.0,2,0.0032
+13,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+14,"""The train arrived late because of the heavy snow.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+15,"""Sh oponi thoen windus tos luen ins soed frishen aaren.""",2,2,0.0001,1,1.0,2,0.0001,2,0.0001,1,0.9948,2,0.0006,2,0.0001,1,1.0,2,0.0124
+16,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+17,"""Th committen wallen annuincs it dacasied noxts woied.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9968,2,0.0005,2,0.0,1,1.0,2,0.0159
+18,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+19,"""The committee will announce its decision next week.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+20,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+21,"""Sheed openads theed winds teed lis in sa friss ais.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9991,2,0.0004,2,0.0,1,1.0,2,0.0097
+22,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+23,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+24,"""Thued docidas tied baalden aen wioden funcen aroeed ths gerdinen.""",2,2,0.0001,1,1.0,2,0.0003,2,0.0001,1,0.9975,2,0.0006,2,0.0001,1,1.0,2,0.0293
+25,"""She opened the window to let in some fresh air.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+26,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+27,"""Sh openas ths wendow ta leen ined somus frased ais.""",2,2,0.0006,1,1.0,2,0.0025,2,0.0006,1,0.9999,2,0.0052,2,0.0006,1,1.0,2,0.2688
+28,"""Th decudoden toed bouls aed wuadined fenen aroa then garden.""",2,2,0.0015,1,1.0,2,0.0015,2,0.0015,1,0.9993,2,0.0017,2,0.0015,1,1.0,2,0.1191
+29,"""Shoen opaneds thuen wenduw tued lits in sum fross aas.""",2,2,0.0,1,1.0,2,0.0,2,0.0,1,0.982,2,0.0001,2,0.0,1,1.0,2,0.0015
+30,"""A small dog chased the ball across the green field.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+31,"""Several students gathered outside the library after class.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+32,"""She opened the window to let in some fresh air.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+33,"""Several students gathered outside the library after class.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+34,"""The train arrived late because of the heavy snow.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+35,"""Theed tris arriven lated becaesed ofs theen hua snos.""",2,2,0.0,1,1.0,2,0.0003,2,0.0,1,0.9997,2,0.0008,2,0.0,1,1.0,2,0.0293
+36,"""Ths oled mes wulks slawed alenged tho rivaed banks.""",2,2,0.3775,1,1.0,2,0.0953,2,0.3775,1,0.9999,2,0.0953,2,0.3775,1,1.0,1,0.8804
+37,"""A small dog chased the ball across the green field.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+38,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+39,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+40,"""Theyen ducodeed toed beulds aed wead fancoen aruuned then girden.""",2,2,0.0009,1,1.0,2,0.011,2,0.0009,1,0.9998,2,0.0067,2,0.0009,1,1.0,1,0.4995
+41,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+42,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+43,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+44,"""As smas doed cheseds thoed bals acress the grie fiied.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9991,2,0.0004,2,0.0,1,1.0,2,0.0076
+45,"""A small dog chased the ball across the green field.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+46,"""A small dog chased the ball across the green field.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+47,"""Hes piuruded aed cup ofen coffieen anden riaden ths newspip.""",2,2,0.0474,1,1.0,2,0.0141,2,0.0474,1,1.0,2,0.0124,2,0.0474,1,1.0,2,0.4375
+48,"""Several students gathered outside the library after class.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+49,"""Ths truien arrivs laen bocausaen ofs thu haov sns.""",2,2,0.0003,1,1.0,2,0.0041,2,0.0003,1,0.9996,2,0.0076,2,0.0003,1,1.0,2,0.3207
+50,"""Thuen dicid to boied as weadeen fencas areunden this gards.""",2,2,0.0001,1,1.0,2,0.0001,2,0.0001,1,0.9994,2,0.0006,2,0.0001,1,1.0,2,0.0159
+51,"""The committee will announce its decision next week.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+52,"""Aen sme doed chasen ths balen acro thoed graeed fialen.""",2,2,0.0001,1,1.0,2,0.0009,2,0.0001,1,0.977,2,0.0017,2,0.0001,1,1.0,2,0.0953
+53,"""Thed cammittueen will annoancen its dicesaaen noxts weued.""",2,2,0.0009,1,1.0,2,0.0019,2,0.0009,1,0.9999,2,0.0032,2,0.0009,1,1.0,2,0.1823
+54,"""Several students gathered outside the library after class.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+55,"""Several students gathered outside the library after class.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+56,"""A smilled dued chisids ths bal acros thed grueed fooen.""",2,2,0.0,1,1.0,2,0.0006,2,0.0,1,0.9968,2,0.0015,2,0.0,1,1.0,2,0.0474
+57,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+58,"""Several students gathered outside the library after class.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+59,"""The committee will announce its decision next week.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+60,"""Th traen arriveded lote bicao ofen th heoen sned.""",2,2,0.0019,1,1.0,2,0.0022,2,0.0019,1,0.9999,2,0.0046,2,0.0019,1,1.0,2,0.2688
+61,"""The decideds te builded a wooden fonced aruuns then garded.""",2,2,0.0,1,1.0,2,0.0,2,0.0,1,1.0,2,0.0003,2,0.0,1,1.0,2,0.0052
+62,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+63,"""Aed smallen dued chaseden th balls acri then greanen fields.""",2,2,0.0,1,1.0,2,0.0,2,0.0,1,0.9975,2,0.0003,2,0.0,1,1.0,2,0.0052
+64,"""As smuen doed chasoen th biled acrus thoen gruened fiilen.""",2,2,0.0002,1,1.0,2,0.0025,2,0.0002,1,0.9981,2,0.0036,2,0.0002,1,1.0,2,0.2226
+65,"""She opened the window to let in some fresh air.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+66,"""Several students gathered outside the library after class.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+67,"""Then cemmittaoen wullen annuunen itsen decusioed ne weeed.""",2,2,0.0,1,1.0,2,0.0002,2,0.0,1,0.9707,2,0.0006,2,0.0,1,1.0,2,0.0203
+68,"""As smaled dogs chaseden the baed acrassen then groed fois.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9993,2,0.0004,2,0.0,1,1.0,2,0.0124
+69,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+70,"""Thed committes wols annoons it ducisiuns nes wuien.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9968,2,0.0004,2,0.0,1,1.0,2,0.018
+71,"""Shaed opens th windeed taen le inen somen frash airs.""",2,2,0.0003,1,1.0,2,0.0002,2,0.0003,1,0.9993,2,0.0007,2,0.0003,1,1.0,2,0.023
+72,"""She opened the window to let in some fresh air.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+73,"""Then decededed to beilen aed waodaen fanc araun ths gard.""",2,2,0.0,1,1.0,2,0.0004,2,0.0,1,0.9994,2,0.0017,2,0.0,1,1.0,2,0.0373
+74,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+75,"""A small dog chased the ball across the green field.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+76,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+77,"""Aed smelled dos chosu ths bas across then gre faeld.""",2,2,0.0,1,1.0,2,0.0,2,0.0,1,0.9998,2,0.0002,2,0.0,1,1.0,2,0.0036
+78,"""The committee will announce its decision next week.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+79,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+80,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+81,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+82,"""Sh opuneded th wonden toed les ins samo froed aoen.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9968,2,0.0006,2,0.0,1,1.0,2,0.018
+83,"""Sh openued thed wonden te leen ined sem froshs aied.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9988,2,0.0005,2,0.0,1,1.0,2,0.0086
+84,"""The committee will announce its decision next week.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+85,"""The commutts wills announed iten decosaenen nis wu.""",2,2,0.0,1,1.0,2,0.0,2,0.0,1,0.9975,2,0.0001,2,0.0,1,1.0,2,0.0017
+86,"""The committee will announce its decision next week.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+87,"""The train arrived late because of the heavy snow.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+88,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+89,"""A small dog chased the ball across the green field.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+90,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+91,"""Ha poireed aen cus ofed caffs anden rias this nowspopo.""",2,2,0.0,1,1.0,2,0.0002,2,0.0,1,0.9988,2,0.0007,2,0.0,1,1.0,2,0.018
+92,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+93,"""Th troin arrevad lateen bacueen of theed heaen sn.""",2,2,0.0025,1,1.0,2,0.0015,2,0.0025,1,1.0,2,0.0046,2,0.0025,1,1.0,2,0.2226
+94,"""Thed oled mun welkuds slawlys alonged the riven bued.""",2,2,0.0004,1,1.0,2,0.0005,2,0.0004,1,0.9996,2,0.0015,2,0.0004,1,1.0,2,0.0474
+95,"""The train arrived late because of the heavy snow.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+96,"""Heen puers aed copen ofed coffouen ands reen th newspaparen.""",2,2,0.0001,1,1.0,2,0.0003,2,0.0001,1,0.9988,2,0.0006,2,0.0001,1,1.0,2,0.023
+97,"""Hoed poars aed cuen ofed coffen anden re this nawspuperen.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9859,2,0.0004,2,0.0,1,1.0,2,0.0097
+98,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+99,"""Shs openeed th wundewed tos luten ined soen fras aired.""",2,2,0.0002,1,1.0,2,0.0025,2,0.0002,1,0.9997,2,0.0041,2,0.0002,1,1.0,2,0.148
+100,"""Th ducideen toen bui aed wiadeen fencuen arounden tha gerdas.""",2,2,0.0,1,1.0,2,0.0006,2,0.0,1,0.9985,2,0.001,2,0.0,1,1.0,2,0.0601
+101,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+102,"""The train arrived late because of the heavy snow.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+103,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+104,"""Then deciduded to bualds aen wiid fened ariunds th gards.""",2,2,0.0,1,1.0,2,0.0006,2,0.0,1,0.9999,2,0.0015,2,0.0,1,1.0,2,0.0601
+105,"""She opened the window to let in some fresh air.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+106,"""Sevaraen stadanted gatherod oitsuded the lobrarys aftis claed.""",2,2,0.0,1,1.0,2,0.0005,2,0.0,1,0.9981,2,0.0015,2,0.0,1,1.0,2,0.0474
+107,"""The old man walked slowly along the river bank.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+108,"""Sevuras studaned gatheru outsoed thas lobrary aftaed cluss.""",2,2,0.0,1,1.0,2,0.0003,2,0.0,1,0.9991,2,0.0015,2,0.0,1,1.0,2,0.0474
+109,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+110,"""Ths dacode tes buil aed woode fenceed aroun then garden.""",2,2,0.1824,1,1.0,2,0.0293,2,0.1824,1,0.9999,2,0.0373,2,0.1824,1,1.0,1,0.8171
+111,"""Then truo arrives la bicuusos of this haivy snowen.""",2,2,0.0001,1,1.0,2,0.0,2,0.0001,1,1.0,2,0.0002,2,0.0001,1,1.0,2,0.0052
+112,"""Several students gathered outside the library after class.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+113,"""He puars a cip ofs coffen anden ris th newspipas.""",2,2,0.0,1,1.0,2,0.0,2,0.0,1,0.9993,2,0.0003,2,0.0,1,1.0,2,0.0052
+114,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+115,"""He poured a cup of coffee and read the newspaper.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+116,"""A small dog chased the ball across the green field.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+117,"""Shu openaden thaen windos to leed inen soed fresh aeed.""",2,2,0.0001,1,1.0,2,0.0,2,0.0001,1,0.9981,2,0.0003,2,0.0001,1,1.0,2,0.0067
+118,"""Suverelen studented githored ootsas ths librarys aftared cla.""",2,2,0.0,1,1.0,2,0.0,2,0.0,1,0.977,2,0.0002,2,0.0,1,1.0,2,0.0036
+119,"""The committee will announce its decision next week.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+120,"""Hes peores aen ci ofed coffs an roen th newspap.""",2,2,0.0,1,1.0,2,0.0007,2,0.0,1,0.9996,2,0.0013,2,0.0,1,1.0,2,0.0758
+121,"""They decided to build a wooden fence around the garden.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+122,"""A small dog chased the ball across the green field.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+123,"""Saveros stidens guthare outsidoed thed librared aftaed cla.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9975,2,0.0005,2,0.0,1,1.0,2,0.0086
+124,"""Aed smied degen chase thied bes acriss theen greuned fioed.""",2,2,0.0,1,1.0,2,0.0001,2,0.0,1,0.9959,2,0.0003,2,0.0,1,1.0,2,0.0052
+125,"""Theys ducides tos build a woiduned fancu aruuen the gurdeed.""",2,2,0.0001,1,1.0,2,0.0002,2,0.0001,1,1.0,2,0.0006,2,0.0001,1,1.0,2,0.0203
+126,"""The committee will announce its decision next week.""",1,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,1.0,1,0.9999
+127,"""Sh open thoed wanduws ta leed inen someed fri aoed.""",2,2,0.0002,1,1.0,2,0.0004,2,0.0002,1,0.9998,2,0.0015,2,0.0002,1,1.0,2,0.0758

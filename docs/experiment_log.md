@@ -31,3 +31,27 @@ Stroop .90/.51/1.0; MSIT 1/0/1; 1-digit mult 1/0/1; WikiText KL (clean‖interve
 Observations: ablation impairs logic to chance and also impairs PrOntoQA (deductive, logic-adjacent) and the language localizer (.56, not selective for that task);
 other controls unaffected. Retention preserves logic but collapses controls (expected: subspace alone is not sufficient for them).
 Caveats: single seed; re-created benchmark; layer convention chosen by sweep; control items are our own (prompts verbatim).
+
+## 2026-10-21 — Phase-0 robustness extension (no tuning; Phase-0 methodology unchanged)
+Seeds 1, 2: identical config/data (`data_seed=0` keeps splits and control items fixed; only init + batch sampling vary), same cached reference mu. Dataset hash identical (96b2e84595f89e08).
+Full tables: `results/phase0_robustness/analysis_tables.md` (+ `analysis_summary.json`, `localizer_per_example.csv`, `random_ablation.json`). Regenerate with
+`scripts/analyze_robustness.py` and `scripts/random_subspace_control.py --n 10`.
+
+| seed | final KL | retain I/F/N | ablate I/F/N |
+|---|---|---|---|
+| 0 | .0088 | .949/.977/.949 | .500/.500/.500 |
+| 1 | .0003 | .941/.980/.949 | **.852/.883/.770** |
+| 2 | .0027 | .941/.977/.949 | .500/.500/.500 |
+| mean±std | .004±.004 | .944±.005/.978±.002/.949±.000 | .617±.203/.628±.221/.590±.156 |
+Intact (.945/.977/.953) is seed-independent.
+
+* **Retention is stable** across seeds (within 0.01 of intact). **Ablation is not**: seeds 0 and 2 give exactly 0.500, seed 1 only drops to ~0.8.
+* **Exact 50% = constant prediction.** In seeds 0 and 2, every example in every split gets answer "1" (valid) with P("1")≈1.0 (per-example entropy ≈0 bits). Balanced 128/128 gold ⇒ 0.500.
+  Per form: all valid forms (MP, MT; ± negated) 100%, all invalid forms (AC, DA; ±) 0%. So ablation does not scramble inference; it yields an unconditional "valid" verdict.
+  Seed 1 is not constant (92 vs 164 predictions of "2"/"1" on Items): it keeps most valid-form accuracy but errs mostly by calling invalid arguments valid (gold-2 recall .71/.77/.54).
+* **Subspaces differ across seeds** (principal-angle cosines: s0/s1 .77,.19; s0/s2 .83,.10; s1/s2 .77,.06; random ≈.02). One direction is shared (~0.8), the second is not. Seed 1 has the lowest KL yet the weakest ablation effect, so retention KL does not predict ablation damage.
+* **Random rank-2 ablations** (10 Gaussian + 10 top-variance, unoptimised, same location/mu): logic accuracy changes by ≤0.008 (max |Δ|); no control moves either. Max overlap with learned MVS 0.055. The learned MVS effect is specific to the learned subspace.
+* **Language localizer**: ablated accuracy .562 in all three seeds, identical predictions: all 72 sentences "1" correct, all 56 pseudoword strings wrongly "1"; intact is 128/128, random ablations ~1.0. Not seed-dependent, not an artifact of one seed's logic damage (seed 1's logic partly survives, localizer does not).
+* **Answer-channel pattern** (post-hoc interpretation, not tested): ablation produces constant "1" on the three tasks whose "1" is the affirmative verdict (valid / true / English sentence) and whose gold=2 requires a rejecting verdict (logic seeds 0,2; PrOntoQA seeds 0,2 (.46,.45; seed 1 .65 non-constant); localizer all seeds).
+  Tasks without a verdict structure (word recall, Stroop, MMLU-binary, MSIT, multiplication) are unaffected. PrOntoQA is reported separately as logic-adjacent; localizer is the non-logical case.
+* Caveats: 3 seeds; control items re-created; random control uses 10+10 subspaces at one location; "constant-1" is measured under teacher-free first-token scoring only.
