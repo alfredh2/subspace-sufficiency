@@ -18,3 +18,5 @@ results/*
 !results/phase05/**
 !results/phase06/
 !results/phase06/**
+!results/phase1/
+!results/phase1/**
