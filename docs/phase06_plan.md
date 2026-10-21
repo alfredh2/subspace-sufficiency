@@ -32,3 +32,14 @@ A candidate is a **credible, causally selective logic target** only if ALL hold 
 5. Reproduces across the two search seeds (largest principal-angle cosine between the two same-rank solutions ≥ 0.5 or both independently satisfy 1–4).
 If no candidate satisfies 1–4, we report that no logic-selective causal component was found at this layer under this search; the search is not extended.
 Partial results (e.g. a candidate satisfying 1–3 but not 4) are reported as such.
+
+---
+## Amendment 1 (written after pilot 1 results, before pilot 2 is run)
+Pilot 1 (`results/phase06/search`, search formats {num_orig, ab_orig}) produced six candidates (ranks 1/2/4 × 2 seeds) that fail the pre-registered rule: criterion 1 (logic AUC drop is confined to
+the two search formats; reversed-mapping formats num_rev / ab_rev / yn are unaffected: AUC 0.95–0.99) and criterion 4 (matched patching transfer ≤ 0.02). Criterion 2 also fails narrowly
+(P(valid) 0.74–0.82 although the mean margin is unchanged); criterion 3 passes for five of six.
+**Design confound identified:** in both pilot-1 search formats the correct "valid" answer is the label listed *first*, so the search could exploit a literal-label-position / output-mapping solution.
+**Pilot 2 (the only corrective round; it will not be extended whatever it shows):** identical objective, weights, steps, ranks, seeds, controls and criteria, except the search formats are
+{num_orig, ab_rev} (valid = first-listed label in one, second-listed in the other). Formats never used for search in pilot 2: num_rev, ab_orig, yn. Caveat: num_rev / ab_orig were also evaluated for the
+pilot-1 candidates, so these formats are not untouched by the overall study; yn and all splits/contents/controls used for evaluation remain unseen by either search. Pilot-1 results stay in the repository and are reported.
+"Format not used for search" in criterion 1 is evaluated per pilot against that pilot's search formats.
