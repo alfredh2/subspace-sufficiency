@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "causal-subspaces"
+version = "0.1.0"
+description = "From logical subspaces to native neurons: Phase 0 reproduction of the Qwen3-8B logic MVS"
+requires-python = ">=3.10"
+dependencies = ["torch", "transformers", "numpy", "pandas", "matplotlib", "pyyaml", "datasets"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+wandb = ["wandb"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["gpu: needs CUDA", "model: needs a downloaded HF model"]

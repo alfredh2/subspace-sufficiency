@@ -1,0 +1,14 @@
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/
+cache/
+wandb/
+results/*
+!results/.gitkeep
+!results/**/config.yaml
+!results/**/metrics.json
+!results/**/environment.json
+!results/**/training_log.jsonl
+*.pt
+*.safetensors

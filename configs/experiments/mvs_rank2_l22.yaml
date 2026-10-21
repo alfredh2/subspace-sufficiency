@@ -1,0 +1,34 @@
+defaults: {model: qwen3_8b, hardware: rtx5090}
+seed: 0
+run_name: mvs_rank2_seed0
+data:
+  n_eval: 256               # paper: 256 items per evaluation split
+  n_val_contents: 4
+  n_test_contents: 8
+  nonwords_in_optimization: false   # UNSTATED in paper; our choice
+controls:
+  n: 128
+  mmlu_subjects: [high_school_biology, world_religions, college_chemistry, us_foreign_policy]
+  mmlu_per_subject: 32
+  lm_kl_passages: 64
+mvs:
+  residual_index: 22        # HF hidden_states[22] = output of decoder module layers[21]; see docs/paper_reproduction.md
+  rank: 2
+  init: onmanifold          # paper App. C
+  init_m: 2048              # paper App. C
+reference:                  # neutral corpus for mu and the init covariance: UNSTATED in paper
+  dataset: Salesforce/wikitext
+  config: wikitext-2-raw-v1
+  split: train
+  max_tokens: 1000000
+  window: 256
+  batch_size: 16
+train:
+  steps: 1600               # paper
+  batch_size: 16            # paper
+  lr: 0.01                  # paper (cosine to lr/20)
+  final_lr_div: 20
+  weight_decay: 0.0         # unstated
+  grad_clip: null           # unstated
+  eval_every: 200
+  ckpt_every: 200

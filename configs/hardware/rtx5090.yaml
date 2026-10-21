@@ -1,0 +1,5 @@
+device: cuda
+micro_batch_size: 8      # prompts per forward/backward pass; grad accumulation = batch_size / micro_batch_size
+eval_batch_size: 32
+cache_dir: cache         # relative to repo root; teacher logits / reference stats
+results_root: results

@@ -1,0 +1,5 @@
+name: Qwen/Qwen3-8B
+revision: null          # resolved + logged at load time (the paper does not state a revision)
+dtype: bfloat16
+enable_thinking: false  # paper: non-thinking mode; implemented via tokenizer chat template
+gradient_checkpointing: false
