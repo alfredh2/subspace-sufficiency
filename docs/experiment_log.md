@@ -61,3 +61,7 @@ Scripts: `phase05_formats_bias.py` (Exp 1+4), `phase05_directions.py` (Exp 2), `
 Narrative + numbers: `docs/phase05_report.md`; tables: `results/phase05/report_tables.md`. Headline: retention is bound to the 1→valid mapping; ablation = shift toward the
 affirmative verdict with ranking (AUC≥0.95) preserved; same signature on the language localizer and PrOntoQA; the shared rank-1 direction alone reproduces the collapse across seeds;
 MVS patching transfers a verdict-like signal on matched pairs (random subspaces: nothing) but also on localizer/PrOntoQA, and not on verdict-free tasks.
+
+## 2026-10-21 — Phase 0.6 (validity beyond the verdict direction)
+Plan with pre-registered decision rule: `docs/phase06_plan.md` (+ Amendment 1 for pilot 2). Report: `docs/phase06_report.md`. Outputs: `results/phase06/` (decodability.json, search/ and search2/ candidates, evaluation*.json, report_tables*.md).
+Result: validity decodable (~0.97) outside d_c, the MVS span and after 12 INLP directions; 12 searched candidates (2 pilots) give format-specific AUC drops with no transplantable patching effect; none passes criteria 1–4 → no credible logic-selective target found.

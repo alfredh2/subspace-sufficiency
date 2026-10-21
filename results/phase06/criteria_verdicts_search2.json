@@ -1,0 +1,38 @@
+{
+ "cand_k1_s0": {
+  "1_logic_auc_drop": false,
+  "2_not_bias_shift": false,
+  "3_selective": false,
+  "4_patching": false
+ },
+ "cand_k1_s1": {
+  "1_logic_auc_drop": false,
+  "2_not_bias_shift": false,
+  "3_selective": true,
+  "4_patching": false
+ },
+ "cand_k2_s0": {
+  "1_logic_auc_drop": false,
+  "2_not_bias_shift": false,
+  "3_selective": true,
+  "4_patching": false
+ },
+ "cand_k2_s1": {
+  "1_logic_auc_drop": false,
+  "2_not_bias_shift": false,
+  "3_selective": true,
+  "4_patching": false
+ },
+ "cand_k4_s0": {
+  "1_logic_auc_drop": false,
+  "2_not_bias_shift": false,
+  "3_selective": true,
+  "4_patching": false
+ },
+ "cand_k4_s1": {
+  "1_logic_auc_drop": true,
+  "2_not_bias_shift": false,
+  "3_selective": true,
+  "4_patching": false
+ }
+}
