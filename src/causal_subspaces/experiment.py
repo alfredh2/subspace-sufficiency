@@ -18,7 +18,7 @@ from causal_subspaces.utils.config import ROOT
 
 def get_splits(cfg):
     d = cfg["data"]
-    return build_splits(cfg["seed"], d["n_eval"], d["n_val_contents"], d["n_test_contents"], d["nonwords_in_optimization"])
+    return build_splits(cfg.get("data_seed", cfg["seed"]), d["n_eval"], d["n_val_contents"], d["n_test_contents"], d["nonwords_in_optimization"])
 
 
 def get_reference(model, tok, cfg, revision, device="cuda"):
@@ -97,7 +97,7 @@ def evaluate_condition(model, tok, cfg, splits, controls, mode, U=None, mu=None,
 
 def get_controls(cfg):
     c = cfg["controls"]
-    return build_controls(cfg["seed"], c["n"], tuple(c["mmlu_subjects"]), c["mmlu_per_subject"])
+    return build_controls(cfg.get("data_seed", cfg["seed"]), c["n"], tuple(c["mmlu_subjects"]), c["mmlu_per_subject"])
 
 
 def get_lm_passages(tok, cfg):
