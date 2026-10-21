@@ -16,7 +16,7 @@ from causal_subspaces.mvs.projection import apply_mode
 
 
 def _target_module(model, residual_index: int):
-    n = len(model.model.layers)
+    n = model.config.num_hidden_layers  # not len(layers): reference computation temporarily truncates the list
     if not 0 <= residual_index < n:
         raise ValueError(f"residual_index must be in [0, {n - 1}], got {residual_index}")
     return model.model.embed_tokens if residual_index == 0 else model.model.layers[residual_index - 1]

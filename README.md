@@ -7,7 +7,7 @@ conda activate ml            # or any env with torch, transformers, datasets, py
 pip install -e ".[dev]"
 pytest                                                              # unit tests (no 8B model needed)
 python scripts/evaluate_baseline.py --run-name baseline             # intact baseline: logic splits + controls
-python scripts/train_mvs.py --run-name mvs_rank2_seed0              # 1600-step rank-2 MVS (configs/experiments/mvs_rank2_l22.yaml)
+python scripts/train_mvs.py --run-name mvs_rank2_seed0              # 1600-step rank-2 MVS (configs/experiments/mvs_rank2_l22.yaml; residual_index 23)
 python scripts/evaluate_mvs.py --run-name mvs_rank2_seed0           # intact / retain / ablate + controls
 python scripts/sweep_residual_index.py --indices 21 22 23 24        # layer-convention sweep (validation KL only)
 ```

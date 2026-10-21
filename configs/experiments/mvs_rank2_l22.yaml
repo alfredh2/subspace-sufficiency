@@ -12,7 +12,7 @@ controls:
   mmlu_per_subject: 32
   lm_kl_passages: 64
 mvs:
-  residual_index: 22        # HF hidden_states[22] = output of decoder module layers[21]; see docs/paper_reproduction.md
+  residual_index: 23        # HF hidden_states[23] = output of 0-based decoder layer 22 (chosen by validation-KL sweep, docs/experiment_log.md)
   rank: 2
   init: onmanifold          # paper App. C
   init_m: 2048              # paper App. C

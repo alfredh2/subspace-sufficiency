@@ -10,7 +10,7 @@ Legend: **F** = faithful to a stated paper detail, **A** = approximation/our cho
 | Retain | h ↦ μ + UUᵀ(h−μ) at **every token position**, rest of net runs normally | F |
 | Ablate | replace UUᵀ with I−UUᵀ | F |
 | μ | mean of h over all token positions of a neutral corpus disjoint from tasks (App. C); corpus/size unstated | A: WikiText-2 train, 1M tokens, 256-token windows, no special tokens/chat template; streaming fp64 accumulation |
-| **Layer index / hook point** | "layer 22"; 0- vs 1-based and before/after block **not stated** | A: `residual_index = 22` ≡ HF `hidden_states[22]` ≡ output of `layers[21]` ≡ input of 0-based `layers[22]` ≡ output of 1-based layer 22. Only the 0-based-output reading (`hidden_states[23]`) differs. See "Layer convention" below. |
+| **Layer index / hook point** | "layer 22"; 0- vs 1-based and before/after block **not stated** | A: **`residual_index = 23`** ≡ HF `hidden_states[23]` ≡ output of 0-based decoder module 22 ("0-based layer 22, after the block"), chosen by a validation-KL sweep over 21–24 (see experiment_log.md; 21/22/24 did not train within 300 steps). |
 
 ## Objective & optimisation (Sec. 3 Eq. 2, Sec. 4, App. C)
 | Item | Paper | Ours |

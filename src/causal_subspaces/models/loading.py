@@ -18,7 +18,13 @@ def load_model(cfg: dict, device: str = "cuda"):
         # reach the (hook-injected) trainable subspace; use_reentrant=False handles this.
         model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
         model.config.use_cache = False
-    revision = getattr(model.config, "_commit_hash", None) or m.get("revision")
+    revision = m.get("revision")
+    if revision is None:  # resolve the exact snapshot hash actually loaded, for logging
+        from huggingface_hub import snapshot_download
+        try:
+            revision = snapshot_download(m["name"], local_files_only=True).rstrip("/").split("/")[-1]
+        except Exception:
+            revision = getattr(model.config, "_commit_hash", None)
     return model, tok, revision
 
 
