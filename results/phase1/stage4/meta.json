@@ -1,0 +1,27 @@
+{
+ "groups": {
+  "localizer": 128,
+  "logic_num_orig": 384,
+  "logic_num_rev": 384,
+  "mmlu_binary": 96,
+  "prontoqa": 128,
+  "stroop": 96,
+  "word_recall_48": 96
+ },
+ "K_GRID": [
+  4,
+  16,
+  64,
+  256,
+  512,
+  2458
+ ],
+ "layers": [
+  22,
+  21,
+  20,
+  19
+ ],
+ "n_conditions": 17,
+ "seconds": 241.37656688690186
+}

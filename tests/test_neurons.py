@@ -207,3 +207,22 @@ def test_empirical_p_and_bootstrap():
     assert C.empirical_p(5.0, list(range(20))) == pytest.approx(16 / 21)
     lo, hi = C.bootstrap_ci(np.random.default_rng(0).normal(size=500))
     assert lo < 0 < hi
+
+
+def test_concl_position_gathers_correct_token(tiny32, tok):
+    d = torch.nn.functional.normalize(torch.randn(32), dim=0)
+    out_l = layerwise_pass(tiny32, tok, TEXTS, ACC, d, IDX, device="cpu", batch_size=2, position="last")
+    out_c = layerwise_pass(tiny32, tok, TEXTS, ACC, d, IDX, device="cpu", batch_size=2, position="concl")
+    assert not np.allclose(out_l["comps"]["resid"], out_c["comps"]["resid"])
+    ids, m, pos = _batch(tok)
+    sink = []
+    with capture_residual(tiny32, IDX, sink):
+        tiny32.model(input_ids=ids, attention_mask=m, position_ids=pos)
+    im_end = tok.convert_tokens_to_ids("<|im_end|>")
+    e = (ids == im_end).float().argmax(-1) - 1
+    want = np.array([float(sink[0][i, e[i]] @ d) for i in range(len(TEXTS))])
+    # batching with different padding may reorder rows, so compare with the same batch composition (batch_size = all)
+    out_all = layerwise_pass(tiny32, tok, TEXTS, ACC, d, IDX, device="cpu", batch_size=len(TEXTS), position="concl")
+    assert np.allclose(out_all["comps"]["resid"], want, atol=1e-4)
+    t = class_difference_table(out_all["comps"], ACC)
+    assert t["identity_max_abs_err"] < 1e-3
