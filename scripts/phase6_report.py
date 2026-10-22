@@ -245,5 +245,39 @@ for which in ("A", "B"):
         ml(f"Accounting (free run, rows G1∪G2): Δd_c at indices 20–23 = {np.round(dC, 3).tolist()} (signed toward source); component Δ(d_c writes) layers 20–22 [attn, mlp each]: {np.round(wm, 3).tolist()}; identity residual max {o['accounting']['max_abs_residual']:.4f} ({o['accounting']['rel_to_local_shift']:.3f} of the local shift) → ok={o['accounting']['ok']}.")
         SEC[f"{which}_{f}"] = o
 V["secondary"] = SEC
+
+# ------------------------------------------------------------------ gated follow-ups: Shapley orderings and head-level pinning at layer 20
+if exists("shapley_A_num_orig.npz"):
+    orders = json.load(open(OUT / "shapley_orders.json")); SH = {}
+    for f in ("num_orig", "num_rev"):
+        if not exists(f"shapley_A_{f}.npz"): continue
+        d = DS(f"shapley_A_{f}"); sg = d.sigma; den = sg * (d.bs["margin"] - d.bt["margin"]); num = lambda n: sg * (d.jobs[n]["margin"] - d.bt["margin"])
+        names = [f"{l}{c}" for l, c in ACC]; contrib = {c: [] for c in names}
+        for k in range(24):
+            order = orders[str(k)]; seq = [num("free")] + [num(f"shap|{k}|{m}") for m in range(1, 6)] + [num("pin_all")]
+            for m, c in enumerate(order): contrib[c].append(seq[m + 1] - seq[m])
+        tot = (num("pin_all") - num("free")); res_ = {}
+        ml(f"\n## Shapley estimate of the pinning increase (set A, {f}; 24 random orderings of the six components): share of T_pin(all) − T_free\n")
+        ml("| component | Shapley share | add-one q | LOO q' |\n|---|---|---|---|")
+        for c in names:
+            sn = np.mean(contrib[c], axis=0); r = d.boot.ratio(sn, den); rt = d.boot.ratio(tot, den); share = r["point"] / rt["point"]
+            sh_rep = (r["rep_pair"] / rt["rep_pair"], r["rep_content"] / rt["rep_content"])
+            res_[c] = dict(share=float(share), pair=[float(np.percentile(sh_rep[0], 2.5)), float(np.percentile(sh_rep[0], 97.5))], content=[float(np.percentile(sh_rep[1], 2.5)), float(np.percentile(sh_rep[1], 97.5))])
+            sec = V["secondary"].get(f"A_{f}", {}); ml(f"| L{c[:2]} {c[2:]} | {share:.2f} [{res_[c]['pair'][0]:.2f}, {res_[c]['pair'][1]:.2f}] / [{res_[c]['content'][0]:.2f}, {res_[c]['content'][1]:.2f}] | {sec.get('q', {}).get(c, float('nan')):.2f} | {sec.get('qprime', {}).get(c, float('nan')):.2f} |")
+        SH[f] = res_
+    V["shapley"] = SH
+if exists("q5_A_num_orig.npz"):
+    qsel = json.load(open(OUT / "q5_selection.json")); Q5 = {}
+    ml(f"\n## Head-level pinning at layer 20 attention (gated Q5; ranking frozen on the 4 validation contents; singles and nested top-k evaluated on held-out sets)\n\nValidation ranking of single heads (pin effect): {qsel['order'][:8]} with effects {[round(qsel['effect_single_pin_validation'][h], 3) for h in qsel['order'][:8]]}")
+    for w in ("A", "B"):
+        for f in ("num_orig", "num_rev"):
+            n = f"q5_{w}_{f}"
+            if not exists(n + ".npz"): continue
+            d = DS(n); Tf = one(d, "free"); inc = sub(one(d, "attn20"), Tf); o = {}
+            ml(f"\n**Set {w}, {f}:** T_free {Tf['point'][0]:.3f}; all layer-20 attention pinned {one(d, 'attn20')['point'][0]:.3f} (z-pin of all 32 heads: {one(d, 'top32')['point'][0]:.3f}, identity check diff {abs(one(d, 'top32')['point'][0] - one(d, 'attn20')['point'][0]):.4f}); single-head shares of the attention-pin increase: " + ", ".join(f"H{h}: {rat(sub(one(d, f'h{h}'), Tf), inc)['point'][0]:.2f}" for h in qsel["order"][:6]))
+            curve = {k: rat(sub(one(d, f"top{k}"), Tf), inc) for k in (1, 2, 3, 4, 6, 8, 16, 32)}; o["nested"] = {k: float(v["point"][0]) for k, v in curve.items()}; o["singles"] = {h: float(rat(sub(one(d, f"h{h}"), Tf), inc)["point"][0]) for h in range(32)}
+            ml("Nested top-k share of the attention-pin increase (frozen validation order): " + ", ".join(f"k={k}: {v['point'][0]:.2f} {ci(bnd(v, 0)[0])}" for k, v in curve.items()))
+            Q5[f"{w}_{f}"] = o
+    V["q5"] = Q5
 (OUT / "report_tables.md").write_text("\n".join(md)); json.dump(V, open(OUT / "criteria_verdict.json", "w"), indent=1, default=lambda o: bool(o) if isinstance(o, np.bool_) else (o.tolist() if isinstance(o, np.ndarray) else float(o)))
 print("\n".join(md)[:12000])
