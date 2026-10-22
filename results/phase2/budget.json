@@ -1,0 +1,5 @@
+{"ceiling_gpu_hours": 4.0,
+ "approx_gpu_hours_used": 3.0,
+ "breakdown_s": {"recompute_gate_and_context": 600, "stage1": 184, "stage3_phaseA": 349, "stage3_k8_controls_first_run_(discarded_nondeterministic_seed)": 1515,
+                 "stage3_k_grid_first_run": 1500, "stage3_rerun_k8_controls_and_kgrid": 1500, "stage3_map_and_generation": 1653, "patching_first_run": 1800, "patching_aligned_rerun": 1108, "stage4": 543},
+ "note": "about 1.2 h was spent on two reruns caused by implementation bugs (non-deterministic control seeds; silent skipping of all-position patches); no exhaustive run was launched"}

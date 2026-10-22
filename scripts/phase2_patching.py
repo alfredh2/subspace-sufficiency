@@ -1,6 +1,7 @@
 """Phase 2 Stage 3 (patching): counterfactual patching of head OUTPUTS z_h (full-z only; A-only / V-only patching and routing/content are cancelled because
 the attention-recompute gate failed). Aligned pairs only for all-position patches (docs/phase2_plan.md section 4). Reports direct (immediate) and downstream
 (after recomputation) changes of the verdict coordinate separately. Usage: python scripts/phase2_patching.py"""
+import argparse
 import json
 import time
 import zlib
@@ -21,6 +22,9 @@ from causal_subspaces.models.loading import encode, format_prompt, last_logits, 
 from causal_subspaces.utils.config import ROOT
 from causal_subspaces.utils.reproducibility import seed_everything
 
+ap = argparse.ArgumentParser()
+ap.add_argument("--only", nargs="*", default=None, help="run only groups whose name starts with one of these prefixes; results are merged into existing files")
+a = ap.parse_args()
 T0 = time.time()
 OUT = ROOT / "results/phase2/patching"; OUT.mkdir(parents=True, exist_ok=True)
 cfg = yaml.safe_load((ROOT / "results/mvs_rank2_seed0/config.yaml").read_text())
@@ -93,7 +97,7 @@ def run_trials(trials, aff, rej, sets, positions, bs=16):
             spec = spec_of(hs)
             for p in positions:
                 if p == "all" and (not same_shape or not ok_all[sl].all()):
-                    continue
+                    raise ValueError("all-position patch requested for a batch with unaligned or unequal-shape pairs")
                 # immediate (direct) effect of the swap on the verdict coordinate at the last position
                 direct = sum(((zs[l].float().view(len(b), -1, H, HD)[:, -1, h] - zt[l].float().view(len(b), -1, H, HD)[:, -1, h]) * GAIN[l].view(H, HD)[h]).sum(-1) for l, h in hs)
                 cp = []
@@ -105,7 +109,12 @@ def run_trials(trials, aff, rej, sets, positions, bs=16):
 
 def fmt_prompt(fmt, syl): return format_prompt(tok, P5.build_prompt(fmt, syl), False)
 summary, raw = {"groups": {}, "control_sets": {}}, {}
+if a.only and (OUT / "patching.json").exists():
+    summary = json.load(open(OUT / "patching.json")); summary.setdefault("control_sets", {}); _z = np.load(OUT / "patching_arrays.npz", allow_pickle=True); raw = {k: _z[k] for k in _z.files}
+want = lambda g: a.only is None or any(g.startswith(x) for x in a.only)
 def go(group, trials, aff, rej, sets, positions):
+    if not want(group):
+        return
     t = time.time(); res = run_trials(trials, aff, rej, sets, positions)
     ta, sa = np.array([x["tgt_aff"] for x in trials]), np.array([x["src_aff"] for x in trials])
     out = {}
@@ -140,11 +149,14 @@ for fmt in ("num_orig", "num_rev"):
     print(f"{fmt}: {sum(a for a, _ in ok)}/{len(pairs)} pairs pass alignment; reasons {reasons}", flush=True)
 summary["alignment"] = {fmt: dict(n_pairs=len(pairs), n_valid=int(sum(a for a, _ in ok)), reasons={w: sum(1 for _, x in ok if x == w) for w in {x for _, x in ok}}) for fmt, ok in align.items()}
 for fmt, nd in (("num_orig", 30), ("num_rev", 6)):   # num_rev draws reduced from 10 (budget)
-    f = P5.FORMATS[fmt]; trials = []
+    f = P5.FORMATS[fmt]; trials, trials_al = [], []
     for p, (a_ok, _) in zip(pairs, align[fmt]):
         v, i = P5.build_prompt(fmt, p["valid_syl"]), P5.build_prompt(fmt, p["invalid_syl"])
-        trials += [dict(tgt=i, src=v, tgt_aff=False, src_aff=True, aligned=a_ok), dict(tgt=v, src=i, tgt_aff=True, src_aff=False, aligned=a_ok)]
-    go(f"match_{fmt}", trials, f["valid"], f["invalid"], head_sets(nd), ("all", "last"))
+        two = [dict(tgt=i, src=v, tgt_aff=False, src_aff=True, aligned=a_ok), dict(tgt=v, src=i, tgt_aff=True, src_aff=False, aligned=a_ok)]
+        trials += two
+        if a_ok: trials_al += two
+    go(f"match_{fmt}_last_allpairs", trials, f["valid"], f["invalid"], head_sets(6 if fmt == "num_orig" else 4), ("last",))        # last-position patches need no alignment
+    go(f"match_{fmt}_aligned", trials_al, f["valid"], f["invalid"], head_sets(nd), ("all", "last"))                                       # all-position patches: alignment-validated pairs only
 # same-label lexical controls (S8 + 10 random/magnitude-matched draws)
 ctl = P5.lexical_controls(contents, pairs, tok)
 f = P5.FORMATS["num_orig"]; ltr = []
@@ -153,7 +165,8 @@ for c in ctl:
     for key, y in (("valid_syl", True), ("invalid_syl", False)):
         a_ok, _ = A.pair_alignment(tok, fmt_prompt("num_orig", b_[key]), b_[key].split("\n"), fmt_prompt("num_orig", o_[key]), o_[key].split("\n"))
         ltr.append(dict(tgt=P5.build_prompt("num_orig", b_[key]), src=P5.build_prompt("num_orig", o_[key]), tgt_aff=y, src_aff=y, aligned=a_ok))
-go("lexctrl_num_orig", ltr, f["valid"], f["invalid"], {k: v for k, v in head_sets(10).items() if k in ("S8", "L22H5") or "d=" in k and int(k.split("d=")[1]) < 10}, ("all", "last"))
+ltr_al = [t for t in ltr if t["aligned"]]
+go("lexctrl_num_orig_aligned", ltr_al, f["valid"], f["invalid"], {k: v for k, v in head_sets(10).items()}, ("all", "last"))
 # non-verdict / other tasks, unmatched pairs, last position only
 c5 = build_controls(5, 128, tuple(cfg["controls"]["mmlu_subjects"]), cfg["controls"]["mmlu_per_subject"])
 rng = np.random.default_rng(0)

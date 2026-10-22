@@ -176,7 +176,11 @@ if (R / "patching/patching.json").exists():
             for pos in ("all", "last"):
                 rs = [v for k, v in gd["results"].items() if k.startswith(f"{fam}|") and k.endswith(f"|{pos}") and "transfer" in v]
                 if rs: ml(f"| {gname} | {fam} (n={len(rs)}) | {pos} | - | mean {np.mean([x['transfer'] for x in rs]):+.3f}, max |.| {max(abs(x['transfer']) for x in rs):.3f} | max flip {max(x.get('flip_to_source', 0) for x in rs):.3f} | - | - |")
-    g0 = PJ["groups"].get("match_num_orig", {}).get("results", {})
+    lx = PJ["groups"].get("lexctrl_num_orig_aligned")
+    if lx:
+        ml("\nSame-label lexical controls (aligned pairs; patching must not change the verdict): " + "; ".join(f"{k}: |Δmargin| {v['abs_shift_mean']:.2f}, verdict change {v['verdict_change_rate']:.3f}" for k, v in lx["results"].items() if k.split("|")[0] in ("S8", "S16", "L22H5") and "abs_shift_mean" in v) +
+           "; random/matched head sets: mean verdict change " + f"{np.mean([v['verdict_change_rate'] for k, v in lx['results'].items() if k.split('|')[0] in ('random', 'layer_restricted', 'magnitude_matched') and k.endswith('|all') and 'verdict_change_rate' in v]):.3f}")
+    g0 = PJ["groups"].get("match_num_orig_aligned", {}).get("results", {})
     if g0.get("S8|all"):
         rnd = [v["transfer"] for k, v in g0.items() if k.endswith("|all") and k.split("|")[0] in FAM and "transfer" in v]
         nv = [PJ["groups"][g]["results"]["S8|last"]["transfer"] for g in ("unmatched_mmlu_binary", "unmatched_stroop", "unmatched_word_recall_48") if g in PJ["groups"]]
