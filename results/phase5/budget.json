@@ -1,0 +1,10 @@
+{
+ "soft_budget_gpu_hours": [
+  3,
+  4
+ ],
+ "stages": {
+  "pilot": 40.71911978721619
+ },
+ "total_hours": 0.011310866607560052
+}
