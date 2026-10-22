@@ -190,3 +190,26 @@ def test_control_sets_deterministic_disjoint_and_matched():
     assert set(CT.oracle_set(resp, native, 2)) == {8, 9}
     dm = CT.delta_matched_set(np.abs(rng.normal(size=m)), native)
     assert len(dm) == 30 and not set(dm) & set(native)
+
+
+def test_coordinate_clamp_restores_clean_coordinate_but_not_other_directions(m32, tok):
+    """The clamp hook (used in runner) resets only the d_c coordinate at the hook; the rest of the residual keeps the intervened values."""
+    b = batch(tok); H, HD, _ = head_dims(m32)
+    d = torch.nn.functional.normalize(torch.randn(32), dim=0); zbar = {l: torch.randn(H * HD) * 0.3 for l in range(4)}
+    _, _ = run(m32, b)
+    res_c, res_i = [], []
+    run(m32, b, resid=res_c); run(m32, b, ctxs=[head_ablation(m32, {L: [0, 2]}, IDX, zbar=zbar)], resid=res_i)
+    c_clean = res_c[0][:, -1].float() @ d
+
+    def clamp_hook(m, i, o, tgt=c_clean):
+        h = o[0] if isinstance(o, tuple) else o
+        new = h.clone(); cur = h[:, -1].float() @ d
+        new[:, -1] = (h[:, -1].float() + (tgt - cur)[:, None] * d[None]).to(h.dtype)
+        return (new,) + tuple(o[1:]) if isinstance(o, tuple) else new
+    hc = m32.model.layers[IDX - 1].register_forward_hook(clamp_hook)
+    res_k = []
+    run(m32, b, ctxs=[head_ablation(m32, {L: [0, 2]}, IDX, zbar=zbar)], resid=res_k)
+    hc.remove()
+    assert torch.allclose(res_k[0][:, -1].float() @ d, c_clean, atol=1e-4)
+    perp = lambda x: x[:, -1].float() - (x[:, -1].float() @ d)[:, None] * d[None]
+    assert torch.allclose(perp(res_k[0]), perp(res_i[0]), atol=1e-4) and not torch.allclose(perp(res_i[0]), perp(res_c[0]), atol=1e-5)

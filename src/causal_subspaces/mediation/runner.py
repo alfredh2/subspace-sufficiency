@@ -22,13 +22,14 @@ def spec_heads(hs):
 
 @torch.no_grad()
 def run_cells(model, tok, items, *, heads, intervention, usets, idx_hook, d_c, zbar=None, position="last", full_layers=(22,), block_layers=(19, 20, 21, 22),
-              bs=16, self_restore=("22",), time_cap=None, t0=None, restore_tags=("Y10", "Y01")):
+              bs=16, self_restore=("22",), time_cap=None, t0=None, restore_tags=("Y10", "Y01"), formatted=False, clamp=False, norm_layer=22):
     """items: dicts with 'tgt' (user text), optional 'src', 'ta', 'tb' (answer token ids). intervention: 'patch' (full-z from src) or 'ablate' (mean z).
     usets: name -> {layer: np.ndarray idx}. Returns per-item arrays for each cell and the full last-position layer activations of the clean/intervened runs."""
     import time
     n = len(items); spec = spec_heads(heads); hl = sorted(spec)
     full = {l: torch.arange(M_UNITS) for l in full_layers}
-    out = {"clean": {}, "inter": {}, "cells": {}, "a_clean": {l: np.zeros((n, M_UNITS), np.float16) for l in full_layers}, "a_inter": {l: np.zeros((n, M_UNITS), np.float16) for l in full_layers}}
+    out = {"clean": {}, "inter": {}, "cells": {}, "a_clean": {l: np.zeros((n, M_UNITS), np.float16) for l in full_layers}, "a_inter": {l: np.zeros((n, M_UNITS), np.float16) for l in full_layers},
+           "mlp_in_clean": np.zeros((n, 4096), np.float16), "mlp_in_inter": np.zeros((n, 4096), np.float16)}
 
     def store(dst, key, sl, v):
         if key not in dst:
@@ -41,9 +42,12 @@ def run_cells(model, tok, items, *, heads, intervention, usets, idx_hook, d_c, z
         for l in block_layers:
             store(dst, f"attn{l}", sl, blocks["attn"][l]); store(dst, f"mlp{l}", sl, blocks["mlp"][l])
 
-    def one(ids, mask, pos, ta, tb, head_ctx=None, restore=None, capture=False):
+    def one(ids, mask, pos, ta, tb, head_ctx=None, restore=None, capture=False, clamp_to=None, mlp_in=None):
         sink_u, blocks, resid = {}, {}, []
         with ExitStack() as st:
+            if mlp_in is not None:                                           # MLP input (post_attention_layernorm output) at the answer position, intervention-strength diagnostic
+                h_ = model.model.layers[norm_layer].post_attention_layernorm.register_forward_hook(lambda m, i, o: mlp_in.__setitem__("v", o[:, -1].detach().float().cpu().numpy()))
+                st.callback(h_.remove)
             if head_ctx is not None:
                 st.enter_context(head_ctx)                                    # registered first: fires first at o_proj
             if restore is not None:
@@ -51,6 +55,13 @@ def run_cells(model, tok, items, *, heads, intervention, usets, idx_hook, d_c, z
             if capture:
                 st.enter_context(capture_units(model, full, sink_u, position))
             st.enter_context(capture_blocks(model, block_layers, d_c, blocks))
+            if clamp_to is not None:                                         # reset the d_c coordinate at the hook (answer position) to the clean value
+                def clamp_hook(m, i, o, tgt=clamp_to):
+                    h = o[0] if isinstance(o, tuple) else o
+                    new = h.clone(); cur = h[:, -1].float() @ d_c
+                    new[:, -1] = (h[:, -1].float() + (tgt - cur)[:, None] * d_c[None]).to(h.dtype)
+                    return (new,) + tuple(o[1:]) if isinstance(o, tuple) else new
+                hc = model.model.layers[idx_hook - 1].register_forward_hook(clamp_hook); st.callback(hc.remove)
             st.enter_context(capture_residual(model, idx_hook, resid))
             lg = last_logits(model, ids, mask, pos)
         return lg, sink_u, blocks, resid
@@ -59,11 +70,12 @@ def run_cells(model, tok, items, *, heads, intervention, usets, idx_hook, d_c, z
         if time_cap is not None and time.time() - t0 > time_cap:
             raise TimeoutError("time cap")
         b = items[s0:s0 + bs]; sl = slice(s0, s0 + len(b))
-        ids, mask, pos = encode(tok, [format_prompt(tok, t["tgt"], False) for t in b], "cuda")
+        fmt_ = (lambda t: t) if formatted else (lambda t: format_prompt(tok, t, False))
+        ids, mask, pos = encode(tok, [fmt_(t["tgt"]) for t in b], "cuda")
         ta = torch.tensor([t["ta"] for t in b], device="cuda"); tb = torch.tensor([t["tb"] for t in b], device="cuda")
         zs = {}
         if intervention == "patch":
-            ids_s, m_s, p_s = encode(tok, [format_prompt(tok, t["src"], False) for t in b], "cuda")
+            ids_s, m_s, p_s = encode(tok, [fmt_(t["src"]) for t in b], "cuda")
             assert ids_s.shape == ids.shape and torch.equal(m_s, mask)
             with capture_z(model, hl, zs):
                 last_logits(model, ids_s, m_s, p_s)
@@ -71,8 +83,11 @@ def run_cells(model, tok, items, *, heads, intervention, usets, idx_hook, d_c, z
             if intervention == "patch":
                 return head_z_patch(model, spec, zs, idx_hook, position=position)
             return head_ablation(model, spec, idx_hook, mode="mean", zbar=zbar, position=position)
-        lgC, uC, bC, rC = one(ids, mask, pos, ta, tb, capture=True); record(out["clean"], sl, lgC, ta, tb, rC, bC)
-        lgI, uI, bI, rI = one(ids, mask, pos, ta, tb, head_ctx=hctx(), capture=True); record(out["inter"], sl, lgI, ta, tb, rI, bI)
+        mi = {}
+        lgC, uC, bC, rC = one(ids, mask, pos, ta, tb, capture=True, mlp_in=mi); record(out["clean"], sl, lgC, ta, tb, rC, bC); out["mlp_in_clean"][sl] = mi["v"].astype(np.float16)
+        lgI, uI, bI, rI = one(ids, mask, pos, ta, tb, head_ctx=hctx(), capture=True, mlp_in=mi); record(out["inter"], sl, lgI, ta, tb, rI, bI); out["mlp_in_inter"][sl] = mi["v"].astype(np.float16)
+        if clamp:
+            lg, _, bl, rs = one(ids, mask, pos, ta, tb, head_ctx=hctx(), clamp_to=rC[0][:, -1].float() @ d_c); record(out["cells"].setdefault("clamp_dc", {}).setdefault("Y", {}), sl, lg, ta, tb, rs, bl)
         for l in full_layers:
             out["a_clean"][l][sl] = (uC[l][:, -1] if position == "all" else uC[l]).float().cpu().numpy().astype(np.float16)
             out["a_inter"][l][sl] = (uI[l][:, -1] if position == "all" else uI[l]).float().cpu().numpy().astype(np.float16)
