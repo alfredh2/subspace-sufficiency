@@ -22,3 +22,5 @@ results/*
 !results/phase1/**
 !results/phase2/
 !results/phase2/**
+!results/phase25/
+!results/phase25/**

@@ -1,0 +1,140 @@
+{
+ "0": {
+  "observed_model_vs_fp32recompute": {
+   "rms_over_std": 0.0015600892947986722,
+   "max_over_std": 0.016598543152213097
+  },
+  "quantisation_floor_of_bf16_output": {
+   "rms_over_std": 0.0014961181829373043,
+   "max_over_std": 0.016746027395129204
+  },
+  "z_rel_L2": {
+   "observed": 0.001654834020882845,
+   "quantisation_floor": 0.0015954636813451846
+  },
+  "error_over_rounding_noise_scale": {
+   "rms": 1.5901187260945637,
+   "p999": 5.666292667388916,
+   "max": 7.461981773376465
+  },
+  "S8_error_over_noise_scale": {
+   "rms": null,
+   "max": null
+  }
+ },
+ "10": {
+  "observed_model_vs_fp32recompute": {
+   "rms_over_std": 0.0017645217400665085,
+   "max_over_std": 0.029109720140695572
+  },
+  "quantisation_floor_of_bf16_output": {
+   "rms_over_std": 0.0015554866598298152,
+   "max_over_std": 0.02989606186747551
+  },
+  "z_rel_L2": {
+   "observed": 0.0018463688514505823,
+   "quantisation_floor": 0.0016564206064989169
+  },
+  "error_over_rounding_noise_scale": {
+   "rms": 1.7341814041137695,
+   "p999": 6.582958221435547,
+   "max": 10.522339820861816
+  },
+  "S8_error_over_noise_scale": {
+   "rms": null,
+   "max": null
+  }
+ },
+ "19": {
+  "observed_model_vs_fp32recompute": {
+   "rms_over_std": 0.0015921771991997957,
+   "max_over_std": 0.031347960233688354
+  },
+  "quantisation_floor_of_bf16_output": {
+   "rms_over_std": 0.0013124853527794282,
+   "max_over_std": 0.026019906625151634
+  },
+  "z_rel_L2": {
+   "observed": 0.0018025740670661132,
+   "quantisation_floor": 0.0016531671863049269
+  },
+  "error_over_rounding_noise_scale": {
+   "rms": 1.695766011873881,
+   "p999": 6.106520175933838,
+   "max": 12.019648551940918
+  },
+  "S8_error_over_noise_scale": {
+   "rms": 1.9176582098007202,
+   "max": 12.019648551940918
+  }
+ },
+ "20": {
+  "observed_model_vs_fp32recompute": {
+   "rms_over_std": 0.001553835851761202,
+   "max_over_std": 0.02087135799229145
+  },
+  "quantisation_floor_of_bf16_output": {
+   "rms_over_std": 0.0013470669509842992,
+   "max_over_std": 0.021114444360136986
+  },
+  "z_rel_L2": {
+   "observed": 0.0018099915469065309,
+   "quantisation_floor": 0.0016591680080940325
+  },
+  "error_over_rounding_noise_scale": {
+   "rms": 1.6720508734385173,
+   "p999": 6.482213497161865,
+   "max": 9.689630508422852
+  },
+  "S8_error_over_noise_scale": {
+   "rms": 1.7647099892298381,
+   "max": 7.498934745788574
+  }
+ },
+ "21": {
+  "observed_model_vs_fp32recompute": {
+   "rms_over_std": 0.0014838055164242785,
+   "max_over_std": 0.030385786667466164
+  },
+  "quantisation_floor_of_bf16_output": {
+   "rms_over_std": 0.0011345883443330724,
+   "max_over_std": 0.0276853796094656
+  },
+  "z_rel_L2": {
+   "observed": 0.0018172134878113866,
+   "quantisation_floor": 0.0016619205319633086
+  },
+  "error_over_rounding_noise_scale": {
+   "rms": 1.7448012034098308,
+   "p999": 6.680159091949463,
+   "max": 11.193222045898438
+  },
+  "S8_error_over_noise_scale": {
+   "rms": 2.187131325403849,
+   "max": 9.404568672180176
+  }
+ },
+ "22": {
+  "observed_model_vs_fp32recompute": {
+   "rms_over_std": 0.0015742130344733596,
+   "max_over_std": 0.03671105578541756
+  },
+  "quantisation_floor_of_bf16_output": {
+   "rms_over_std": 0.0014063197498520215,
+   "max_over_std": 0.029207274317741394
+  },
+  "z_rel_L2": {
+   "observed": 0.0017948532088970144,
+   "quantisation_floor": 0.001655025912138323
+  },
+  "error_over_rounding_noise_scale": {
+   "rms": 1.675505797068278,
+   "p999": 6.029354095458984,
+   "max": 9.280513763427734
+  },
+  "S8_error_over_noise_scale": {
+   "rms": 1.6746082703272502,
+   "max": 8.388314247131348
+  }
+ }
+}
