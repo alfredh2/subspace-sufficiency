@@ -1,0 +1,84 @@
+{
+ "files": {
+  "src/causal_subspaces/upstream/patching.py": "293a2e50841a702f20e9445dc77766a70b8c4988c60f5516e967590ff2b7feeb",
+  "src/causal_subspaces/upstream/stats.py": "ef4f9269c224898b5d36b0247f534fc1ca4a1bf25810c51d01ae5024020df495",
+  "src/causal_subspaces/upstream/data.py": "7ad2d18d372b2d09fc082146f8da53c216dffa4fac8a72a8aa4be09ac40577f9",
+  "src/causal_subspaces/upstream/runner.py": "92fdef919f980278563fc08e6f36e2e51d3d2e8a66d3e324cf9a6f3fb2050567",
+  "src/causal_subspaces/upstream/pipeline.py": "6685b2d685d355da78593bf8618a93cc41b42873fe5ad66624d328150e3340b7",
+  "scripts/phase4_run.py": "de196691509a12db3f5638d200f0f51237244cc09af221821fdb155fe505d363",
+  "docs/phase4_plan.md": "b1494d0f5db79f97b648699d5c5565941b08455dcbbad79acc0d1f4a1ce17cc0"
+ },
+ "onsets_A": {
+  "num_orig": {
+   "G1": {
+    "plateau": 0.20480988988157073,
+    "threshold": 0.10240494494078536,
+    "first_crossing": 19,
+    "sustained_pair": 19,
+    "sustained_content": 19,
+    "sustained_both": 19
+   },
+   "G2": {
+    "plateau": 0.22059006856430502,
+    "threshold": 0.11029503428215251,
+    "first_crossing": 20,
+    "sustained_pair": 20,
+    "sustained_content": 20,
+    "sustained_both": 20
+   },
+   "G1G2": {
+    "plateau": 0.6416891751506337,
+    "threshold": 0.32084458757531686,
+    "first_crossing": 20,
+    "sustained_pair": 20,
+    "sustained_content": 20,
+    "sustained_both": 20
+   }
+  },
+  "num_rev": {
+   "G1": {
+    "plateau": 0.20958196927726014,
+    "threshold": 0.10479098463863007,
+    "first_crossing": 19,
+    "sustained_pair": 20,
+    "sustained_content": 20,
+    "sustained_both": 20
+   },
+   "G2": {
+    "plateau": 0.23297658020649709,
+    "threshold": 0.11648829010324854,
+    "first_crossing": 20,
+    "sustained_pair": 20,
+    "sustained_content": 20,
+    "sustained_both": 20
+   },
+   "G1G2": {
+    "plateau": 0.6552505666079074,
+    "threshold": 0.3276252833039537,
+    "first_crossing": 20,
+    "sustained_pair": 20,
+    "sustained_content": 20,
+    "sustained_both": 20
+   }
+  }
+ },
+ "grid_B": [
+  0,
+  2,
+  4,
+  6,
+  8,
+  10,
+  12,
+  14,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23
+ ],
+ "note": "frozen before any Replication-B computation (docs/phase4_plan.md section 8)"
+}
