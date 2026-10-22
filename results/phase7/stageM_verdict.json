@@ -1,0 +1,190 @@
+{
+ "stageM": {
+  "A_num_orig": {
+   "rules": {
+    "M_A": true,
+    "ratio_dc_eqorth_over_orth": 1.0399378399378398,
+    "MA_bounds": [
+     0.9743918053777209,
+     1.108334690553746
+    ],
+    "M_B": false,
+    "orth_over_full": 0.7691388274666827,
+    "orth_over_full_lower": 0.750530847947993,
+    "randorth_over_orth": 0.02654234654234654,
+    "randorth_upper": 0.029381037151250445,
+    "max_abs_single_randorth": 0.008684811967587783,
+    "M_C": false,
+    "geff_over_full": 0.01225124006454312,
+    "geff_lower": 0.009685289752623318,
+    "cos_raw": [
+     0.02047366090118885,
+     -0.007249952293932438
+    ],
+    "loco_ok_MB": true,
+    "T_full": 0.3476625805111157,
+    "T_dc": 0.024350716808643258,
+    "T_orth": 0.2674007895283607,
+    "T_geff": 0.004259297735300228,
+    "T_rest": 0.264865987949304
+   },
+   "ranking": {
+    "|write on d_c|": {
+     "spearman_with_causal": 0.28833287629116894,
+     "top3": [
+      10,
+      31,
+      17
+     ],
+     "overlap_with_causal_top3": 3
+    },
+    "|write on g_eff|": {
+     "spearman_with_causal": 0.312711943390168,
+     "top3": [
+      10,
+      31,
+      30
+     ],
+     "overlap_with_causal_top3": 2
+    },
+    "write norm": {
+     "spearman_with_causal": 0.5268078108460392,
+     "top3": [
+      10,
+      31,
+      17
+     ],
+     "overlap_with_causal_top3": 3
+    },
+    "causal_top3": [
+     10,
+     31,
+     17
+    ],
+    "validation_R1_vs_test_causal_spearman": 0.9624060797693476
+   }
+  },
+  "A_num_rev": {
+   "rules": {
+    "M_A": true,
+    "ratio_dc_eqorth_over_orth": 0.9004830113257827,
+    "MA_bounds": [
+     0.8483579291229237,
+     0.9557258451795231
+    ],
+    "M_B": false,
+    "orth_over_full": 0.7776698400362672,
+    "orth_over_full_lower": 0.7587713256864815,
+    "randorth_over_orth": 0.018862425049966693,
+    "randorth_upper": 0.021782266562987207,
+    "max_abs_single_randorth": 0.008461344749433393,
+    "M_C": false,
+    "geff_over_full": 0.00803056796839583,
+    "geff_lower": 0.005659777117267223,
+    "cos_raw": [
+     0.02047366090118885,
+     -0.007249952293932438
+    ],
+    "loco_ok_MB": true,
+    "T_full": 0.3888441198690506,
+    "T_dc": 0.023772349534122387,
+    "T_orth": 0.30239234449760766,
+    "T_geff": 0.003122639133719466,
+    "T_rest": 0.3006547469151347
+   },
+   "ranking": {
+    "|write on d_c|": {
+     "spearman_with_causal": 0.30461876832844575,
+     "top3": [
+      10,
+      31,
+      17
+     ],
+     "overlap_with_causal_top3": 3
+    },
+    "|write on g_eff|": {
+     "spearman_with_causal": 0.281524926686217,
+     "top3": [
+      10,
+      30,
+      31
+     ],
+     "overlap_with_causal_top3": 2
+    },
+    "write norm": {
+     "spearman_with_causal": 0.5183284457478006,
+     "top3": [
+      10,
+      31,
+      17
+     ],
+     "overlap_with_causal_top3": 3
+    },
+    "causal_top3": [
+     10,
+     31,
+     17
+    ],
+    "validation_R1_vs_test_causal_spearman": 0.9533328222765189
+   }
+  },
+  "B_num_orig": {
+   "rules": {
+    "M_A": true,
+    "ratio_dc_eqorth_over_orth": 1.0131000280714888,
+    "MA_bounds": [
+     0.9600427948897738,
+     1.0653447689536018
+    ],
+    "M_B": false,
+    "orth_over_full": 0.7969425801640567,
+    "orth_over_full_lower": 0.7833253131534614,
+    "randorth_over_orth": 0.023107513801815287,
+    "randorth_upper": 0.02610702850602255,
+    "max_abs_single_randorth": 0.008336370262390671,
+    "M_C": false,
+    "geff_over_full": 0.016256524981357195,
+    "geff_lower": 0.012616003292058392,
+    "cos_raw": [
+     0.02047366090118885,
+     -0.007249952293932438
+    ],
+    "loco_ok_MB": true,
+    "T_full": 0.305439139941691,
+    "T_dc": 0.02425747084548105,
+    "T_orth": 0.2434174562682216,
+    "T_geff": 0.004965379008746356,
+    "T_rest": 0.23877095481049562
+   }
+  },
+  "B_num_rev": {
+   "rules": {
+    "M_A": true,
+    "ratio_dc_eqorth_over_orth": 0.8382890447495801,
+    "MA_bounds": [
+     0.792045351367259,
+     0.8824800099475669
+    ],
+    "M_B": false,
+    "orth_over_full": 0.8110078513058805,
+    "orth_over_full_lower": 0.7978591117997476,
+    "randorth_over_orth": 0.01950014817741776,
+    "randorth_upper": 0.023117435646919537,
+    "max_abs_single_randorth": 0.008683227082875358,
+    "M_C": false,
+    "geff_over_full": 0.011536612722320141,
+    "geff_lower": 0.008182428059237587,
+    "cos_raw": [
+     0.02047366090118885,
+     -0.007249952293932438
+    ],
+    "loco_ok_MB": true,
+    "T_full": 0.34298746977357664,
+    "T_dc": 0.023878874477907232,
+    "T_orth": 0.278165530885909,
+    "T_geff": 0.003956913607386239,
+    "T_rest": 0.27393383161134316
+   }
+  }
+ }
+}
