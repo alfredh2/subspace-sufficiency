@@ -1,0 +1,7 @@
+{
+ "cap_gpu_hours": 0.5,
+ "first_attempt_minutes_approx": 8,
+ "first_attempt_note": "crashed in post-processing (misplaced conditional); results discarded and rerun",
+ "rerun_wall_seconds": 984.270706653595,
+ "total_gpu_hours_approx": 0.40674186329046885
+}

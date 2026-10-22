@@ -1,0 +1,21 @@
+{
+ "per_format": {
+  "num_orig": {
+   "F_G1G2": 0.8995018788779165,
+   "F_Rem": -0.00506860089137464,
+   "rand_mean": 0.004844300736986221,
+   "rand_max": 0.005913367706603746,
+   "supported": true,
+   "partial": false
+  },
+  "num_rev": {
+   "F_G1G2": 0.9150651895395283,
+   "F_Rem": -0.017898862009194362,
+   "rand_mean": 0.0029090360991785363,
+   "rand_max": 0.003542090587082674,
+   "supported": true,
+   "partial": false
+  }
+ },
+ "overall": "LOCALIZATION SUPPORTED (both formats)"
+}
