@@ -15,6 +15,7 @@ from causal_subspaces.utils.config import ROOT
 
 stage = sys.argv[1]; T0 = time.time(); OUT = PL.OUT; OUT.mkdir(exist_ok=True)
 FMTS = ("num_orig", "num_rev")
+FROZEN = ["src/causal_subspaces/phase5/patching.py", "src/causal_subspaces/phase5/runner.py", "src/causal_subspaces/phase5/pipeline.py", "src/causal_subspaces/upstream/patching.py", "src/causal_subspaces/upstream/stats.py", "src/causal_subspaces/upstream/data.py", "src/causal_subspaces/upstream/pipeline.py", "scripts/phase5_run.py", "docs/phase5_plan.md", "results/phase5/selection.json"]
 
 
 def log_budget(name, secs):
@@ -93,10 +94,10 @@ elif stage == "select":
     fallback = bool(kstar > 4)
     Hs = sorted(order[:kstar]) if not fallback else allh
     # pass 3: R2/R3 sets of size k*, L19H10, dose-response of H* on validation, null sets on validation
-    rnd, mat = ([], []) if fallback else PL.null_sets(kstar, Hs, mags)
+    rnd, mat, mscale = ([], [], []) if fallback else PL.null_sets(kstar, Hs, mags)
     jobs = [dict(name="r2set", kind="z", heads=sorted(order_r2[:kstar]), rows=ROWS), dict(name="r3set", kind="z", heads=sorted(order_r3[:kstar]), rows=ROWS), dict(name="l19h10", kind="z", heads=[10], rows=ROWS)]
     jobs += [dict(name=f"dose{a}", kind="z", heads=Hs, rows=ROWS, alpha=a) for a in PL.ALPHAS]
-    jobs += [dict(name=f"rnd{i}", kind="z", heads=h, rows=ROWS) for i, h in enumerate(rnd)] + [dict(name=f"mm{i}", kind="z", heads=h, rows=ROWS) for i, h in enumerate(mat)]
+    jobs += [dict(name=f"rnd{i}", kind="z", heads=h, rows=ROWS) for i, h in enumerate(rnd)] + [dict(name=f"mm{i}", kind="z", heads=h, rows=ROWS) for i, h in enumerate(mat)] + [dict(name=f"mms{i}", kind="z", heads=h, rows=ROWS, alpha=mscale[i]) for i, h in enumerate(mat)]
     bt, bs3, res3 = run_jobs(c5, trials, jobs, bs=32)
     g = lambda key, n_: [float(tm(boot, tr, bt, bs3, res3, f"dose{a}", key)) for a in PL.ALPHAS]
     Tm_dose, Tw_dose, Tc_dose = g("margin", 0), g("w20", 0), g("c20", 0)
@@ -104,16 +105,88 @@ elif stage == "select":
     sel = dict(census=census, n_trials=len(trials), T_all32=T32, R1_single_head_T=R1, R1_order=order, nested_topk_T=curve, k_star=kstar, fallback_all32=fallback, H_star=Hs,
                kv_group_T=kv, R2_local_write=r2.tolist(), R2_order=order_r2, R3_phase2_lastrow_delta=d3.tolist(), R3_order=order_r3, head_output_magnitude=mags.tolist(),
                sets=dict(R2=sorted(order_r2[:kstar]), R3=sorted(order_r3[:kstar]), L19H10=[10]), validation_T=dict(R2=tm(boot, tr, bt, bs3, res3, "r2set"), R3=tm(boot, tr, bt, bs3, res3, "r3set"), L19H10=tm(boot, tr, bt, bs3, res3, "l19h10"),
-                   random=[tm(boot, tr, bt, bs3, res3, f"rnd{i}") for i in range(len(rnd))], matched=[tm(boot, tr, bt, bs3, res3, f"mm{i}") for i in range(len(mat))]),
-               null_random=rnd, null_matched=mat, matched_mag_sum=dict(ref=float(np.sum(np.array(mags)[Hs])), matched=[float(np.sum(np.array(mags)[h])) for h in mat]),
+                   random=[tm(boot, tr, bt, bs3, res3, f"rnd{i}") for i in range(len(rnd))], matched=[tm(boot, tr, bt, bs3, res3, f"mm{i}") for i in range(len(mat))], matched_scaled=[tm(boot, tr, bt, bs3, res3, f"mms{i}") for i in range(len(mat))]),
+               null_random=rnd, null_matched=mat, matched_scale=mscale, matched_mag_sum=dict(ref=float(np.sum(np.array(mags)[Hs])), matched=[float(np.sum(np.array(mags)[h])) for h in mat]),
                dose=dict(alphas=PL.ALPHAS, T_margin=Tm_dose, T_w20=Tw_dose, T_c20=Tc_dose, pi_w=pi_w, pi_c=pi_c, g_w=dict(pi=pi_w, T=Tm_dose), g_dc=dict(pi=pi_c, T=Tm_dose)),
                scalar_baselines=["proportional: T_hat = pi * T_Z(H*)", "d_c scalar: T_hat = g_dc(pi_c)"], w_norm=float(np.linalg.norm(wv)))
     torch.save(torch.tensor(wv), OUT / "w_direction.pt"); json.dump(sel, open(OUT / "selection.json", "w"), indent=1, default=float)
     print("T_all32", T32, "k*", kstar, "H*", Hs, "fallback", fallback, flush=True); print("nested curve", np.round(curve, 3).tolist(), flush=True)
     print("R1 top8", order[:8], np.round(np.array(R1)[order[:8]], 3).tolist(), "| R2 top8", order_r2[:8], "| R3 top8", order_r3[:8], flush=True)
     print("kv", np.round(kv, 3).tolist(), "dose", np.round(Tm_dose, 3).tolist(), "pi_w", np.round(pi_w, 3).tolist(), flush=True)
-    print("val nulls rnd mean", np.mean(sel["validation_T"]["random"]) if rnd else None, "matched mean", np.mean(sel["validation_T"]["matched"]) if mat else None, "R2", sel["validation_T"]["R2"], "R3", sel["validation_T"]["R3"], flush=True)
+    print("val nulls rnd mean", np.mean(sel["validation_T"]["random"]) if rnd else None, "matched mean", np.mean(sel["validation_T"]["matched"]) if mat else None, "matched-scaled mean", np.mean(sel["validation_T"]["matched_scaled"]) if mat else None, "scale range", (min(mscale), max(mscale)) if mat else None, "R2", sel["validation_T"]["R2"], "R3", sel["validation_T"]["R3"], flush=True)
     log_budget("select", time.time() - T0)
+
+elif stage in ("stage1", "stage2", "stage3", "stage4"):
+    sel = json.load(open(OUT / "selection.json")); Hs = sel["H_star"]; order = sel["R1_order"]; allh = list(range(32)); kstar = sel["k_star"]
+    for nm, w in (("w", torch.load(OUT / "w_direction.pt")),): pass
+    P = PL.setup(); c5 = P["ctx5"]; c5.w = torch.load(OUT / "w_direction.pt").float().to(c5.dev)
+    rnd, mat, msc = sel["null_random"], sel["null_matched"], sel["matched_scale"]
+    PINS = {"22a": dict(layers="22", which=("attn",)), "22m": dict(layers="22", which=("mlp",)), "22b": dict(layers="22", which=("attn", "mlp")), "35b": dict(layers="35", which=("attn", "mlp"))}
+    Z = lambda name, heads, rows=ROWS, **kw: dict(name=name, kind="z", heads=list(heads), rows=rows, **kw)
+
+    def jobs_stage1():
+        J = [Z(f"h{h}", [h]) for h in allh] + [Z(f"top{k}", sorted(order[:k])) for k in range(1, 33)] + [Z(f"kv{g}", range(4 * g, 4 * g + 4)) for g in range(8)]
+        J += [Z("Hstar", Hs), Z("r2set", sel["sets"]["R2"]), Z("r3set", sel["sets"]["R3"]), Z("l19h10", [10]), Z("z32", allh), Z("z32_G1", allh, "G1"), Z("z32_G2", allh, "G2")]
+        J += [Z(f"rnd{i}", h) for i, h in enumerate(rnd)] + [Z(f"mm{i}", h) for i, h in enumerate(mat)] + [Z(f"mms{i}", h, alpha=msc[i]) for i, h in enumerate(mat)]
+        J += [Z(f"Hstar_rows|{c}", Hs, c) for c in ("G1", "G2", "NonSummary", "Self", "rand0", "rand1", "rand2", "rand3", "rand4")] + [Z("Hstar_noise", Hs, noise=True)]
+        return J
+
+    SINGLES = {f"single{j}": [order[j]] for j in range(3)}
+
+    def jobs_stage2():
+        sets = {"Hstar": Hs, **SINGLES}; J = []
+        for hn, hs in sets.items():
+            J += [dict(name=f"V|{hn}|{K}", kind="av", heads=hs, patch="V", rows=ROWS, keys=K) for K in PL.KEY_SINGLE + PL.KEY_SETS]
+        J += [dict(name="A|Hstar", kind="av", heads=Hs, patch="A", rows=ROWS), dict(name="AV|Hstar", kind="av", heads=Hs, patch="AV", rows=ROWS)]
+        for i in range(5):
+            J += [dict(name=f"V|mms{i}|{K}", kind="av", heads=mat[i], patch="V", rows=ROWS, keys=K) for K in ("Fact", "Concl", "G1", PL.KEY_ALL)]
+        J += [dict(name=f"V|Hstar|rk:{g}:{d}", kind="av", heads=Hs, patch="V", rows=ROWS, keys=f"rk:{g}:{d}") for g in ("Fact", "Concl") for d in range(5)]
+        J += [dict(name=f"res19|{K}", kind="res", index=19, cond=K) for K in PL.KEY_SINGLE + ["Fact+Concl", PL.KEY_ALL]]
+        return J
+
+    def jobs_stage3():
+        sets = {"Hstar": Hs, "z32": allh, "single0": SINGLES["single0"], **{f"mms{i}": (mat[i], msc[i]) for i in range(min(5, len(mat)))}}; J = []
+        for sn, hs in sets.items():
+            heads, alpha = (hs if isinstance(hs, tuple) else (hs, 1.0))
+            for pv, pd in PINS.items(): J.append(Z(f"pin|{sn}|{pv}", heads, pin=pd, alpha=alpha))
+        for sn in ("Hstar", "z32", "single0"):
+            J += [Z(f"dose|{sn}|{a}", sets[sn], alpha=a) for a in PL.ALPHAS if a != 1.0]
+        J += [Z("pin|Hstar_G1|22b", Hs, "G1", pin=PINS["22b"]), Z("pin|Hstar_G2|22b", Hs, "G2", pin=PINS["22b"])]
+        return J
+
+    def jobs_stage4():
+        J = [Z("Hstar", Hs), Z("z32", allh), Z("single0", SINGLES["single0"])] + [Z(f"rnd{i}", h) for i, h in enumerate(rnd[:10])] + [Z(f"mm{i}", h) for i, h in enumerate(mat[:10])] + [Z(f"mms{i}", h, alpha=msc[i]) for i, h in enumerate(mat[:10])]
+        J += [Z("pin|Hstar|22b", Hs, pin=PINS["22b"]), Z("pin|z32|22b", allh, pin=PINS["22b"])] + [Z(f"pin|mms{i}|22b", mat[i], pin=PINS["22b"], alpha=msc[i]) for i in range(3)]
+        J += [dict(name=f"V|Hstar|{K}", kind="av", heads=Hs, patch="V", rows=ROWS, keys=K) for K in ("Fact", "Concl", "G1", "G2", "Rule", "Fact+Concl", "Fact+G1", "Concl+G1", PL.KEY_ALL)]
+        J += [dict(name="A|Hstar", kind="av", heads=Hs, patch="A", rows=ROWS), dict(name="AV|Hstar", kind="av", heads=Hs, patch="AV", rows=ROWS)]
+        J += [Z(f"dose|Hstar|{a}", Hs, alpha=a) for a in PL.ALPHAS if a != 1.0] + [Z("Hstar_noise", Hs, noise=True)] + [Z(f"Hstar_rows|{c}", Hs, c) for c in ("NonSummary", "rand0", "rand1", "rand2")]
+        return J
+
+    builder = {"stage1": jobs_stage1, "stage2": jobs_stage2, "stage3": jobs_stage3, "stage4": jobs_stage4}[stage]
+    summary = {}
+    if stage == "stage4":
+        fz = json.load(open(OUT / "frozen_config.json")); now = UP.file_hashes(FROZEN)
+        amend = OUT / "frozen_config_amendment.json"; expect = json.load(open(amend))["new_files"] if amend.exists() else fz["files"]
+        if now != expect: raise SystemExit("frozen files changed since the freeze: " + str([k for k in now if now[k] != expect.get(k)]))
+    for fmt in FMTS:
+        T0 = time.time()
+        which = "B" if stage == "stage4" else "A"
+        trials, census = UP.trial_sets(P, which, fmt); jobs = builder(); print(stage, which, fmt, len(trials), "trials", len(jobs), "jobs", flush=True)
+        bt, bs_, res = run_jobs(c5, trials, jobs, bs=32, t0=T0, cap=50 * 60)
+        save(OUT / f"{stage}_{fmt}.npz", trials, bt, bs_, res); print(stage, fmt, "done", f"{time.time() - T0:.0f}s", flush=True)
+        summary[fmt] = dict(census=census, n_jobs=len(jobs)); log_budget(f"{stage}_{fmt}", time.time() - T0)
+    if stage == "stage4":      # lexical same-label controls (set A, num_orig) and the held-out test of the frozen head set
+        from causal_subspaces.data.logic import build_contents
+        from causal_subspaces.upstream.data import build_special_trials
+        T0 = time.time(); splits = UP.get_splits(P["cfg"]); tid = sorted({e.content_id for e in splits["items"]})
+        tr2, c2 = build_special_trials(P["tok"], build_contents("ordinary"), tid, UP.FAMS, "lexical", tag="phase5lex"); print("lexical", c2, flush=True)
+        bt2, bs2, res2 = run_jobs(c5, tr2, [Z("Hstar", Hs), Z("z32", allh), Z("single0", SINGLES["single0"])] + [Z(f"rnd{i}", h) for i, h in enumerate(rnd[:5])], bs=32)
+        save(OUT / "stage4_lexical.npz", tr2, bt2, bs2, res2); log_budget("stage4_lexical", time.time() - T0)
+    json.dump(summary, open(OUT / f"{stage}.json", "w"), indent=1, default=float)
+
+elif stage == "freeze":
+    fz = dict(files=UP.file_hashes(FROZEN), note="frozen before any Replication-B (set B) computation (docs/phase5_plan.md)")
+    json.dump(fz, open(OUT / "frozen_config.json", "w"), indent=1); print("frozen", len(fz["files"]), "files")
 
 else:
     raise SystemExit("not implemented: " + stage)

@@ -49,17 +49,25 @@ def head_stats(ctx5, trials, bs=32):
     return np.concatenate(S_), np.concatenate(M_)
 
 
-def null_sets(k, ref_heads, mags, n_random=20, n_matched=20, tol=0.10, H=32):
-    """Deterministic (crc32) head sets of size k disjoint from ref_heads: random, and output-magnitude-matched (sum of m_h within tol of the reference)."""
-    pool = [h for h in range(H) if h not in set(ref_heads)]; target = float(np.sum(mags[list(ref_heads)]))
+def null_sets(k, ref_heads, mags, n_random=20, n_matched=20, H=32, nn=6):
+    """Deterministic (crc32) head sets of size k disjoint from ref_heads. random: uniform. magnitude-matched: per-head strata - each reference head (in
+    decreasing output magnitude) is paired with a distinct non-reference head drawn at random from its `nn` nearest in output magnitude m_h. When the reference
+    heads are the largest-magnitude heads (as here) the summed magnitude of any disjoint set is necessarily lower; `scale` = sum(m_ref)/sum(m_set) is the
+    factor by which the matched set's patch is scaled in the magnitude-equalised variant."""
+    ref = sorted(ref_heads, key=lambda h: -mags[h]); pool0 = [h for h in range(H) if h not in set(ref_heads)]
     rnd = []
     for d in range(n_random):
-        rg = np.random.default_rng(zlib.crc32(f"phase5|rand|{k}|{d}".encode())); rnd.append(sorted(int(x) for x in rg.choice(pool, k, replace=False)))
-    mat, tries, d = [], 0, 0
-    while len(mat) < n_matched and tries < 200000:
-        rg = np.random.default_rng(zlib.crc32(f"phase5|mm|{k}|{tries}".encode())); c = sorted(int(x) for x in rg.choice(pool, k, replace=False)); tries += 1
-        if abs(float(np.sum(mags[c])) - target) <= tol * target and c not in mat: mat.append(c)
-    return rnd, mat
+        rg = np.random.default_rng(zlib.crc32(f"phase5|rand|{k}|{d}".encode())); rnd.append(sorted(int(x) for x in rg.choice(pool0, k, replace=False)))
+    mat, scales, seen = [], [], set()
+    for t in range(1000):
+        if len(mat) >= n_matched: break
+        rg = np.random.default_rng(zlib.crc32(f"phase5|mm|{k}|{t}".encode())); chosen, pool = [], list(pool0)
+        for hr in ref:
+            near = sorted(pool, key=lambda h: abs(mags[h] - mags[hr]))[:nn]; c = int(rg.choice(near)); chosen.append(c); pool.remove(c)
+        key = tuple(sorted(chosen))
+        if key in seen: continue
+        seen.add(key); mat.append(sorted(chosen)); scales.append(float(np.sum(mags[list(ref_heads)]) / np.sum(mags[chosen])))
+    return rnd, mat, scales
 
 
 def tstat(boot, tr, bt, bs, jobs, name, key):
