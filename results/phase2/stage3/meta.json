@@ -1,0 +1,13 @@
+{
+ "n_conditions": 23,
+ "seconds": 348.848673582077,
+ "groups": {
+  "localizer": 128,
+  "logic_num_orig": 384,
+  "logic_num_rev": 384,
+  "mmlu_binary": 96,
+  "prontoqa": 128,
+  "stroop": 96,
+  "word_recall_48": 96
+ }
+}
