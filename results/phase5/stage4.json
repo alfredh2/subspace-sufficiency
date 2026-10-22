@@ -1,0 +1,26 @@
+{
+ "num_orig": {
+  "census": {
+   "matched": 2688,
+   "alignment_rejected": 1810,
+   "mask_invalid": 0,
+   "mask_mismatch": 0,
+   "pairs_kept": 200,
+   "trials": 400,
+   "rand_flagged": 0
+  },
+  "n_jobs": 59
+ },
+ "num_rev": {
+  "census": {
+   "matched": 2688,
+   "alignment_rejected": 1810,
+   "mask_invalid": 0,
+   "mask_mismatch": 0,
+   "pairs_kept": 200,
+   "trials": 400,
+   "rand_flagged": 0
+  },
+  "n_jobs": 59
+ }
+}

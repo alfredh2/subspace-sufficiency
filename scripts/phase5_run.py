@@ -184,6 +184,17 @@ elif stage in ("stage1", "stage2", "stage3", "stage4"):
         save(OUT / "stage4_lexical.npz", tr2, bt2, bs2, res2); log_budget("stage4_lexical", time.time() - T0)
     json.dump(summary, open(OUT / f"{stage}.json", "w"), indent=1, default=float)
 
+elif stage == "cross":
+    from causal_subspaces.data.logic import build_contents
+    sel = json.load(open(OUT / "selection.json")); Hs = sel["H_star"]; rnd = sel["null_random"]
+    P = PL.setup(); c5 = P["ctx5"]; c5.w = torch.load(OUT / "w_direction.pt").float().to(c5.dev)
+    splits = UP.get_splits(P["cfg"]); tid = sorted({e.content_id for e in splits["items"]})
+    trials, cen = PL.build_cross_trials(P["tok"], build_contents("ordinary"), tid, UP.FAMS); print("cross", cen, flush=True)
+    J = [dict(name="Hstar", kind="z", heads=Hs, rows=ROWS), dict(name="z32", kind="z", heads=list(range(32)), rows=ROWS)] + [dict(name=f"rnd{i}", kind="z", heads=rnd[i], rows=ROWS) for i in range(5)]
+    J += [dict(name=f"V|Hstar|{K}", kind="av", heads=Hs, patch="V", rows=ROWS, keys=K) for K in ("Fact", "Concl", "G1", "G2", "Concl+G1", "Fact+Concl+G1", PL.KEY_ALL)] + [dict(name="A|Hstar", kind="av", heads=Hs, patch="A", rows=ROWS)]
+    bt, bs_, res = run_jobs(c5, trials, J, bs=32); save(OUT / "cross.npz", trials, bt, bs_, res); json.dump(dict(census=cen), open(OUT / "cross.json", "w")); log_budget("cross", time.time() - T0)
+    print("cross done", flush=True)
+
 elif stage == "freeze":
     fz = dict(files=UP.file_hashes(FROZEN), note="frozen before any Replication-B (set B) computation (docs/phase5_plan.md)")
     json.dump(fz, open(OUT / "frozen_config.json", "w"), indent=1); print("frozen", len(fz["files"]), "files")

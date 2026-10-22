@@ -79,3 +79,31 @@ def tstat(boot, tr, bt, bs, jobs, name, key):
 def interp_g(pi_grid, t_grid):
     pg, tg = np.asarray(pi_grid, float), np.asarray(t_grid, float); o = np.argsort(pg)
     return lambda pi: np.interp(pi, pg[o], tg[o])          # constant extrapolation outside the validation range
+
+
+def build_cross_trials(tok, contents, content_ids, families, seed=0):
+    """Exploratory (added after the Replication-B freeze): target and source have OPPOSITE labels but DIFFERENT contents (same family/form/negation, equal token
+    length, alignment-validated). Transfer then cannot be carried by the lexical identity of the matched sibling."""
+    from causal_subspaces import phase05 as P5
+    from causal_subspaces.heads import attention as A
+    from causal_subspaces.heads import positions as POS
+    from causal_subspaces.upstream.data import position_sets
+    f = P5.FORMATS["num_orig"]; ta, tb = P5.single_token_id(tok, f["valid"]), P5.single_token_id(tok, f["invalid"])
+    pairs = P5.build_pairs(contents, content_ids, families, tok); by = {}
+    for p in pairs: by.setdefault((p["family"], p["ptype"], p["neg"]), []).append(p)
+    rg = np.random.default_rng(seed); out = []; cen = dict(candidates=0, rejected=0)
+    for k, p in enumerate(pairs):
+        cands = [q for q in by[(p["family"], p["ptype"], p["neg"])] if q["content_id"] != p["content_id"] and q["n_tokens"] == p["n_tokens"]]
+        if not cands: continue
+        q = cands[int(rg.integers(len(cands)))]
+        for tsyl, ssyl, sv in ((p["invalid_syl"], q["valid_syl"], 1.0), (p["valid_syl"], q["invalid_syl"], -1.0)):
+            pt, ps = P5.build_prompt("num_orig", tsyl), P5.build_prompt("num_orig", ssyl); cen["candidates"] += 1
+            ok, _ = A.pair_alignment(tok, format_prompt(tok, pt), tsyl.split("\n"), format_prompt(tok, ps), ssyl.split("\n"))
+            ft, fs = format_prompt(tok, pt, False), format_prompt(tok, ps, False); it, is_ = tok(ft, add_special_tokens=False).input_ids, tok(fs, add_special_tokens=False).input_ids
+            if not ok or len(it) != len(is_): cen["rejected"] += 1; continue
+            ct = POS.categorize(tok, ft, pt, POS.spans_logic(pt, tsyl.split("\n"), p["family"])); cs = POS.categorize(tok, fs, ps, POS.spans_logic(ps, ssyl.split("\n"), q["family"]))
+            fd = next((j for j, (a, b) in enumerate(zip(it, is_)) if a != b), None)
+            if fd is None or ct != cs or POS.check_groups(POS.group_masks(ct)): cen["rejected"] += 1; continue
+            out.append(dict(pair=k, content=p["content_id"], family=p["family"], fmt="num_orig", tgt=pt, src=ps, sigma=sv, ta=ta, tb=tb, sets=position_sets(ct, fd, "phase5cross", len(out)), fd=fd, n_tok=len(ct)))
+    cen["trials"] = len(out)
+    return out, cen
