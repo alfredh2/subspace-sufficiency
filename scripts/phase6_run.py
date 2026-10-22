@@ -179,5 +179,33 @@ elif stage == "stage5":
     for which, fmts in (("A", FMTS), ("B", FMTS)):
         for fmt in fmts:
             trials, cen = prep(P, which, fmt); run_set(c5, trials, pin_jobs(), f"stage5_{which}_{fmt}")
+elif stage == "shapley":
+    import zlib
+    P, c5 = setup()
+    def perm_jobs(n_perm=24):
+        J = []
+        for k in range(n_perm):
+            rg = np.random.default_rng(zlib.crc32(f"phase6|shapley|{k}".encode())); order = [ACC[i] for i in rg.permutation(len(ACC))]
+            for m in range(1, len(ACC)):
+                J.append(dict(name=f"shap|{k}|{m}", kind="pin", heads=Hs, pins=order[:m], order=[f"{l}{c}" for l, c in order]))
+        return J
+    for fmt in FMTS:
+        trials, cen = prep(P, "A", fmt); jobs = perm_jobs() + [dict(name="free", kind="pin", heads=Hs, pins=[]), dict(name="pin_all", kind="pin", heads=Hs, pins=ACC)]
+        run_set(c5, trials, jobs, f"shapley_A_{fmt}")
+    json.dump({f"{k}": [f"{l}{c}" for l, c in [ACC[i] for i in np.random.default_rng(zlib.crc32(f"phase6|shapley|{k}".encode())).permutation(len(ACC))]] for k in range(24)}, open(OUT / "shapley_orders.json", "w"))
+
+elif stage == "q5":
+    P, c5 = setup(); SPIN = lambda name, heads: dict(name=name, kind="pin", heads=Hs, zpins=[(20, list(heads))], pin_rows=ROWSN)
+    ROWSN = "G1G2"
+    val, cv = prep(P, "val", "num_orig"); jobs = [SPIN(f"h{h}", [h]) for h in range(32)] + [dict(name="free", kind="pin", heads=Hs, pins=[])]
+    bt, bs, res = run_set(c5, val, jobs, "q5_val"); bv = UP.boot_for(val, 300)
+    eff = [tT(bv, val, bt, bs, res, f"h{h}") - tT(bv, val, bt, bs, res, "free") for h in range(32)]; order = [int(h) for h in np.argsort(-np.array(eff))]
+    json.dump(dict(effect_single_pin_validation=eff, order=order), open(OUT / "q5_selection.json", "w"), indent=1)
+    KS = (1, 2, 3, 4, 6, 8, 16, 32)
+    J = [SPIN(f"h{h}", [h]) for h in range(32)] + [SPIN(f"top{k}", sorted(order[:k])) for k in KS] + [dict(name="free", kind="pin", heads=Hs, pins=[]), dict(name="attn20", kind="pin", heads=Hs, pins=[(20, "attn")])]
+    for which in ("A", "B"):
+        for fmt in FMTS:
+            trials, cen = prep(P, which, fmt); run_set(c5, trials, J, f"q5_{which}_{fmt}")
+
 else:
     raise SystemExit("unknown stage")

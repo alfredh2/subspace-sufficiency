@@ -68,7 +68,7 @@ def run_jobs(ctx, heads, trials, jobs, *, bs=32, t0=None, cap=None, comp_layers=
             z, cF, h20, h21, h22, comp, st = {}, [], [], [], [], {"attn": {}, "mlp": {}}, None
             sinks = {i: [] for i in range(LOCAL, FINAL + 1)}
             with ExitStack() as es:
-                es.enter_context(capture_z(model, [LAYER], z))
+                es.enter_context(capture_z(model, [LAYER, LAYER + 1], z))
                 for i in sinks: es.enter_context(capture_residual(model, i, sinks[i]))
                 cl = sorted(set(ACC_LAYERS) | (set(comp_layers) if need_comp else set()))
                 for w in COMPS: es.enter_context(capture_component(model, cl, w, comp[w]))
@@ -76,7 +76,7 @@ def run_jobs(ctx, heads, trials, jobs, *, bs=32, t0=None, cap=None, comp_layers=
                 lg, hs = forward_states(model, ids, m, p, n_states=LAYER + 1)
             av = None
             if st is not None: av = recompute(model, LAYER, *st.data[LAYER], m); st.close()
-            return dict(lg=lg, hs=hs, z=z[LAYER], sinks={i: sinks[i][0] for i in sinks}, comp=comp, av=av)
+            return dict(lg=lg, hs=hs, z=z[LAYER], z2=z[LAYER + 1], sinks={i: sinks[i][0] for i in sinks}, comp=comp, av=av)
         S_, T_ = clean(ids_s, m_s, p_s), clean(ids_t, m_t, p_t)
 
         def acc(c_, rows):
@@ -151,6 +151,7 @@ def run_jobs(ctx, heads, trials, jobs, *, bs=32, t0=None, cap=None, comp_layers=
                     dc = (d @ u)[..., None] * u; part = {"full": d, "dc": dc, "orth": d - dc}[j["part"]]
                     ctxs.append(residual_set_patch(model, LOCAL, R, T_["sinks"][LOCAL], delta=part))
                 for (l, c) in j.get("pins", []): ctxs.append(component_patch(model, l, c, pin_rows, T_["comp"][c][l]))
+                for (l, hh_) in j.get("zpins", []): ctxs.append(head_z_set_patch(model, l, hh_, pin_rows, T_["z2"]))   # pin head outputs of layer LAYER+1 at the rows to the target's clean values
                 zz, sk, cp = {}, {i: [] for i in range(LOCAL, FINAL + 1)}, {"attn": {}, "mlp": {}}
                 with ExitStack() as es:
                     for c in ctxs: es.enter_context(c)
