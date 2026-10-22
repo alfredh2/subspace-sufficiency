@@ -213,3 +213,14 @@ def test_coordinate_clamp_restores_clean_coordinate_but_not_other_directions(m32
     assert torch.allclose(res_k[0][:, -1].float() @ d, c_clean, atol=1e-4)
     perp = lambda x: x[:, -1].float() - (x[:, -1].float() @ d)[:, None] * d[None]
     assert torch.allclose(perp(res_k[0]), perp(res_i[0]), atol=1e-4) and not torch.allclose(perp(res_i[0]), perp(res_c[0]), atol=1e-5)
+
+
+def test_gap_effects_algebra_and_undefined():
+    rg = np.random.default_rng(0); n = 400; acc = np.arange(n) % 2 == 0
+    y00 = np.where(acc, 10.0, -10.0) + rg.normal(0, 1, n)                       # clean class gap 20
+    y11 = np.where(acc, 2.0, -2.0) + rg.normal(0, 1, n)                         # intervened gap 4 -> TE = 16
+    y10 = np.where(acc, 6.0, -6.0) + rg.normal(0, 1, n)                         # rescue: gap 12 -> effect_fixed = 8
+    y01 = np.where(acc, 7.0, -7.0) + rg.normal(0, 1, n)                         # transplant: gap 14 -> effect = 6
+    r = AN.gap_effects(y00, y11, y10, y01, acc)
+    assert not r["undefined"] and r["TE"] == pytest.approx(16, abs=0.5) and r["R"] == pytest.approx(0.5, abs=0.05) and r["S"] == pytest.approx(0.375, abs=0.05) and r["R"] + r["B"] == pytest.approx(1)
+    assert AN.gap_effects(y00, y00 + rg.normal(0, 1, n), y10, y01, acc)["undefined"]
