@@ -1,0 +1,2348 @@
+{
+ "seed": 20261023,
+ "procedure": "build_contents('nonword', n=48, seed=20261023); alignment: Phase 2.5 pair_alignment + equal token length + identical category masks (upstream.data.build_trials); sampling: family-stratified, max_pairs=200, seed=1",
+ "code_sha256": {
+  "src/causal_subspaces/data/logic.py": "fed14314430d4ed0ed6fd48b5ccabf849d432da6bcde9fb19693bd7fab0b080e",
+  "src/causal_subspaces/upstream/data.py": "7ad2d18d372b2d09fc082146f8da53c216dffa4fac8a72a8aa4be09ac40577f9",
+  "src/causal_subspaces/phase05.py": "9b2925b5b3a54dbcf44d0c9dbea07c0323a4d3dc74beeb304445534e82a656d6"
+ },
+ "families": [
+  "if_then",
+  "fact_first",
+  "reversed_if",
+  "reversed_whenever",
+  "always_generic",
+  "all_are",
+  "all_nouns",
+  "if_then_event",
+  "every_time_event",
+  "guarantee",
+  "semi_formal",
+  "suppose_observe",
+  "whenever",
+  "subset"
+ ],
+ "min_trials_per_format": 150,
+ "contents": [
+  {
+   "noun": "grog",
+   "adj_a": "spat",
+   "adj_b": "wailshud",
+   "cat": "deedvut",
+   "ev1": [
+    "kelbreen",
+    "putbeek"
+   ],
+   "ev2": [
+    "kebgleek",
+    "voopwoop"
+   ]
+  },
+  {
+   "noun": "rumptron",
+   "adj_a": "kleend",
+   "adj_b": "klok",
+   "cat": "falmaind",
+   "ev1": [
+    "puldol",
+    "stun"
+   ],
+   "ev2": [
+    "poomp",
+    "mugrump"
+   ]
+  },
+  {
+   "noun": "rurzwag",
+   "adj_a": "skamgrer",
+   "adj_b": "grab",
+   "cat": "thep",
+   "ev1": [
+    "reeb",
+    "lukdeep"
+   ],
+   "ev2": [
+    "rirzip",
+    "chibnud"
+   ]
+  },
+  {
+   "noun": "waid",
+   "adj_a": "shabskur",
+   "adj_b": "glam",
+   "cat": "spognin",
+   "ev1": [
+    "stag",
+    "glandvid"
+   ],
+   "ev2": [
+    "geel",
+    "stublimp"
+   ]
+  },
+  {
+   "noun": "bund",
+   "adj_a": "cham",
+   "adj_b": "brot",
+   "cat": "shimwood",
+   "ev1": [
+    "skenskur",
+    "wind"
+   ],
+   "ev2": [
+    "shemp",
+    "peek"
+   ]
+  },
+  {
+   "noun": "shumbren",
+   "adj_a": "britrun",
+   "adj_b": "glanko",
+   "cat": "tatgrit",
+   "ev1": [
+    "zwil",
+    "tandfleb"
+   ],
+   "ev2": [
+    "chab",
+    "gegtag"
+   ]
+  },
+  {
+   "noun": "togmeg",
+   "adj_a": "glip",
+   "adj_b": "clad",
+   "cat": "trug",
+   "ev1": [
+    "voom",
+    "vend"
+   ],
+   "ev2": [
+    "flek",
+    "driglond"
+   ]
+  },
+  {
+   "noun": "chompvop",
+   "adj_a": "chun",
+   "adj_b": "graiblum",
+   "cat": "foorfud",
+   "ev1": [
+    "shuk",
+    "klookpu"
+   ],
+   "ev2": [
+    "koomwait",
+    "kloltor"
+   ]
+  },
+  {
+   "noun": "speppeen",
+   "adj_a": "beldrak",
+   "adj_b": "dreemp",
+   "cat": "zwat",
+   "ev1": [
+    "gleed",
+    "drot"
+   ],
+   "ev2": [
+    "kloo",
+    "thimtaid"
+   ]
+  },
+  {
+   "noun": "mailkli",
+   "adj_a": "shaind",
+   "adj_b": "blootnon",
+   "cat": "demp",
+   "ev1": [
+    "zaik",
+    "chet"
+   ],
+   "ev2": [
+    "spaig",
+    "staim"
+   ]
+  },
+  {
+   "noun": "klekvai",
+   "adj_a": "zwek",
+   "adj_b": "skam",
+   "cat": "kumgrai",
+   "ev1": [
+    "clamp",
+    "wund"
+   ],
+   "ev2": [
+    "skind",
+    "blokgrup"
+   ]
+  },
+  {
+   "noun": "skur",
+   "adj_a": "flai",
+   "adj_b": "begstaik",
+   "cat": "groog",
+   "ev1": [
+    "burtrap",
+    "thump"
+   ],
+   "ev2": [
+    "gumpkoo",
+    "geedvaid"
+   ]
+  },
+  {
+   "noun": "skob",
+   "adj_a": "woond",
+   "adj_b": "lemp",
+   "cat": "bupskaig",
+   "ev1": [
+    "gaigdrer",
+    "rain"
+   ],
+   "ev2": [
+    "stur",
+    "chaimtem"
+   ]
+  },
+  {
+   "noun": "debshomp",
+   "adj_a": "difleed",
+   "adj_b": "spand",
+   "cat": "zweemp",
+   "ev1": [
+    "daid",
+    "reet"
+   ],
+   "ev2": [
+    "zwaim",
+    "flond"
+   ]
+  },
+  {
+   "noun": "spugzig",
+   "adj_a": "thaimp",
+   "adj_b": "neen",
+   "cat": "wook",
+   "ev1": [
+    "drarpaim",
+    "roop"
+   ],
+   "ev2": [
+    "graim",
+    "klipskug"
+   ]
+  },
+  {
+   "noun": "grak",
+   "adj_a": "spumstam",
+   "adj_b": "claitlod",
+   "cat": "greerwor",
+   "ev1": [
+    "brirag",
+    "praid"
+   ],
+   "ev2": [
+    "leend",
+    "braib"
+   ]
+  },
+  {
+   "noun": "blap",
+   "adj_a": "shenpu",
+   "adj_b": "pedthot",
+   "cat": "flood",
+   "ev1": [
+    "grep",
+    "foonzo"
+   ],
+   "ev2": [
+    "spaigpul",
+    "shairkip"
+   ]
+  },
+  {
+   "noun": "steed",
+   "adj_a": "speem",
+   "adj_b": "vilbrund",
+   "cat": "chaippur",
+   "ev1": [
+    "glogmin",
+    "staimp"
+   ],
+   "ev2": [
+    "stir",
+    "chirwim"
+   ]
+  },
+  {
+   "noun": "blop",
+   "adj_a": "spam",
+   "adj_b": "prabzwot",
+   "cat": "maimpben",
+   "ev1": [
+    "neellet",
+    "bail"
+   ],
+   "ev2": [
+    "drindmat",
+    "laidklut"
+   ]
+  },
+  {
+   "noun": "votreet",
+   "adj_a": "trupzond",
+   "adj_b": "spor",
+   "cat": "weetthul",
+   "ev1": [
+    "zetkoomp",
+    "weel"
+   ],
+   "ev2": [
+    "spal",
+    "spaid"
+   ]
+  },
+  {
+   "noun": "chat",
+   "adj_a": "nail",
+   "adj_b": "grilkom",
+   "cat": "padpreeb",
+   "ev1": [
+    "foot",
+    "glut"
+   ],
+   "ev2": [
+    "fleb",
+    "getbroon"
+   ]
+  },
+  {
+   "noun": "famplaig",
+   "adj_a": "preekgal",
+   "adj_b": "kentreeb",
+   "cat": "cheeg",
+   "ev1": [
+    "geetkon",
+    "roon"
+   ],
+   "ev2": [
+    "choor",
+    "zweed"
+   ]
+  },
+  {
+   "noun": "stonrig",
+   "adj_a": "zalcleed",
+   "adj_b": "skeegfo",
+   "cat": "trood",
+   "ev1": [
+    "neemp",
+    "kait"
+   ],
+   "ev2": [
+    "feet",
+    "vump"
+   ]
+  },
+  {
+   "noun": "zenclomp",
+   "adj_a": "fipfland",
+   "adj_b": "fleem",
+   "cat": "skil",
+   "ev1": [
+    "teenkeen",
+    "druzen"
+   ],
+   "ev2": [
+    "shaim",
+    "nand"
+   ]
+  },
+  {
+   "noun": "mair",
+   "adj_a": "trutop",
+   "adj_b": "clol",
+   "cat": "zwultrop",
+   "ev1": [
+    "kamp",
+    "steem"
+   ],
+   "ev2": [
+    "bradloop",
+    "mendfir"
+   ]
+  },
+  {
+   "noun": "brimpler",
+   "adj_a": "dotglaib",
+   "adj_b": "paik",
+   "cat": "kluttri",
+   "ev1": [
+    "noomkump",
+    "chem"
+   ],
+   "ev2": [
+    "grar",
+    "theeg"
+   ]
+  },
+  {
+   "noun": "grok",
+   "adj_a": "pratrood",
+   "adj_b": "gree",
+   "cat": "pegskaig",
+   "ev1": [
+    "prided",
+    "mool"
+   ],
+   "ev2": [
+    "greeb",
+    "zumpclur"
+   ]
+  },
+  {
+   "noun": "teedtrom",
+   "adj_a": "waizwait",
+   "adj_b": "klobzweb",
+   "cat": "raktre",
+   "ev1": [
+    "neet",
+    "toopkam"
+   ],
+   "ev2": [
+    "zwip",
+    "klel"
+   ]
+  },
+  {
+   "noun": "thakwund",
+   "adj_a": "gledblit",
+   "adj_b": "cheend",
+   "cat": "steer",
+   "ev1": [
+    "shoomp",
+    "stek"
+   ],
+   "ev2": [
+    "bimpzomp",
+    "thak"
+   ]
+  },
+  {
+   "noun": "lairprek",
+   "adj_a": "pool",
+   "adj_b": "pegreem",
+   "cat": "zind",
+   "ev1": [
+    "zwoon",
+    "podlon"
+   ],
+   "ev2": [
+    "clip",
+    "reem"
+   ]
+  },
+  {
+   "noun": "goor",
+   "adj_a": "bleem",
+   "adj_b": "peemp",
+   "cat": "faik",
+   "ev1": [
+    "nanddot",
+    "zwin"
+   ],
+   "ev2": [
+    "nutvok",
+    "roor"
+   ]
+  },
+  {
+   "noun": "reer",
+   "adj_a": "droomp",
+   "adj_b": "grem",
+   "cat": "trem",
+   "ev1": [
+    "klarflug",
+    "nittrair"
+   ],
+   "ev2": [
+    "zwaip",
+    "koonzwet"
+   ]
+  },
+  {
+   "noun": "blend",
+   "adj_a": "vood",
+   "adj_b": "zeekmam",
+   "cat": "grum",
+   "ev1": [
+    "gruflop",
+    "room"
+   ],
+   "ev2": [
+    "brorzid",
+    "zwap"
+   ]
+  },
+  {
+   "noun": "klaip",
+   "adj_a": "nangeeb",
+   "adj_b": "chon",
+   "cat": "shudreer",
+   "ev1": [
+    "fleglup",
+    "glik"
+   ],
+   "ev2": [
+    "grump",
+    "spaind"
+   ]
+  },
+  {
+   "noun": "stor",
+   "adj_a": "vonbruk",
+   "adj_b": "lebfoob",
+   "cat": "lipko",
+   "ev1": [
+    "spai",
+    "cleeb"
+   ],
+   "ev2": [
+    "klaib",
+    "beblel"
+   ]
+  },
+  {
+   "noun": "mook",
+   "adj_a": "poog",
+   "adj_b": "skubdat",
+   "cat": "bron",
+   "ev1": [
+    "greep",
+    "kloor"
+   ],
+   "ev2": [
+    "faimp",
+    "zwodlund"
+   ]
+  },
+  {
+   "noun": "droop",
+   "adj_a": "gegdog",
+   "adj_b": "chub",
+   "cat": "greg",
+   "ev1": [
+    "kloob",
+    "rakgun"
+   ],
+   "ev2": [
+    "star",
+    "prindske"
+   ]
+  },
+  {
+   "noun": "clutzwig",
+   "adj_a": "prup",
+   "adj_b": "clempven",
+   "cat": "zeep",
+   "ev1": [
+    "speegvem",
+    "daitlab"
+   ],
+   "ev2": [
+    "pobflug",
+    "clair"
+   ]
+  },
+  {
+   "noun": "thib",
+   "adj_a": "wikster",
+   "adj_b": "wiggot",
+   "cat": "zwetnoop",
+   "ev1": [
+    "ramthan",
+    "zemp"
+   ],
+   "ev2": [
+    "drab",
+    "thudrib"
+   ]
+  },
+  {
+   "noun": "rainchon",
+   "adj_a": "clukvit",
+   "adj_b": "chenbuk",
+   "cat": "pootchim",
+   "ev1": [
+    "pindclal",
+    "tranlaig"
+   ],
+   "ev2": [
+    "shamp",
+    "stim"
+   ]
+  },
+  {
+   "noun": "wimp",
+   "adj_a": "beedtrek",
+   "adj_b": "ballend",
+   "cat": "grookzub",
+   "ev1": [
+    "deedpad",
+    "shekgrab"
+   ],
+   "ev2": [
+    "deen",
+    "veepshal"
+   ]
+  },
+  {
+   "noun": "gloobtun",
+   "adj_a": "trak",
+   "adj_b": "zwit",
+   "cat": "zeelgru",
+   "ev1": [
+    "pooltrul",
+    "meen"
+   ],
+   "ev2": [
+    "shooller",
+    "spimp"
+   ]
+  },
+  {
+   "noun": "prodraip",
+   "adj_a": "kleeb",
+   "adj_b": "bula",
+   "cat": "clai",
+   "ev1": [
+    "prunfig",
+    "blegthip"
+   ],
+   "ev2": [
+    "flupgup",
+    "skugtik"
+   ]
+  },
+  {
+   "noun": "naid",
+   "adj_a": "moclood",
+   "adj_b": "zeelpup",
+   "cat": "brenclog",
+   "ev1": [
+    "feep",
+    "bloo"
+   ],
+   "ev2": [
+    "glotleen",
+    "speen"
+   ]
+  },
+  {
+   "noun": "glug",
+   "adj_a": "milfaik",
+   "adj_b": "feem",
+   "cat": "goob",
+   "ev1": [
+    "preenkib",
+    "nond"
+   ],
+   "ev2": [
+    "skood",
+    "flait"
+   ]
+  },
+  {
+   "noun": "moogtup",
+   "adj_a": "brair",
+   "adj_b": "thufel",
+   "cat": "thaind",
+   "ev1": [
+    "lubglol",
+    "trub"
+   ],
+   "ev2": [
+    "kailvain",
+    "treegzeg"
+   ]
+  },
+  {
+   "noun": "drur",
+   "adj_a": "grood",
+   "adj_b": "deeg",
+   "cat": "steegam",
+   "ev1": [
+    "gleg",
+    "shalnug"
+   ],
+   "ev2": [
+    "mainpaik",
+    "clid"
+   ]
+  },
+  {
+   "noun": "rund",
+   "adj_a": "mimprem",
+   "adj_b": "woopclai",
+   "cat": "feel",
+   "ev1": [
+    "chup",
+    "groot"
+   ],
+   "ev2": [
+    "veen",
+    "flagtrap"
+   ]
+  }
+ ],
+ "n_contents": 48,
+ "n_words": 192,
+ "word_overlap_with_earlier_lexicons": {
+  "ordinary": [
+   "nail"
+  ],
+  "nonword_seed0": [
+   "chat",
+   "dreemp",
+   "speem"
+  ]
+ },
+ "formats": {
+  "num_orig": {
+   "census": {
+    "matched": 2688,
+    "alignment_rejected": 1937,
+    "mask_invalid": 0,
+    "mask_mismatch": 0,
+    "pairs_kept": 200,
+    "trials": 400,
+    "rand_flagged": 0
+   },
+   "n_trials": 400,
+   "n_pairs": 200,
+   "prompts_sha256": "701f1f53736c3e2c8d70ac706d52c7c00bf05a10911e99ab0c56388051acc1b0",
+   "underpowered": false,
+   "pair_content_family": [
+    [
+     0,
+     "all_are"
+    ],
+    [
+     0,
+     "if_then_event"
+    ],
+    [
+     0,
+     "every_time_event"
+    ],
+    [
+     1,
+     "fact_first"
+    ],
+    [
+     1,
+     "reversed_if"
+    ],
+    [
+     1,
+     "reversed_whenever"
+    ],
+    [
+     1,
+     "semi_formal"
+    ],
+    [
+     1,
+     "suppose_observe"
+    ],
+    [
+     1,
+     "whenever"
+    ],
+    [
+     2,
+     "semi_formal"
+    ],
+    [
+     4,
+     "reversed_whenever"
+    ],
+    [
+     4,
+     "all_are"
+    ],
+    [
+     4,
+     "if_then_event"
+    ],
+    [
+     4,
+     "every_time_event"
+    ],
+    [
+     4,
+     "semi_formal"
+    ],
+    [
+     4,
+     "suppose_observe"
+    ],
+    [
+     4,
+     "whenever"
+    ],
+    [
+     4,
+     "subset"
+    ],
+    [
+     5,
+     "all_nouns"
+    ],
+    [
+     5,
+     "all_nouns"
+    ],
+    [
+     5,
+     "if_then_event"
+    ],
+    [
+     5,
+     "every_time_event"
+    ],
+    [
+     5,
+     "whenever"
+    ],
+    [
+     5,
+     "subset"
+    ],
+    [
+     6,
+     "fact_first"
+    ],
+    [
+     6,
+     "all_nouns"
+    ],
+    [
+     6,
+     "whenever"
+    ],
+    [
+     7,
+     "all_are"
+    ],
+    [
+     7,
+     "subset"
+    ],
+    [
+     8,
+     "all_nouns"
+    ],
+    [
+     8,
+     "if_then_event"
+    ],
+    [
+     8,
+     "semi_formal"
+    ],
+    [
+     9,
+     "if_then"
+    ],
+    [
+     9,
+     "fact_first"
+    ],
+    [
+     9,
+     "reversed_if"
+    ],
+    [
+     9,
+     "every_time_event"
+    ],
+    [
+     9,
+     "every_time_event"
+    ],
+    [
+     9,
+     "guarantee"
+    ],
+    [
+     10,
+     "if_then"
+    ],
+    [
+     10,
+     "if_then"
+    ],
+    [
+     10,
+     "reversed_if"
+    ],
+    [
+     10,
+     "always_generic"
+    ],
+    [
+     10,
+     "guarantee"
+    ],
+    [
+     11,
+     "if_then"
+    ],
+    [
+     11,
+     "reversed_if"
+    ],
+    [
+     11,
+     "all_are"
+    ],
+    [
+     11,
+     "all_nouns"
+    ],
+    [
+     11,
+     "guarantee"
+    ],
+    [
+     11,
+     "whenever"
+    ],
+    [
+     11,
+     "subset"
+    ],
+    [
+     11,
+     "subset"
+    ],
+    [
+     12,
+     "if_then"
+    ],
+    [
+     12,
+     "reversed_if"
+    ],
+    [
+     12,
+     "reversed_whenever"
+    ],
+    [
+     12,
+     "reversed_whenever"
+    ],
+    [
+     12,
+     "all_are"
+    ],
+    [
+     12,
+     "if_then_event"
+    ],
+    [
+     12,
+     "every_time_event"
+    ],
+    [
+     12,
+     "every_time_event"
+    ],
+    [
+     12,
+     "guarantee"
+    ],
+    [
+     13,
+     "fact_first"
+    ],
+    [
+     13,
+     "reversed_if"
+    ],
+    [
+     13,
+     "all_nouns"
+    ],
+    [
+     13,
+     "if_then_event"
+    ],
+    [
+     13,
+     "semi_formal"
+    ],
+    [
+     14,
+     "fact_first"
+    ],
+    [
+     14,
+     "reversed_whenever"
+    ],
+    [
+     14,
+     "always_generic"
+    ],
+    [
+     14,
+     "semi_formal"
+    ],
+    [
+     15,
+     "reversed_if"
+    ],
+    [
+     15,
+     "reversed_whenever"
+    ],
+    [
+     15,
+     "always_generic"
+    ],
+    [
+     15,
+     "all_are"
+    ],
+    [
+     16,
+     "fact_first"
+    ],
+    [
+     16,
+     "fact_first"
+    ],
+    [
+     16,
+     "reversed_whenever"
+    ],
+    [
+     16,
+     "all_are"
+    ],
+    [
+     16,
+     "all_nouns"
+    ],
+    [
+     16,
+     "guarantee"
+    ],
+    [
+     16,
+     "guarantee"
+    ],
+    [
+     17,
+     "fact_first"
+    ],
+    [
+     17,
+     "always_generic"
+    ],
+    [
+     17,
+     "all_nouns"
+    ],
+    [
+     17,
+     "every_time_event"
+    ],
+    [
+     18,
+     "if_then_event"
+    ],
+    [
+     20,
+     "all_are"
+    ],
+    [
+     21,
+     "if_then"
+    ],
+    [
+     21,
+     "if_then"
+    ],
+    [
+     21,
+     "always_generic"
+    ],
+    [
+     21,
+     "all_are"
+    ],
+    [
+     21,
+     "all_are"
+    ],
+    [
+     21,
+     "guarantee"
+    ],
+    [
+     21,
+     "semi_formal"
+    ],
+    [
+     21,
+     "subset"
+    ],
+    [
+     21,
+     "subset"
+    ],
+    [
+     22,
+     "if_then"
+    ],
+    [
+     22,
+     "fact_first"
+    ],
+    [
+     22,
+     "reversed_whenever"
+    ],
+    [
+     22,
+     "always_generic"
+    ],
+    [
+     22,
+     "guarantee"
+    ],
+    [
+     22,
+     "guarantee"
+    ],
+    [
+     22,
+     "semi_formal"
+    ],
+    [
+     22,
+     "suppose_observe"
+    ],
+    [
+     22,
+     "suppose_observe"
+    ],
+    [
+     22,
+     "subset"
+    ],
+    [
+     23,
+     "semi_formal"
+    ],
+    [
+     23,
+     "subset"
+    ],
+    [
+     24,
+     "if_then"
+    ],
+    [
+     24,
+     "if_then_event"
+    ],
+    [
+     24,
+     "whenever"
+    ],
+    [
+     25,
+     "if_then_event"
+    ],
+    [
+     26,
+     "reversed_if"
+    ],
+    [
+     26,
+     "always_generic"
+    ],
+    [
+     26,
+     "whenever"
+    ],
+    [
+     27,
+     "always_generic"
+    ],
+    [
+     27,
+     "every_time_event"
+    ],
+    [
+     27,
+     "semi_formal"
+    ],
+    [
+     27,
+     "suppose_observe"
+    ],
+    [
+     29,
+     "semi_formal"
+    ],
+    [
+     29,
+     "semi_formal"
+    ],
+    [
+     30,
+     "if_then"
+    ],
+    [
+     30,
+     "if_then"
+    ],
+    [
+     30,
+     "all_nouns"
+    ],
+    [
+     30,
+     "if_then_event"
+    ],
+    [
+     30,
+     "every_time_event"
+    ],
+    [
+     30,
+     "every_time_event"
+    ],
+    [
+     30,
+     "guarantee"
+    ],
+    [
+     30,
+     "suppose_observe"
+    ],
+    [
+     30,
+     "suppose_observe"
+    ],
+    [
+     30,
+     "subset"
+    ],
+    [
+     31,
+     "reversed_if"
+    ],
+    [
+     31,
+     "guarantee"
+    ],
+    [
+     31,
+     "whenever"
+    ],
+    [
+     31,
+     "subset"
+    ],
+    [
+     33,
+     "fact_first"
+    ],
+    [
+     33,
+     "all_are"
+    ],
+    [
+     33,
+     "whenever"
+    ],
+    [
+     34,
+     "all_nouns"
+    ],
+    [
+     34,
+     "if_then_event"
+    ],
+    [
+     34,
+     "every_time_event"
+    ],
+    [
+     34,
+     "suppose_observe"
+    ],
+    [
+     34,
+     "whenever"
+    ],
+    [
+     35,
+     "if_then"
+    ],
+    [
+     35,
+     "all_are"
+    ],
+    [
+     35,
+     "if_then_event"
+    ],
+    [
+     35,
+     "guarantee"
+    ],
+    [
+     35,
+     "suppose_observe"
+    ],
+    [
+     35,
+     "whenever"
+    ],
+    [
+     35,
+     "subset"
+    ],
+    [
+     35,
+     "subset"
+    ],
+    [
+     36,
+     "fact_first"
+    ],
+    [
+     36,
+     "fact_first"
+    ],
+    [
+     36,
+     "reversed_if"
+    ],
+    [
+     36,
+     "reversed_whenever"
+    ],
+    [
+     36,
+     "always_generic"
+    ],
+    [
+     36,
+     "always_generic"
+    ],
+    [
+     36,
+     "all_nouns"
+    ],
+    [
+     37,
+     "fact_first"
+    ],
+    [
+     37,
+     "reversed_whenever"
+    ],
+    [
+     37,
+     "if_then_event"
+    ],
+    [
+     37,
+     "suppose_observe"
+    ],
+    [
+     38,
+     "if_then"
+    ],
+    [
+     38,
+     "all_are"
+    ],
+    [
+     38,
+     "every_time_event"
+    ],
+    [
+     38,
+     "whenever"
+    ],
+    [
+     39,
+     "if_then"
+    ],
+    [
+     39,
+     "reversed_if"
+    ],
+    [
+     39,
+     "always_generic"
+    ],
+    [
+     39,
+     "all_are"
+    ],
+    [
+     39,
+     "guarantee"
+    ],
+    [
+     39,
+     "semi_formal"
+    ],
+    [
+     39,
+     "whenever"
+    ],
+    [
+     40,
+     "if_then_event"
+    ],
+    [
+     41,
+     "reversed_whenever"
+    ],
+    [
+     41,
+     "reversed_whenever"
+    ],
+    [
+     41,
+     "always_generic"
+    ],
+    [
+     41,
+     "all_nouns"
+    ],
+    [
+     41,
+     "all_nouns"
+    ],
+    [
+     41,
+     "suppose_observe"
+    ],
+    [
+     41,
+     "whenever"
+    ],
+    [
+     42,
+     "reversed_if"
+    ],
+    [
+     42,
+     "reversed_whenever"
+    ],
+    [
+     42,
+     "always_generic"
+    ],
+    [
+     42,
+     "guarantee"
+    ],
+    [
+     42,
+     "semi_formal"
+    ],
+    [
+     42,
+     "suppose_observe"
+    ],
+    [
+     42,
+     "whenever"
+    ],
+    [
+     43,
+     "fact_first"
+    ],
+    [
+     44,
+     "always_generic"
+    ],
+    [
+     44,
+     "all_nouns"
+    ],
+    [
+     44,
+     "every_time_event"
+    ],
+    [
+     44,
+     "subset"
+    ],
+    [
+     44,
+     "subset"
+    ],
+    [
+     45,
+     "reversed_if"
+    ],
+    [
+     45,
+     "reversed_whenever"
+    ],
+    [
+     45,
+     "all_nouns"
+    ],
+    [
+     45,
+     "suppose_observe"
+    ],
+    [
+     46,
+     "if_then"
+    ],
+    [
+     46,
+     "reversed_if"
+    ],
+    [
+     46,
+     "reversed_whenever"
+    ]
+   ]
+  },
+  "num_rev": {
+   "census": {
+    "matched": 2688,
+    "alignment_rejected": 1937,
+    "mask_invalid": 0,
+    "mask_mismatch": 0,
+    "pairs_kept": 200,
+    "trials": 400,
+    "rand_flagged": 0
+   },
+   "n_trials": 400,
+   "n_pairs": 200,
+   "prompts_sha256": "4ff85163f3d63b5f711d6b98818d8feac2d2b1944ffb5ff14b67da849fdee28e",
+   "underpowered": false,
+   "pair_content_family": [
+    [
+     0,
+     "all_are"
+    ],
+    [
+     0,
+     "if_then_event"
+    ],
+    [
+     0,
+     "every_time_event"
+    ],
+    [
+     1,
+     "fact_first"
+    ],
+    [
+     1,
+     "reversed_if"
+    ],
+    [
+     1,
+     "reversed_whenever"
+    ],
+    [
+     1,
+     "semi_formal"
+    ],
+    [
+     1,
+     "suppose_observe"
+    ],
+    [
+     1,
+     "whenever"
+    ],
+    [
+     2,
+     "semi_formal"
+    ],
+    [
+     4,
+     "reversed_whenever"
+    ],
+    [
+     4,
+     "all_are"
+    ],
+    [
+     4,
+     "if_then_event"
+    ],
+    [
+     4,
+     "every_time_event"
+    ],
+    [
+     4,
+     "semi_formal"
+    ],
+    [
+     4,
+     "suppose_observe"
+    ],
+    [
+     4,
+     "whenever"
+    ],
+    [
+     4,
+     "subset"
+    ],
+    [
+     5,
+     "all_nouns"
+    ],
+    [
+     5,
+     "all_nouns"
+    ],
+    [
+     5,
+     "if_then_event"
+    ],
+    [
+     5,
+     "every_time_event"
+    ],
+    [
+     5,
+     "whenever"
+    ],
+    [
+     5,
+     "subset"
+    ],
+    [
+     6,
+     "fact_first"
+    ],
+    [
+     6,
+     "all_nouns"
+    ],
+    [
+     6,
+     "whenever"
+    ],
+    [
+     7,
+     "all_are"
+    ],
+    [
+     7,
+     "subset"
+    ],
+    [
+     8,
+     "all_nouns"
+    ],
+    [
+     8,
+     "if_then_event"
+    ],
+    [
+     8,
+     "semi_formal"
+    ],
+    [
+     9,
+     "if_then"
+    ],
+    [
+     9,
+     "fact_first"
+    ],
+    [
+     9,
+     "reversed_if"
+    ],
+    [
+     9,
+     "every_time_event"
+    ],
+    [
+     9,
+     "every_time_event"
+    ],
+    [
+     9,
+     "guarantee"
+    ],
+    [
+     10,
+     "if_then"
+    ],
+    [
+     10,
+     "if_then"
+    ],
+    [
+     10,
+     "reversed_if"
+    ],
+    [
+     10,
+     "always_generic"
+    ],
+    [
+     10,
+     "guarantee"
+    ],
+    [
+     11,
+     "if_then"
+    ],
+    [
+     11,
+     "reversed_if"
+    ],
+    [
+     11,
+     "all_are"
+    ],
+    [
+     11,
+     "all_nouns"
+    ],
+    [
+     11,
+     "guarantee"
+    ],
+    [
+     11,
+     "whenever"
+    ],
+    [
+     11,
+     "subset"
+    ],
+    [
+     11,
+     "subset"
+    ],
+    [
+     12,
+     "if_then"
+    ],
+    [
+     12,
+     "reversed_if"
+    ],
+    [
+     12,
+     "reversed_whenever"
+    ],
+    [
+     12,
+     "reversed_whenever"
+    ],
+    [
+     12,
+     "all_are"
+    ],
+    [
+     12,
+     "if_then_event"
+    ],
+    [
+     12,
+     "every_time_event"
+    ],
+    [
+     12,
+     "every_time_event"
+    ],
+    [
+     12,
+     "guarantee"
+    ],
+    [
+     13,
+     "fact_first"
+    ],
+    [
+     13,
+     "reversed_if"
+    ],
+    [
+     13,
+     "all_nouns"
+    ],
+    [
+     13,
+     "if_then_event"
+    ],
+    [
+     13,
+     "semi_formal"
+    ],
+    [
+     14,
+     "fact_first"
+    ],
+    [
+     14,
+     "reversed_whenever"
+    ],
+    [
+     14,
+     "always_generic"
+    ],
+    [
+     14,
+     "semi_formal"
+    ],
+    [
+     15,
+     "reversed_if"
+    ],
+    [
+     15,
+     "reversed_whenever"
+    ],
+    [
+     15,
+     "always_generic"
+    ],
+    [
+     15,
+     "all_are"
+    ],
+    [
+     16,
+     "fact_first"
+    ],
+    [
+     16,
+     "fact_first"
+    ],
+    [
+     16,
+     "reversed_whenever"
+    ],
+    [
+     16,
+     "all_are"
+    ],
+    [
+     16,
+     "all_nouns"
+    ],
+    [
+     16,
+     "guarantee"
+    ],
+    [
+     16,
+     "guarantee"
+    ],
+    [
+     17,
+     "fact_first"
+    ],
+    [
+     17,
+     "always_generic"
+    ],
+    [
+     17,
+     "all_nouns"
+    ],
+    [
+     17,
+     "every_time_event"
+    ],
+    [
+     18,
+     "if_then_event"
+    ],
+    [
+     20,
+     "all_are"
+    ],
+    [
+     21,
+     "if_then"
+    ],
+    [
+     21,
+     "if_then"
+    ],
+    [
+     21,
+     "always_generic"
+    ],
+    [
+     21,
+     "all_are"
+    ],
+    [
+     21,
+     "all_are"
+    ],
+    [
+     21,
+     "guarantee"
+    ],
+    [
+     21,
+     "semi_formal"
+    ],
+    [
+     21,
+     "subset"
+    ],
+    [
+     21,
+     "subset"
+    ],
+    [
+     22,
+     "if_then"
+    ],
+    [
+     22,
+     "fact_first"
+    ],
+    [
+     22,
+     "reversed_whenever"
+    ],
+    [
+     22,
+     "always_generic"
+    ],
+    [
+     22,
+     "guarantee"
+    ],
+    [
+     22,
+     "guarantee"
+    ],
+    [
+     22,
+     "semi_formal"
+    ],
+    [
+     22,
+     "suppose_observe"
+    ],
+    [
+     22,
+     "suppose_observe"
+    ],
+    [
+     22,
+     "subset"
+    ],
+    [
+     23,
+     "semi_formal"
+    ],
+    [
+     23,
+     "subset"
+    ],
+    [
+     24,
+     "if_then"
+    ],
+    [
+     24,
+     "if_then_event"
+    ],
+    [
+     24,
+     "whenever"
+    ],
+    [
+     25,
+     "if_then_event"
+    ],
+    [
+     26,
+     "reversed_if"
+    ],
+    [
+     26,
+     "always_generic"
+    ],
+    [
+     26,
+     "whenever"
+    ],
+    [
+     27,
+     "always_generic"
+    ],
+    [
+     27,
+     "every_time_event"
+    ],
+    [
+     27,
+     "semi_formal"
+    ],
+    [
+     27,
+     "suppose_observe"
+    ],
+    [
+     29,
+     "semi_formal"
+    ],
+    [
+     29,
+     "semi_formal"
+    ],
+    [
+     30,
+     "if_then"
+    ],
+    [
+     30,
+     "if_then"
+    ],
+    [
+     30,
+     "all_nouns"
+    ],
+    [
+     30,
+     "if_then_event"
+    ],
+    [
+     30,
+     "every_time_event"
+    ],
+    [
+     30,
+     "every_time_event"
+    ],
+    [
+     30,
+     "guarantee"
+    ],
+    [
+     30,
+     "suppose_observe"
+    ],
+    [
+     30,
+     "suppose_observe"
+    ],
+    [
+     30,
+     "subset"
+    ],
+    [
+     31,
+     "reversed_if"
+    ],
+    [
+     31,
+     "guarantee"
+    ],
+    [
+     31,
+     "whenever"
+    ],
+    [
+     31,
+     "subset"
+    ],
+    [
+     33,
+     "fact_first"
+    ],
+    [
+     33,
+     "all_are"
+    ],
+    [
+     33,
+     "whenever"
+    ],
+    [
+     34,
+     "all_nouns"
+    ],
+    [
+     34,
+     "if_then_event"
+    ],
+    [
+     34,
+     "every_time_event"
+    ],
+    [
+     34,
+     "suppose_observe"
+    ],
+    [
+     34,
+     "whenever"
+    ],
+    [
+     35,
+     "if_then"
+    ],
+    [
+     35,
+     "all_are"
+    ],
+    [
+     35,
+     "if_then_event"
+    ],
+    [
+     35,
+     "guarantee"
+    ],
+    [
+     35,
+     "suppose_observe"
+    ],
+    [
+     35,
+     "whenever"
+    ],
+    [
+     35,
+     "subset"
+    ],
+    [
+     35,
+     "subset"
+    ],
+    [
+     36,
+     "fact_first"
+    ],
+    [
+     36,
+     "fact_first"
+    ],
+    [
+     36,
+     "reversed_if"
+    ],
+    [
+     36,
+     "reversed_whenever"
+    ],
+    [
+     36,
+     "always_generic"
+    ],
+    [
+     36,
+     "always_generic"
+    ],
+    [
+     36,
+     "all_nouns"
+    ],
+    [
+     37,
+     "fact_first"
+    ],
+    [
+     37,
+     "reversed_whenever"
+    ],
+    [
+     37,
+     "if_then_event"
+    ],
+    [
+     37,
+     "suppose_observe"
+    ],
+    [
+     38,
+     "if_then"
+    ],
+    [
+     38,
+     "all_are"
+    ],
+    [
+     38,
+     "every_time_event"
+    ],
+    [
+     38,
+     "whenever"
+    ],
+    [
+     39,
+     "if_then"
+    ],
+    [
+     39,
+     "reversed_if"
+    ],
+    [
+     39,
+     "always_generic"
+    ],
+    [
+     39,
+     "all_are"
+    ],
+    [
+     39,
+     "guarantee"
+    ],
+    [
+     39,
+     "semi_formal"
+    ],
+    [
+     39,
+     "whenever"
+    ],
+    [
+     40,
+     "if_then_event"
+    ],
+    [
+     41,
+     "reversed_whenever"
+    ],
+    [
+     41,
+     "reversed_whenever"
+    ],
+    [
+     41,
+     "always_generic"
+    ],
+    [
+     41,
+     "all_nouns"
+    ],
+    [
+     41,
+     "all_nouns"
+    ],
+    [
+     41,
+     "suppose_observe"
+    ],
+    [
+     41,
+     "whenever"
+    ],
+    [
+     42,
+     "reversed_if"
+    ],
+    [
+     42,
+     "reversed_whenever"
+    ],
+    [
+     42,
+     "always_generic"
+    ],
+    [
+     42,
+     "guarantee"
+    ],
+    [
+     42,
+     "semi_formal"
+    ],
+    [
+     42,
+     "suppose_observe"
+    ],
+    [
+     42,
+     "whenever"
+    ],
+    [
+     43,
+     "fact_first"
+    ],
+    [
+     44,
+     "always_generic"
+    ],
+    [
+     44,
+     "all_nouns"
+    ],
+    [
+     44,
+     "every_time_event"
+    ],
+    [
+     44,
+     "subset"
+    ],
+    [
+     44,
+     "subset"
+    ],
+    [
+     45,
+     "reversed_if"
+    ],
+    [
+     45,
+     "reversed_whenever"
+    ],
+    [
+     45,
+     "all_nouns"
+    ],
+    [
+     45,
+     "suppose_observe"
+    ],
+    [
+     46,
+     "if_then"
+    ],
+    [
+     46,
+     "reversed_if"
+    ],
+    [
+     46,
+     "reversed_whenever"
+    ]
+   ]
+  }
+ }
+}
