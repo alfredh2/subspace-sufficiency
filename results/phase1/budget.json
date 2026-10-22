@@ -1,0 +1,5 @@
+{"ceiling_gpu_hours": 5.0,
+ "stage0_benchmark_s": 10, "stage1_s": 190, "stage2_3_s": 138,
+ "stage4_phaseA_s": 241, "stage4_phasesBCD_s": 3772, "stage4_cross_task_rerun_s": 44, "g3_other_directions_s": 60,
+ "total_gpu_hours_approx": 1.2,
+ "note": "approximate wall-clock from logs; exhaustive (all 23 layers, all positions) run NOT launched"}

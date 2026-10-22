@@ -1,0 +1,6 @@
+{
+ "E_gap_top5pct_logic": 0.6255111694335938,
+ "E_gap_top1pct_logic": 0.4101170599460602,
+ "control_max_E_gap_k512": 0.11511959135532379,
+ "early_stop": false
+}

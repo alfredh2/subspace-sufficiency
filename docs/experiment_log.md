@@ -65,3 +65,8 @@ MVS patching transfers a verdict-like signal on matched pairs (random subspaces:
 ## 2026-10-21 — Phase 0.6 (validity beyond the verdict direction)
 Plan with pre-registered decision rule: `docs/phase06_plan.md` (+ Amendment 1 for pilot 2). Report: `docs/phase06_report.md`. Outputs: `results/phase06/` (decodability.json, search/ and search2/ candidates, evaluation*.json, report_tables*.md).
 Result: validity decodable (~0.97) outside d_c, the MVS span and after 12 INLP directions; 12 searched candidates (2 pilots) give format-specific AUC drops with no transplantable patching effect; none passes criteria 1–4 → no credible logic-selective target found.
+
+## 2026-10-21 — Phase 1 (native-unit implementation of the verdict direction)
+Frozen plan `docs/phase1_plan.md`; report `docs/phase1_report.md`; outputs `results/phase1/`. Stage 1: MLP share 0.557, selected layers 22/21/20/19; Stage 2–3: top-1 % |Δ| share 0.49 vs Haar 0.126, N_eff 60 vs 11.7k, top-512 reconstructs 98 % of the signed class difference;
+Stage 4: top-512 ablation reproduces 41 % / 59 % of full d_c-ablation gap loss (logic num_orig / num_rev), controls ≈0–0.18; C4 fails narrowly (Stroop +1.13 logits). Frozen rule → mixed/inconclusive (G-sparse, C-mixed). ~1.2 GPU-hours used.
+Operational notes: the first Stage-4 run crashed in the last cross-task step (key-name mismatch `localizer` vs `language_localizer`); fixed and rerun with resume (phase D only), no other conditions were affected. For the full d_c-ablation condition the captured residual precedes the intervention hook (hook order), so its stored `c`/`dh` are not used; its effect enters only through margins.

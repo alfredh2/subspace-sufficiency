@@ -73,6 +73,7 @@ ABAR = {l: NS[l]["mean"].to(dev) for l in LS}
 
 # ------------------------------------------------ rankings (training data only) ----------------------------------------------
 def delta_pool(task, dname):
+    task = {"localizer": "language_localizer"}.get(task, task)   # key names used in stage1_vectors.npz
     out = []
     for l in LS:
         d = torch.tensor(V1[f"{task}/mean_acc"][l] - V1[f"{task}/mean_rej"][l])

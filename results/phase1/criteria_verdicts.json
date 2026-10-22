@@ -1,0 +1,55 @@
+{
+ "geometric": {
+  "G1": true,
+  "G2": true,
+  "G3": true
+ },
+ "geometric_directions_g1g2": 4,
+ "geometric_directions_g3": 4,
+ "causal": {
+  "C1": true,
+  "C2": true,
+  "C3": true,
+  "C4": false,
+  "C5": true
+ },
+ "C2_detail": {
+  "random/logic_num_orig": [
+   0.048,
+   0.374,
+   0.436,
+   true
+  ],
+  "random/logic_num_rev": [
+   0.048,
+   0.561,
+   0.617,
+   true
+  ],
+  "actmatched/logic_num_orig": [
+   0.048,
+   0.403,
+   0.472,
+   true
+  ],
+  "actmatched/logic_num_rev": [
+   0.048,
+   0.594,
+   0.648,
+   true
+  ],
+  "alignmatched/logic_num_orig": [
+   0.048,
+   0.343,
+   0.425,
+   true
+  ],
+  "alignmatched/logic_num_rev": [
+   0.048,
+   0.498,
+   0.564,
+   true
+  ]
+ },
+ "overall": "MIXED / INCONCLUSIVE"
+}
