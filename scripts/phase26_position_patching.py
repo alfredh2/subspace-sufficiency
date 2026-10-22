@@ -21,7 +21,7 @@ from causal_subspaces.models.loading import encode, format_prompt, last_logits, 
 from causal_subspaces.utils.config import ROOT
 from causal_subspaces.utils.reproducibility import seed_everything
 
-T0 = time.time(); CAP = 27 * 60
+T0 = time.time(); CAP = 21 * 60   # first attempt (post-processing bug) used ~8 min of the 30-minute total budget
 OUT = ROOT / "results/phase26"
 # ---- V1-V3 re-check from the stored Phase 2.5 diagnostics -------------------------------------------------------------------------------------
 diag = json.load(open(ROOT / "results/phase25/recompute_diagnosis.json")); floor = json.load(open(ROOT / "results/phase25/rounding_floor.json"))
@@ -149,7 +149,11 @@ for fmt in ("num_orig", "num_rev"):
         all_out["formats"][fmt] = dict(stopped="V4 failed"); break
     noise = max(v["max_abs"] for v in v4.values())
     setconds = {sn: conds_for(sn) for sn in SETS}
-    res = run_pass(trials, f["valid"], f["invalid"], setconds, ("last", "all"), fmt)
+    try:
+        res = run_pass(trials, f["valid"], f["invalid"], setconds, ("last", "all"), fmt)
+    except TimeoutError:
+        all_out["formats"][fmt] = dict(stopped="time cap reached during the main pass"); print(fmt, "TIMEOUT in main pass", flush=True); break
+    np.savez_compressed(OUT / f"raw_{fmt}.npz", ta=ta, sa=sa, **res)
     diff, sgn, gap, cgap = transfers(res, ta, sa)
     # full-mask reproduction of the Phase 2.5 V-only result (S8, All)
     chk = {}
@@ -183,9 +187,10 @@ for fmt in ("num_orig", "num_rev"):
                                  discarded_bootstrap_replicates=int(np.isnan(Fb).sum()))
             # random controls summarised per matching (mean/max over the 10 draws of F)
             rand = {}
-            for m in RANDOM_MATCH:
-                Fd = [rowset[f"rand_{m}_{d}"]["T"] / Tall_pt for d in range(N_DRAW)] if evaluable else None
-                rand[m] = dict(F_mean=float(np.mean(Fd)) if Fd else None, F_max=float(np.max(Fd)) if Fd else None, T_mean=float(np.mean([rowset[f"rand_{m}_{d}"]["T"] for d in range(N_DRAW)])) if sn == "S8" else None) if sn == "S8" else None
+            if sn == "S8":
+                for m in RANDOM_MATCH:
+                    Fd = [rowset[f"rand_{m}_{d}"]["T"] / Tall_pt for d in range(N_DRAW)] if evaluable else None
+                    rand[m] = dict(F_mean=float(np.mean(Fd)) if Fd else None, F_max=float(np.max(Fd)) if Fd else None, T_mean=float(np.mean([rowset[f"rand_{m}_{d}"]["T"] for d in range(N_DRAW)])))
             ir = None
             if "G2" in rowset and "G1" in rowset:
                 i1 = [Tm(f"{sn}|G1G2|{qs}", r) - Tm(f"{sn}|G1|{qs}", r) - Tm(f"{sn}|G2|{qs}", r) for r in boots]; i2 = [Tm(f"{sn}|All|{qs}", r) - Tm(f"{sn}|G1G2|{qs}", r) - Tm(f"{sn}|Rem|{qs}", r) for r in boots]
@@ -225,5 +230,5 @@ except TimeoutError as e:
     all_out["lexical_controls"] = dict(error=str(e))
 json.dump(dict(**all_out, **stats), open(OUT / "position_patching.json", "w"), indent=1)
 np.savez_compressed(OUT / "position_patching_arrays.npz", **raw)
-json.dump(dict(cap_gpu_hours=0.5, wall_seconds=time.time() - T0, wall_gpu_hours=(time.time() - T0) / 3600), open(OUT / "budget.json", "w"), indent=1)
+json.dump(dict(cap_gpu_hours=0.5, first_attempt_minutes_approx=8, first_attempt_note="crashed in post-processing (misplaced conditional); results discarded and rerun", rerun_wall_seconds=time.time() - T0, total_gpu_hours_approx=(8 * 60 + time.time() - T0) / 3600), open(OUT / "budget.json", "w"), indent=1)
 print("done", time.time() - T0)
