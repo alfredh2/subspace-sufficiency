@@ -1,0 +1,21 @@
+{
+ "old_files": {
+  "src/causal_subspaces/upstream/patching.py": "293a2e50841a702f20e9445dc77766a70b8c4988c60f5516e967590ff2b7feeb",
+  "src/causal_subspaces/upstream/stats.py": "ef4f9269c224898b5d36b0247f534fc1ca4a1bf25810c51d01ae5024020df495",
+  "src/causal_subspaces/upstream/data.py": "7ad2d18d372b2d09fc082146f8da53c216dffa4fac8a72a8aa4be09ac40577f9",
+  "src/causal_subspaces/upstream/runner.py": "92fdef919f980278563fc08e6f36e2e51d3d2e8a66d3e324cf9a6f3fb2050567",
+  "src/causal_subspaces/upstream/pipeline.py": "6685b2d685d355da78593bf8618a93cc41b42873fe5ad66624d328150e3340b7",
+  "scripts/phase4_run.py": "de196691509a12db3f5638d200f0f51237244cc09af221821fdb155fe505d363",
+  "docs/phase4_plan.md": "b1494d0f5db79f97b648699d5c5565941b08455dcbbad79acc0d1f4a1ce17cc0"
+ },
+ "new_files": {
+  "src/causal_subspaces/upstream/patching.py": "293a2e50841a702f20e9445dc77766a70b8c4988c60f5516e967590ff2b7feeb",
+  "src/causal_subspaces/upstream/stats.py": "ef4f9269c224898b5d36b0247f534fc1ca4a1bf25810c51d01ae5024020df495",
+  "src/causal_subspaces/upstream/data.py": "7ad2d18d372b2d09fc082146f8da53c216dffa4fac8a72a8aa4be09ac40577f9",
+  "src/causal_subspaces/upstream/runner.py": "92fdef919f980278563fc08e6f36e2e51d3d2e8a66d3e324cf9a6f3fb2050567",
+  "src/causal_subspaces/upstream/pipeline.py": "6685b2d685d355da78593bf8618a93cc41b42873fe5ad66624d328150e3340b7",
+  "scripts/phase4_run.py": "9fd00ed2349d9605372ae9f391ffc5954925a8f124a67122b454f7b6e570ae07",
+  "docs/phase4_plan.md": "b1494d0f5db79f97b648699d5c5565941b08455dcbbad79acc0d1f4a1ce17cc0"
+ },
+ "note": "Procedural amendment recorded before re-running Replication B num_rev: my stage cap (14 min) was applied to the whole repl stage instead of per format, so num_rev stopped with TimeoutError after num_orig completed (532 s). The amendment adds an optional format filter (P4_FORMATS), a per-format cap, merging of repl.json, and the P4_LADDER environment switch for Stages 5/4 (degrade-ladder steps 1-2 of docs/phase4_plan.md section 7). No job list, threshold, statistic, onset definition or position group is changed; num_orig results were produced by the pre-amendment script and are unchanged."
+}

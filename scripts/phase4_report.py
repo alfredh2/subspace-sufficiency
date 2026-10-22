@@ -127,12 +127,15 @@ if exists("stage3_num_orig.npz"):
             ml("| index | T_total | T_noS8 | T_nonS8 | T_late | T_all-heads | T_onlyS8 | T_S8+late | D_S8 [pair CI] / content CI | D_random mean (max) | D_S8 − D_random CI (pair / content) | 2x2 interaction | frozen-vs-clean max |z diff| |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|")
             for i in idxs:
                 R = {f: tcurve_rep(boot3, tr3, bt3, bs3, jobs3, f"path|G1G2|{i}|{f}", key) for f in ["total"] + PL.FREEZES}
+                ver = max(float(jobs3[f"path|G1G2|{i}|{f}"]["verify"]) for f in PL.FREEZES)
+                base = f"| {i} | {R['total']['point']:.2f} | {R['S8']['point']:.2f} | {R['nonS8']['point']:.2f} | {R['late']['point']:.2f} | {R['all']['point']:.2f} | {R['onlyS8']['point']:.2f} | {R['S8late']['point']:.2f} | "
+                if abs(R["total"]["point"]) < 0.05:
+                    ml(base + f"undefined (T_total < 0.05) | — | — | — | {ver:.1e} |"); continue
                 Dp = 1 - R["S8"]["rep_pair"] / R["total"]["rep_pair"]; Dc = 1 - R["S8"]["rep_content"] / R["total"]["rep_content"]; D0 = 1 - R["S8"]["point"] / R["total"]["point"]
                 rnd = [1 - R[f"rnd{k}"]["point"] / R["total"]["point"] for k in range(5)]
                 rdp = np.mean([1 - R[f"rnd{k}"]["rep_pair"] / R["total"]["rep_pair"] for k in range(5)], 0); rdc = np.mean([1 - R[f"rnd{k}"]["rep_content"] / R["total"]["rep_content"] for k in range(5)], 0)
                 inter = (R["total"]["point"] - R["S8late"]["point"]) - (R["total"]["point"] - R["S8"]["point"]) - (R["total"]["point"] - R["late"]["point"])
-                ver = max(float(jobs3[f"path|G1G2|{i}|{f}"]["verify"]) for f in PL.FREEZES)
-                ml(f"| {i} | {R['total']['point']:.2f} | {R['S8']['point']:.2f} | {R['nonS8']['point']:.2f} | {R['late']['point']:.2f} | {R['all']['point']:.2f} | {R['onlyS8']['point']:.2f} | {R['S8late']['point']:.2f} | {D0:.2f} {ci2(boot3.ci(Dp))} / {ci2(boot3.ci(Dc))} | {np.mean(rnd):.2f} ({max(rnd):.2f}) | {ci2(boot3.ci(Dp - rdp))} / {ci2(boot3.ci(Dc - rdc))} | {inter:+.2f} | {ver:.1e} |")
+                ml(base + f"{D0:.2f} {ci2(boot3.ci(Dp))} / {ci2(boot3.ci(Dc))} | {np.mean(rnd):.2f} ({max(rnd):.2f}) | {ci2(boot3.ci(Dp - rdp))} / {ci2(boot3.ci(Dc - rdc))} | {inter:+.2f} | {ver:.1e} |")
                 V["P1"].setdefault(fmt, {}).setdefault(key, {})[i] = dict(D_S8=float(D0), D_pair_lo=float(np.percentile(Dp, 2.5)), D_content_lo=float(np.percentile(Dc, 2.5)), D_rand_mean=float(np.mean(rnd)), D_rand_max=float(max(rnd)),
                                                                      diff_pair_lo=float(np.percentile(Dp - rdp, 2.5)), diff_content_lo=float(np.percentile(Dc - rdc, 2.5)), verify=ver, interaction=float(inter), T_total=R["total"]["point"])
         ml(f"\n{fmt}: G1 and G2 separately (margin): " + "; ".join(f"{cd}@{i}: total {tcurve_rep(boot3, tr3, bt3, bs3, jobs3, f'path|{cd}|{i}|total', 'margin')['point']:.2f}, S8-frozen {tcurve_rep(boot3, tr3, bt3, bs3, jobs3, f'path|{cd}|{i}|S8', 'margin')['point']:.2f}" for cd in ("G1", "G2") for i in sorted({int(k.split('|')[2]) for k in jobs3 if k.startswith(f'path|{cd}|')})))

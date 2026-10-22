@@ -1,5 +1,6 @@
 """Phase 4 staged runner (docs/phase4_plan.md). Usage: python scripts/phase4_run.py {pilot|stage2|stage3|freeze|repl|stage5|stage4}"""
 import json
+import os
 import sys
 import time
 
@@ -10,7 +11,7 @@ from causal_subspaces.upstream.runner import run_jobs
 from causal_subspaces.utils.config import ROOT
 
 stage = sys.argv[1]; T0 = time.time(); OUT = PL.OUT; OUT.mkdir(exist_ok=True)
-CAP = dict(pilot=12 * 60, stage2=44 * 60, stage3=17 * 60, repl=14 * 60, stage5=15 * 60, stage4=6 * 60)[stage] if stage != "freeze" else 60
+CAP = dict(pilot=12 * 60, stage2=44 * 60, stage3=17 * 60, repl=14 * 60, stage5=12 * 60, stage4=6 * 60)[stage] if stage != "freeze" else 60
 PILOT_IDX = [0, 2, 4, 8, 12, 16, 18, 19, 20, 21, 22, 23]
 GRID_B = [0, 2, 4, 6, 8, 10, 12, 14, 16, 17, 18, 19, 20, 21, 22, 23]
 
@@ -101,9 +102,13 @@ elif stage == "freeze":
 elif stage == "repl":
     fz = json.load(open(OUT / "frozen_config.json"))
     now = PL.file_hashes(PL.FROZEN_FILES)
-    if now != fz["files"]: raise SystemExit("frozen files changed since the freeze: " + str([k for k in now if now[k] != fz["files"].get(k)]))
-    P = PL.setup(); ctx = P["ctx"]; summary = {}
-    for fmt in ("num_orig", "num_rev"):
+    amend = OUT / "frozen_config_amendment.json"      # procedural amendment (format filter, per-format cap); original freeze file is never modified
+    expect = json.load(open(amend))["new_files"] if amend.exists() else fz["files"]
+    if now != expect: raise SystemExit("frozen files changed since the freeze: " + str([k for k in now if now[k] != expect.get(k)]))
+    P = PL.setup(); ctx = P["ctx"]
+    summary = json.load(open(OUT / "repl.json")) if (OUT / "repl.json").exists() else {}
+    for fmt in os.environ.get("P4_FORMATS", "num_orig,num_rev").split(","):
+        T0 = time.time()                                # cap applies per format
         trials, c = PL.trial_sets(P, "B", fmt); print("B", fmt, c, flush=True)
         lon = fz["onsets_A"][fmt]["G1G2"]["sustained_both"]; idx = sorted({i for i in ([lon] if lon is not None else [16]) + [19, 22, 23]})
         jobs = PL.job_list_patch(["G1", "G2", "G1G2", "NonSummary", "AllMinusG1G2", "rand0", "rand1", "rand2"], GRID_B) + PL.job_list_patch(["All"], [0, 8, 16, 22, 23])
@@ -112,7 +117,7 @@ elif stage == "repl":
         PL.save_raw(OUT / f"repl_{fmt}.npz", trials, bt, bs_, res)
         boot = PL.boot_for(trials); summary[fmt] = dict(census=c, path_indices=idx, jobs={j: PL.summarize(boot, trials, bt, bs_, r) for j, r in res.items()})
         json.dump(summary, open(OUT / "repl.json", "w"), indent=1, default=float); print("B", fmt, "done", f"{time.time() - T0:.0f}s", flush=True)
-    log_budget("repl", time.time() - T0)
+    log_budget("repl_" + "_".join(os.environ.get("P4_FORMATS", "num_orig,num_rev").split(",")), time.time() - T0)
 elif stage in ("stage5", "stage4"):
     from causal_subspaces.data.logic import build_contents
     from causal_subspaces.upstream.data import build_special_trials
@@ -120,6 +125,7 @@ elif stage in ("stage5", "stage4"):
     splits = PL.get_splits(P["cfg"]); test_ids = sorted({e.content_id for e in splits["items"]}); contents = build_contents("ordinary")
     for fmt in ("num_orig", "num_rev"):
         lon = on[fmt]["G1G2"]["sustained_both"]; idxs = sorted({lon, 22} - {None}) if lon is not None else [16, 22]
+        if os.environ.get("P4_LADDER"): idxs = [lon if lon is not None else 22]      # degrade ladder step 2: dose-response/noise at one layer (the onset)
         trials, c = PL.trial_sets(P, "A", fmt); boot = PL.boot_for(trials); summary[fmt] = {}
         if stage == "stage5":
             jobs = [dict(name=f"dose|{cd}|{i}|{a}", kind="patch", index=i, cond=cd, alpha=a) for cd in ("G1G2", "rand0") for i in idxs for a in (0.25, 0.5, 0.75, 1.25)]
@@ -128,7 +134,7 @@ elif stage in ("stage5", "stage4"):
             PL.save_raw(OUT / f"stage5_{fmt}.npz", trials, bt, bs_, res)
             summary[fmt]["jobs"] = {j: PL.summarize(boot, trials, bt, bs_, r) for j, r in res.items()}
             if fmt == "num_orig":    # lexical and format-mapping controls are defined on the num_orig prompt
-                for kind in ("lexical", "format"):
+                for kind in (("lexical",) if os.environ.get("P4_LADDER") else ("lexical", "format")):
                     tr2, c2 = build_special_trials(P["tok"], contents, test_ids, PL.FAMS, kind, tag=f"phase4{kind}"); print(kind, c2, flush=True)
                     jobs2 = [dict(name=f"{kind}|{cd}|{i}", kind="patch", index=i, cond=cd) for cd in (["G1G2", "NonSummary", "All"] if kind == "lexical" else ["Instr", "All"]) for i in sorted(set(idxs) | {0})]
                     bt2, bs2, res2 = run_jobs(ctx, tr2, jobs2, bs=32, t0=T0, cap=CAP)
@@ -142,7 +148,7 @@ elif stage in ("stage5", "stage4"):
                     summary[fmt][kind] = dict(census=c2, jobs=ent)
         else:
             lo = lon if lon is not None else 19
-            jobs = [dict(name=f"comp|{w}|L{i - 1}|{cd}", kind="comp", index=i, cond=cd, comp=w, layer=i - 1) for i in sorted({max(1, lo - k) for k in (0, 1, 2, 3)}) for w in ("attn", "mlp") for cd in ("G1", "G2", "G1G2")]
+            jobs = [dict(name=f"comp|{w}|L{i - 1}|{cd}", kind="comp", index=i, cond=cd, comp=w, layer=i - 1) for i in sorted({max(1, lo - k) for k in ((0, 1) if os.environ.get("P4_LADDER") else (0, 1, 2, 3))}) for w in ("attn", "mlp") for cd in ("G1", "G2", "G1G2")]
             bt, bs_, res = run_jobs(ctx, trials, jobs, bs=32, t0=T0, cap=CAP, diag=False)
             PL.save_raw(OUT / f"stage4_{fmt}.npz", trials, bt, bs_, res)
             summary[fmt]["jobs"] = {j: PL.summarize(boot, trials, bt, bs_, r) for j, r in res.items()}
