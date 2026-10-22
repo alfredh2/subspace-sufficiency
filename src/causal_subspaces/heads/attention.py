@@ -117,10 +117,12 @@ def pair_alignment(tok, prompt_a: str, lines_a: list[str], prompt_b: str, lines_
 
 # ---- attention-weight / value patching ---------------------------------------------------------------------------------
 @contextmanager
-def attention_patch(model, spec: dict, source: dict, mask2d: torch.Tensor, residual_index: int, *, patch="AV", position="all"):
+def attention_patch(model, spec: dict, source: dict, mask2d: torch.Tensor, residual_index: int, *, patch="AV", position="all", v_positions: torch.Tensor | None = None):
     """Recompute the listed heads with source attention weights (patch contains 'A') and/or source values (patch contains 'V').
     spec[layer] = heads; source[layer] = dict(A=(B,H,T,T), v=(B,H,T,HD)) from `recompute` on the SOURCE forward (same batch order, same shapes).
-    position 'last' only replaces the final query row. The recompute path must have passed the gate; self-patching (source = target) measures its noise floor."""
+    position 'last' only replaces the final query row. The recompute path must have passed the gate; self-patching (source = target) measures its noise floor.
+    v_positions (optional, bool (B,T)): with a 'V' patch, only the key positions marked True take the SOURCE value vectors; all other key positions keep the
+    target's own values (None = all positions; Phase 2.6 position-restricted patching)."""
     if position not in ("all", "last") or not set(patch) <= {"A", "V"} or not patch:
         raise ValueError((patch, position))
     H, HD, _ = head_dims(model)
@@ -147,7 +149,12 @@ def attention_patch(model, spec: dict, source: dict, mask2d: torch.Tensor, resid
                         a[:, -1] = source[l]["A"][:, h, -1]
                     A_ov[h] = a
                 if "V" in patch:
-                    V_ov[h] = source[l]["v"][:, h]
+                    if v_positions is None:
+                        V_ov[h] = source[l]["v"][:, h]
+                    else:
+                        if v_positions.shape != (B, T):
+                            raise ValueError(f"v_positions must have shape {(B, T)}, got {tuple(v_positions.shape)}")
+                        V_ov[h] = torch.where(v_positions.to(z.device)[:, :, None], source[l]["v"][:, h], base["v"][:, h])
             rec = recompute(model, l, hidden, pe, mask2d, A_override=A_ov or None, V_override=V_ov or None)
             new = z.float().view(B, T, H, HD).clone()
             for h in heads:
