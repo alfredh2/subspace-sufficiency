@@ -1,0 +1,8 @@
+{
+ "E_gap_S8_logic_num_orig": 0.861046314239502,
+ "E_gap_S16": 0.9095857739448547,
+ "E_gap_k64": 1.1321227550506592,
+ "control_max_E_gap_k8": 0.38056764006614685,
+ "R_dc_logic_num_orig": 23.4453125,
+ "decision": "full plan"
+}

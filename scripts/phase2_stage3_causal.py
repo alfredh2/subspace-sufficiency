@@ -4,6 +4,7 @@ Usage: python scripts/phase2_stage3_causal.py --phase A B C D"""
 import argparse
 import json
 import time
+import zlib
 
 import numpy as np
 import torch
@@ -110,12 +111,16 @@ def nearest_in_layer(l, val_arr, native_h, rng, used, n_cand=3):
     cands = [c for c in cands if (l, int(c)) not in used][:n_cand]
     return int(rng.choice(cands))
 def ctrl_sets(family, hs, d):
-    rng = np.random.default_rng(100_003 * len(hs) + 7919 * d + hash(family) % 1000)
+    rng = np.random.default_rng(100_003 * len(hs) + 7919 * d + zlib.crc32(family.encode()) % 1000)   # deterministic (str hash() is randomised per process)
     nat = set(hs); out, used = [], set(hs)
     if family == "random":                                   # same number of heads per layer, any other head of that layer
         for l in sorted({l for l, _ in hs}):
             k = sum(1 for x, _ in hs if x == l); pool = [h for h in range(H) if (l, h) not in nat]
-            out += [(l, int(h)) for h in rng.choice(pool, k, replace=False)]
+            take = min(k, len(pool))
+            out += [(l, int(h)) for h in rng.choice(pool, take, replace=False)]
+            if take < k:   # layer has too few non-native heads (only happens for k = 64): fill the shortfall from other non-native heads of layers 19-22
+                extra = [(x, y) for x in range(19, 23) for y in range(H) if (x, y) not in nat and (x, y) not in out]
+                out += [extra[i] for i in rng.choice(len(extra), k - take, replace=False)]
     elif family == "layer_restricted":                       # uniform over heads of layers 19-22 not in the native set
         pool = [(l, h) for l in range(19, 23) for h in range(H) if (l, h) not in nat]
         out = [pool[i] for i in rng.choice(len(pool), len(hs), replace=False)]
@@ -126,6 +131,16 @@ def ctrl_sets(family, hs, d):
     return out
 
 def native(k, rank="abs"): return heads_from(RANK[rank], k)
+
+REG_PATH = OUT / "control_sets.json"
+REG = json.load(open(REG_PATH)) if REG_PATH.exists() else {}
+if not REG_PATH.exists():   # purge the k=8 controls drawn with the non-deterministic seed; they are re-run and recorded
+    for key in [k for k in STORE if k.split('|')[0] in ('random', 'layer_restricted', 'magnitude_matched', 'alignment_matched') and '|k=8|' in k.split('||')[0]]:
+        del STORE[key]
+def crun(family, k, d):
+    hs = ctrl_sets(family, native(k), d); nm = f"{family}|k={k}|d={d}"
+    REG[nm] = hs; json.dump(REG, open(REG_PATH, 'w'))
+    run(nm, hfac(hs))
 
 # ================================ phases ================================================================================================
 if "A" in a.phase:
@@ -156,7 +171,7 @@ def gap(n, g):
 if "B" in a.phase:
     for fam in ("random", "layer_restricted", "magnitude_matched", "alignment_matched"):
         for d in range(30):
-            run(f"{fam}|k=8|d={d}", hfac(ctrl_sets(fam, native(8), d)))
+            crun(fam, 8, d)
         save(); print(f"phase B {fam} done ({time.time() - T0:.0f}s)", flush=True)
     R_dc = gap("intact", "logic_num_orig") - gap("dc_ablation", "logic_num_orig")
     E = lambda n: (gap("intact", "logic_num_orig") - gap(n, "logic_num_orig")) / R_dc
@@ -172,10 +187,10 @@ if "B" in a.phase:
 if "C" in a.phase:
     for k in (2, 4, 16, 32):
         for fam in ("random", "layer_restricted", "magnitude_matched"):
-            for d in range(10): run(f"{fam}|k={k}|d={d}", hfac(ctrl_sets(fam, native(k), d)))
+            for d in range(10): crun(fam, k, d)
         save(); print(f"phase C k={k} done ({time.time() - T0:.0f}s)", flush=True)
     for fam in ("random", "layer_restricted", "magnitude_matched"):
-        for d in range(5): run(f"{fam}|k=64|d={d}", hfac(ctrl_sets(fam, native(64), d)))
+        for d in range(5): crun(fam, 64, d)
     for l in range(19, 23):                                  # k = 1 head-effect map over layers 19-22
         for h in range(H): run(f"map|L{l}H{h}", hfac([(l, h)]))
         save(); print(f"phase C map layer {l} done ({time.time() - T0:.0f}s)", flush=True)
