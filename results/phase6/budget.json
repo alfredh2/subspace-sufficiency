@@ -12,7 +12,19 @@
   "stage3_Fm_num_orig": 115.05477142333984,
   "stage3_Fm_num_rev": 113.38512754440308,
   "stage3_L_num_orig": 203.78476667404175,
-  "stage3_X_num_orig": 112.29398679733276
+  "stage3_X_num_orig": 112.29398679733276,
+  "stage4_B_num_orig": 608.2668926715851,
+  "stage4_B_L_num_orig": 699.914927482605,
+  "stage4_B_X_num_orig": 513.9484362602234,
+  "stage4_B_num_rev": 602.682544708252,
+  "stage4_C_num_orig": 613.866096496582,
+  "stage4_C_L_num_orig": 515.6883141994476,
+  "stage4_C_X_num_orig": 463.5123746395111,
+  "stage4_C_num_rev": 613.3452441692352,
+  "stage5_A_num_orig": 164.60801124572754,
+  "stage5_A_num_rev": 166.66627836227417,
+  "stage5_B_num_orig": 168.1704044342041,
+  "stage5_B_num_rev": 167.33780479431152
  },
- "total_hours": 0.8587048980924818
+ "total_hours": 2.330373600721359
 }

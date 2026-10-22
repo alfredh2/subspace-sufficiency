@@ -104,17 +104,19 @@ def analyse(ds, label, dense_ok=True):
         ml("\n### Component-level patches at P = Concl: signed T*_V and F_comp = T*_V/T*_V(19, Concl) (total influence = downstream recompute; direct = only the component's own write added at index 19); interaction I = joint − attn − MLP\n")
         ml("| layer | total attn | total MLP | total joint | I_total | direct attn | direct MLP | direct joint | I_direct | total − direct (joint) |\n|---|---|---|---|---|---|---|---|---|---|")
         d19 = Tc["point"][last]
+        has_joint = ds.has("ct|attn+mlp|0|Concl")
         for l in Lm:
-            t = {c: ds.T([f"ct|{c}|{l}|Concl"])["point"][0] for c in ("attn", "mlp", "attn+mlp")}; d = {c: ds.T([f"cd|{c}|{l}|Concl"])["point"][0] for c in ("attn", "mlp", "attn+mlp")}
-            comp[l] = dict(total=t, direct=d)
-            ml(f"| {l} | {t['attn']:.3f} | {t['mlp']:.3f} | {t['attn+mlp']:.3f} | {t['attn+mlp'] - t['attn'] - t['mlp']:+.3f} | {d['attn']:.3f} | {d['mlp']:.3f} | {d['attn+mlp']:.3f} | {d['attn+mlp'] - d['attn'] - d['mlp']:+.3f} | {t['attn+mlp'] - d['attn+mlp']:+.3f} |")
+            cs_ = ("attn", "mlp", "attn+mlp") if has_joint else ("attn", "mlp")
+            t = {c: ds.T([f"ct|{c}|{l}|Concl"])["point"][0] for c in cs_}; d = {c: ds.T([f"cd|{c}|{l}|Concl"])["point"][0] for c in cs_}
+            comp[l] = dict(total=t, direct=d); j = lambda x: x.get("attn+mlp", float("nan"))
+            ml(f"| {l} | {t['attn']:.3f} | {t['mlp']:.3f} | {j(t):.3f} | {j(t) - t['attn'] - t['mlp']:+.3f} | {d['attn']:.3f} | {d['mlp']:.3f} | {j(d):.3f} | {j(d) - d['attn'] - d['mlp']:+.3f} | {j(t) - j(d):+.3f} |")
         out["components"] = comp
         if F is not None:
             ons2 = S6.onsets(F, grid); i0, i1 = ons2[0.1]["first"], ons2[0.9]["sustained"]
             if i0 is not None and i1 is not None and i1 > i0:
                 rise = float(F["point"][grid.index(i1)] - F["point"][grid.index(i0)]); thr = 0.3 * rise; wr = {}
                 for kind, pre in (("total", "ct"), ("direct", "cd")):
-                    for c in ("attn", "mlp", "attn+mlp"):
+                    for c in (("attn", "mlp", "attn+mlp") if has_joint else ("attn", "mlp")):
                         cur = ds.T([f"{pre}|{c}|{l}|Concl" for l in range(19)]); Fc = dict(point=cur["point"] / Tc["point"][last], rp=cur["rp"] / Tc["rp"][:, [last]], rc=cur["rc"] / Tc["rc"][:, [last]])
                         lo = np.minimum(np.percentile(Fc["rp"], 2.5, axis=0), np.percentile(Fc["rc"], 2.5, axis=0))
                         wr[f"{kind}|{c}"] = [l for l in range(19) if Fc["point"][l] >= thr and lo[l] > 0.05]
