@@ -4,7 +4,10 @@
   "pilot": 218.67519664764404,
   "stage2": 2262.116570711136,
   "stage3": 709.5339922904968,
-  "repl_num_rev": 531.6215243339539
+  "repl_num_rev": 531.6215243339539,
+  "repl_first_attempt_num_orig_plus_aborted_num_rev": 900.0,
+  "stage5": 121.92026543617249,
+  "stage4": 92.35116291046143
  },
- "total_hours": 1.0338742455508974
+ "total_hours": 1.3433940867582956
 }

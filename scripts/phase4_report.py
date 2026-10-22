@@ -9,6 +9,7 @@ from causal_subspaces.upstream import stats as S
 OUT = PL.OUT; md = []; ml = md.append; V = {}
 exists = lambda n: (OUT / n).exists()
 KEYS = ("margin", "c", "rj")
+PL_NOOP = PL.NOOP_IDX
 f2 = lambda x: "—" if x is None else (f"{x:.2f}" if isinstance(x, (float, np.floating)) else str(x))
 ci2 = lambda c: f"[{c[0]:.2f}, {c[1]:.2f}]"
 
@@ -152,6 +153,19 @@ if exists("stage3_num_orig.npz"):
 # ---------------- Stage 5 + replication + writers ----------------
 if exists("stage5.json"):
     s5 = json.load(open(OUT / "stage5.json")); ml("\n## Stage 5 diagnostics\n```json\n" + json.dumps({f: {k: v for k, v in d.items()} for f, d in s5.items()}, default=float)[:12000] + "\n```")
+if exists("stage5.json"):
+    c1 = {}
+    for fmt, d in s5.items():
+        lon = crit[fmt]["onset_sustained_both"]
+        if lon is None: continue
+        al = [0.25, 0.5, 0.75, 1.0, 1.25]; tg = [d["jobs"][f"dose|G1G2|{lon}|{a}"]["margin"]["T"] if a != 1.0 else None for a in al]
+        tr, bt, bs, jobs, boot = A[fmt]; tg[3] = tcurve_rep(boot, tr, bt, bs, jobs, f"patch|G1G2|{lon}", "margin")["point"]
+        c1[fmt] = dict(index=lon, dose_G1G2=dict(zip(map(str, al), map(float, tg))), dose_monotone=bool(all(np.diff(tg) > 0)), noise_T=d["jobs"][f"noise|G1G2|{lon}"]["margin"]["T"], noise_ok=bool(abs(d["jobs"][f"noise|G1G2|{lon}"]["margin"]["T"]) <= 0.10))
+        if "lexical" in d:
+            lx = d["lexical"]["jobs"][f"lexical|G1G2|{lon}"]; c1[fmt]["lexical_flip"] = lx["flip_vs_target"]; c1[fmt]["lexical_mean_abs_dmargin"] = lx["mean_abs_dmargin"]; c1[fmt]["lexical_ok"] = bool(lx["flip_vs_target"] <= 0.10)
+        c1[fmt]["prediff_exact"] = bool(all(float(np.abs(jobs[f"patch|PreDiff|{i}"]["margin"] - bt["margin"]).max()) == 0.0 for i in PL_NOOP))
+    V["C1"] = c1; V["C1_met"] = bool(c1 and all(v["dose_monotone"] and v["noise_ok"] and v.get("lexical_ok", True) and v["prediff_exact"] for v in c1.values()))
+    ml("\n### C1 controls (mechanical)\n```json\n" + json.dumps(c1, indent=1, default=float) + "\n```")
 if exists("repl.json"):
     rp = json.load(open(OUT / "repl.json")); ml("\n## Replication B (nonword lexicon; frozen configuration)\n")
     V["B"] = {}
@@ -188,6 +202,7 @@ def outcome():
     if a3["exists_both"] and not a3["format_diff_le_2"]: notes.append("onset differs by more than 2 layers between formats")
     if any(crit[f].get("A2") is False for f in crit): notes.append("A2 (localization vs random / NonSummary) not met")
     if "P1_met" in V and not V["P1_met"]: notes.append("P1 (S8 pathway dependence) not met")
+    if "C1_met" in V and not V["C1_met"]: notes.append("C1 controls not met")
     if "B" in V:
         b_ok = all(V["B"][f]["plateau"] >= 0.5 for f in V["B"]) and all(V["B"][f]["onset"]["sustained_both"] is not None and a3["exists_both"] and abs(V["B"][f]["onset"]["sustained_both"] - crit[f]["onset_sustained_both"]) <= 2 for f in V["B"])
         if not b_ok: notes.append("Replication B does not reproduce plateau/onset")

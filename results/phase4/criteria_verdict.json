@@ -482,5 +482,77 @@
   "num_rev|20": true,
   "num_rev|22": true
  },
+ "C1": {
+  "num_orig": {
+   "index": 20,
+   "dose_G1G2": {
+    "0.25": 0.0728236027425722,
+    "0.5": 0.19110741741117807,
+    "0.75": 0.3846041969665489,
+    "1.0": 0.6159983378350301,
+    "1.25": 0.7553500934967795
+   },
+   "dose_monotone": true,
+   "noise_T": 0.021982131726573862,
+   "noise_ok": true,
+   "lexical_flip": 0.05649717514124294,
+   "lexical_mean_abs_dmargin": 2.1712570190429688,
+   "lexical_ok": true,
+   "prediff_exact": true
+  },
+  "num_rev": {
+   "index": 20,
+   "dose_G1G2": {
+    "0.25": 0.07401158398388315,
+    "0.5": 0.19660035255603123,
+    "0.75": 0.39408209519012843,
+    "1.0": 0.6266431629312516,
+    "1.25": 0.7712918660287081
+   },
+   "dose_monotone": true,
+   "noise_T": 0.02299168975069252,
+   "noise_ok": true,
+   "prediff_exact": true
+  }
+ },
+ "C1_met": true,
+ "B": {
+  "num_orig": {
+   "onset": {
+    "plateau": 0.5821109693877551,
+    "threshold": 0.29105548469387754,
+    "first_crossing": 20,
+    "sustained_pair": 20,
+    "sustained_content": 20,
+    "sustained_both": 20
+   },
+   "plateau": 0.5821109693877551,
+   "plateau_content_lo": 0.5622230066251973,
+   "D": {
+    "19": 0.708293060119853,
+    "20": 0.8334358721955621,
+    "22": 0.8286761680320204,
+    "23": 0.0
+   }
+  },
+  "num_rev": {
+   "onset": {
+    "plateau": 0.5916272807210377,
+    "threshold": 0.2958136403605188,
+    "first_crossing": 20,
+    "sustained_pair": 20,
+    "sustained_content": 20,
+    "sustained_both": 20
+   },
+   "plateau": 0.5916272807210377,
+   "plateau_content_lo": 0.5723354506183624,
+   "D": {
+    "19": 0.7149988115046351,
+    "20": 0.819158116789721,
+    "22": 0.7851641670044589,
+    "23": 0.0
+   }
+  }
+ },
  "outcome": "MIXED: sustained onset inside the S8 layers (19-22): no separable upstream stage; A2 (localization vs random / NonSummary) not met"
 }
