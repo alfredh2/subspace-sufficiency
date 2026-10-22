@@ -1,0 +1,15 @@
+{
+ "files": {
+  "src/causal_subspaces/phase5/patching.py": "94ff386ab7aa93456b7d4f08bc2f85e5397cde875d6f0ed7e569014a027d97b8",
+  "src/causal_subspaces/phase5/runner.py": "05a87d551a5e16b01967fbaeed36fd5823720c163ea60aed1658667682780ddc",
+  "src/causal_subspaces/phase5/pipeline.py": "853b227565936914a1973c0450e2bbc1426da65c964275d2286b22f08602fa5c",
+  "src/causal_subspaces/upstream/patching.py": "293a2e50841a702f20e9445dc77766a70b8c4988c60f5516e967590ff2b7feeb",
+  "src/causal_subspaces/upstream/stats.py": "ef4f9269c224898b5d36b0247f534fc1ca4a1bf25810c51d01ae5024020df495",
+  "src/causal_subspaces/upstream/data.py": "7ad2d18d372b2d09fc082146f8da53c216dffa4fac8a72a8aa4be09ac40577f9",
+  "src/causal_subspaces/upstream/pipeline.py": "6685b2d685d355da78593bf8618a93cc41b42873fe5ad66624d328150e3340b7",
+  "scripts/phase5_run.py": "582554c6a0156332622973658ee628656451480751568c196873141a5dfc91cf",
+  "docs/phase5_plan.md": "e7b52132a782ceccbaa253e03abdb8404bd00aeb2bb8aa72e98590ff7c3f1638",
+  "results/phase5/selection.json": "377a9dec46d9f8f08391871f1737c438301b8cad97784137d7100780ca58d5c7"
+ },
+ "note": "frozen before any Replication-B (set B) computation (docs/phase5_plan.md)"
+}
