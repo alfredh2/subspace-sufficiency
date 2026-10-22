@@ -155,6 +155,19 @@ if exists("stage3_num_orig.npz"):
         out["dose_half_ratio"] = bounds(half)["point"]; out["convex"] = bool(convex)
         ml("Dose-response of H* (T_m(α)/T_m(1)): " + ", ".join(f"α={a}: {dz[a]['point']:.2f}" for a in PL.ALPHAS if a != 1.0) + f"; g(0.5)/g(1) = {fmt_stat(half)} → convex={convex}. Validation (frozen) curve: T(α) = {np.round(sel['dose']['T_margin'], 3).tolist()}. Dose for all-32: " + ", ".join(f"α={a}: {ratio(d.T(f'dose|z32|{a}'), free['z32'])['point']:.2f}" for a in PL.ALPHAS if a != 1.0) + "; single head: " + ", ".join(f"α={a}: {ratio(d.T(f'dose|single0|{a}'), free['single0'])['point']:.2f}" for a in PL.ALPHAS if a != 1.0))
         V["stage3"][f] = out
+if "num_orig" in A:
+    HELD = ("suppose_observe", "whenever", "subset"); ml("\n## Held-out template families (the three families never used in MVS optimisation) vs the other eleven; set A, point estimates with pair-level 95% intervals\n")
+    ml("| format | quantity | held-out families | trained families |\n|---|---|---|---|")
+    V["families"] = {}
+    for f in FM:
+        d = A[f]; fam = d.tr["family"]; held = np.isin(fam, HELD); d2 = D("stage2", f) if exists("stage2_num_orig.npz") else None
+        for nm, dd, job in (("T_m H*", d, "Hstar"), ("T_m all-32", d, "z32"), ("T_m V(Concl) of H*", d2, "V|Hstar|Concl"), ("T_m V(Fact+Concl+G1) of H*", d2, "V|Hstar|Fact+Concl+G1")):
+            if dd is None: continue
+            cells = []
+            for msk in (held, ~held):
+                num, den = S.transfer_terms(dd.tr["sigma"][msk], dd.jobs[job]["margin"][msk], dd.bt["margin"][msk], dd.bs["margin"][msk]); bo = S.Boot(dd.tr["pair"][msk], dd.tr["content"][msk], nboot=1000, seed=5); r = bo.ratio(num, den)
+                cells.append(f"{r['point']:.2f} {ci(*bo.ci(r['rep_pair']))} (n={int(msk.sum())})"); V["families"][f"{f}|{nm}|{'held' if msk is held else 'trained'}"] = float(r["point"])
+            ml(f"| {f} | {nm} | {cells[0]} | {cells[1]} |")
 # ------------------------------------------------ Replication B + lexical
 if exists("stage4_num_orig.npz"):
     V["B"] = {}; B4 = {f: D("stage4", f) for f in FM}
@@ -177,6 +190,15 @@ if exists("stage4_lexical.npz"):
     for nm in ("Hstar", "z32", "single0", "rnd0", "rnd1", "rnd2"):
         flip = float(np.mean(np.sign(jobs[nm]["margin"]) != np.sign(bt["margin"]))); lex[nm] = dict(flip=flip, mean_abs_dmargin=float(np.abs(jobs[nm]["margin"] - bt["margin"]).mean()))
     ml(json.dumps(lex)); V["lexical"] = lex
+if exists("cross.npz"):
+    class DX(D):
+        def __init__(self):
+            self.tr, self.bt, self.bs, self.jobs = UP.load_raw(OUT / "cross.npz"); self.boot = S.Boot(self.tr["pair"], self.tr["content"], nboot=2000, seed=11); self.cache = {}
+    dx = DX(); ml(f"\n## Exploratory cross-content control (set A contents, num_orig; {len(dx.tr['sigma'])} trials with OPPOSITE-label, DIFFERENT-content sources; added after the Replication-B freeze; not part of the criteria)\n")
+    z32x, hx = dx.T("z32"), dx.T("Hstar")
+    ml(f"All-32 Z-patch {fmt_stat(z32x)}; H* {fmt_stat(hx)} (share {fmt_stat(ratio(hx, z32x))}); random head sets: " + ", ".join(f"{dx.T(f'rnd{i}')['point']:.3f}" for i in range(5)))
+    ml("V-patch of H* (T and F = T_V/T_Z): " + ", ".join(f"{K}: {dx.T(f'V|Hstar|{K}')['point']:.2f} (F {ratio(dx.T(f'V|Hstar|{K}'), hx)['point']:.2f})" for K in ("Fact", "Concl", "G1", "G2", "Concl+G1", "Fact+Concl+G1", PL.KEY_ALL)) + f"; A-only {dx.T('A|Hstar')['point']:.3f}")
+    V["cross"] = dict(T_z32=z32x["point"], T_Hstar=hx["point"], F={K: ratio(dx.T(f"V|Hstar|{K}"), hx)["point"] for K in ("Fact", "Concl", "G1", "G2", "Concl+G1", "Fact+Concl+G1", PL.KEY_ALL)})
 # ------------------------------------------------ control criteria and hypothesis flags
 def controls_ok():
     ok = {}

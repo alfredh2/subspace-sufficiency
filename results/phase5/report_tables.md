@@ -186,9 +186,43 @@ S_pin (H*, pin attention+MLP of layers 20–22 at rows G1∪G2) = 1.48 [1.41, 1.
 Local ratio ρ = L_c / T_c = 2.11 [2.04, 2.19] / [2.05, 2.18] (LOCO 2.09…2.13) (L_c = 0.81 [0.79, 0.82] / [0.79, 0.82] (LOCO 0.80…0.81), T_c = 0.38 [0.37, 0.40] / [0.37, 0.39] (LOCO 0.38…0.39)): high=True, low=False. Immediate residual change at index 20 is reported separately from the final effect.
 Dose-response of H* (T_m(α)/T_m(1)): α=0.25: 0.13, α=0.5: 0.31, α=0.75: 0.60, α=1.25: 1.40, α=1.5: 1.67; g(0.5)/g(1) = 0.31 [0.29, 0.33] / [0.30, 0.32] (LOCO 0.31…0.31) → convex=True. Validation (frozen) curve: T(α) = [0.052, 0.123, 0.224, 0.362, 0.501, 0.608]. Dose for all-32: α=0.25: 0.13, α=0.5: 0.33, α=0.75: 0.62, α=1.25: 1.40, α=1.5: 1.72; single head: α=0.25: 0.18, α=0.5: 0.41, α=0.75: 0.67, α=1.25: 1.41, α=1.5: 1.90
 
+## Held-out template families (the three families never used in MVS optimisation) vs the other eleven; set A, point estimates with pair-level 95% intervals
+
+| format | quantity | held-out families | trained families |
+|---|---|---|---|
+| num_orig | T_m H* | 0.36 [0.33, 0.39] (n=94) | 0.34 [0.32, 0.36] (n=340) |
+| num_orig | T_m all-32 | 0.37 [0.33, 0.41] (n=94) | 0.36 [0.34, 0.38] (n=340) |
+| num_orig | T_m V(Concl) of H* | 0.15 [0.13, 0.17] (n=94) | 0.17 [0.16, 0.19] (n=340) |
+| num_orig | T_m V(Fact+Concl+G1) of H* | 0.35 [0.32, 0.38] (n=94) | 0.33 [0.31, 0.35] (n=340) |
+| num_rev | T_m H* | 0.39 [0.36, 0.43] (n=94) | 0.39 [0.37, 0.41] (n=340) |
+| num_rev | T_m all-32 | 0.39 [0.36, 0.42] (n=94) | 0.39 [0.37, 0.41] (n=340) |
+| num_rev | T_m V(Concl) of H* | 0.17 [0.15, 0.20] (n=94) | 0.21 [0.19, 0.23] (n=340) |
+| num_rev | T_m V(Fact+Concl+G1) of H* | 0.39 [0.35, 0.42] (n=94) | 0.38 [0.36, 0.40] (n=340) |
+
+## Replication B (num_orig; nonword lexicon, 400 trials, 43 contents; documented prior exposure in earlier MVS research; frozen configuration)
+
+All-32: 0.33 [0.31, 0.34] / [0.31, 0.35] (LOCO 0.32…0.33); H*: 0.31 [0.29, 0.32] / [0.29, 0.32] (LOCO 0.30…0.31) (share 0.93 [0.90, 0.97] / [0.89, 0.98] (LOCO 0.93…0.94)); nulls (share of all-32): random: mean 0.008, max 0.057; matched: mean 0.054, max 0.091; matched_scaled: mean 0.112, max 0.209
+S_pin = 1.67 [1.58, 1.76] / [1.57, 1.75] (LOCO 1.65…1.68); ρ = 2.24 [2.16, 2.33] / [2.15, 2.34] (LOCO 2.23…2.26); F_A = 0.02; dose g(0.5)/g(1) = 0.35 [0.33, 0.37] / [0.33, 0.37] (LOCO 0.35…0.36); F_K: Fact: 0.05, Concl: 0.59, G1: 0.14, G2: 0.00, Rule: 0.00, Fact+Concl: 0.72, Fact+G1: 0.21, Concl+G1: 0.83, Rule+Fact+Concl+G1+G2: 0.98; norm-matched random direction: 0.009
+Scalar-model errors on B (T_V − ĝ(π_K)): Fact: -0.04, Concl: -0.00, G1: -0.01, G2: -0.05, Rule: -0.05, Fact+Concl: +0.01, Fact+G1: -0.01, Concl+G1: -0.05, Rule+Fact+Concl+G1+G2: -0.05
+
+## Replication B (num_rev; nonword lexicon, 400 trials, 43 contents; documented prior exposure in earlier MVS research; frozen configuration)
+
+All-32: 0.35 [0.34, 0.37] / [0.34, 0.38] (LOCO 0.35…0.36); H*: 0.34 [0.33, 0.36] / [0.32, 0.36] (LOCO 0.34…0.35) (share 0.97 [0.93, 1.01] / [0.93, 1.01] (LOCO 0.96…0.97)); nulls (share of all-32): random: mean 0.007, max 0.064; matched: mean 0.048, max 0.087; matched_scaled: mean 0.103, max 0.200
+S_pin = 1.64 [1.56, 1.72] / [1.56, 1.72] (LOCO 1.63…1.66); ρ = 2.22 [2.14, 2.32] / [2.12, 2.32] (LOCO 2.21…2.24); F_A = 0.01; dose g(0.5)/g(1) = 0.35 [0.33, 0.37] / [0.34, 0.37] (LOCO 0.35…0.35); F_K: Fact: 0.03, Concl: 0.61, G1: 0.14, G2: 0.00, Rule: 0.00, Fact+Concl: 0.70, Fact+G1: 0.19, Concl+G1: 0.86, Rule+Fact+Concl+G1+G2: 0.97; norm-matched random direction: 0.010
+Scalar-model errors on B (T_V − ĝ(π_K)): Fact: -0.04, Concl: +0.02, G1: -0.00, G2: -0.05, Rule: -0.05, Fact+Concl: +0.03, Fact+G1: -0.00, Concl+G1: -0.00, Rule+Fact+Concl+G1+G2: -0.02
+
+## Lexical same-label controls (set A, num_orig)
+
+{"Hstar": {"flip": 0.03672316384180791, "mean_abs_dmargin": 1.5589689016342163}, "z32": {"flip": 0.038135593220338986, "mean_abs_dmargin": 1.566384196281433}, "single0": {"flip": 0.018361581920903956, "mean_abs_dmargin": 0.8396892547607422}, "rnd0": {"flip": 0.005649717514124294, "mean_abs_dmargin": 0.23799434304237366}, "rnd1": {"flip": 0.0, "mean_abs_dmargin": 0.1419491469860077}, "rnd2": {"flip": 0.002824858757062147, "mean_abs_dmargin": 0.1910310685634613}}
+
+## Exploratory cross-content control (set A contents, num_orig; 382 trials with OPPOSITE-label, DIFFERENT-content sources; added after the Replication-B freeze; not part of the criteria)
+
+All-32 Z-patch 0.35 [0.33, 0.37] / [0.33, 0.37] (LOCO 0.34…0.36); H* 0.35 [0.33, 0.37] / [0.31, 0.38] (LOCO 0.34…0.36) (share 0.99 [0.94, 1.04] / [0.94, 1.02] (LOCO 0.98…1.00)); random head sets: 0.012, -0.000, 0.001, 0.000, -0.002
+V-patch of H* (T and F = T_V/T_Z): Fact: 0.02 (F 0.06), Concl: 0.16 (F 0.47), G1: 0.05 (F 0.14), G2: 0.00 (F 0.00), Concl+G1: 0.25 (F 0.72), Fact+Concl+G1: 0.33 (F 0.96), Rule+Fact+Concl+G1+G2: 0.34 (F 0.98); A-only 0.004
+
 ### Controls (V4)
 ```json
-{"num_orig": {"heads": true, "rows": false, "noise": true, "random_keys": false}, "num_rev": {"heads": true, "rows": false, "noise": true, "random_keys": false}}
+{"num_orig": {"heads": true, "rows": false, "noise": true, "random_keys": false}, "num_rev": {"heads": true, "rows": false, "noise": true, "random_keys": false}, "lexical": true}
 ```
 
 ## Hypothesis scoring (non-exclusive; replication on B reported above)
