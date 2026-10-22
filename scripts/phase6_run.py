@@ -138,10 +138,10 @@ if stage == "pilot":
     # (3) control builders: yields on set A (num_orig) and set C
     ctrl = {}
     ids_a = sorted({e.content_id for e in UP.get_splits(P["cfg"])["items"]}); cons = build_contents("ordinary")
-    fm, cfm = D6.build_fm_trials(P["tok"], cons, ids_a, UP.FAMS, "num_orig"); ctrl["Fm_A"] = dict(trials=len(fm), **cfm)
-    lx, clx = build_special_trials(P["tok"], cons, ids_a, UP.FAMS, "lexical", tag="phase6L"); ctrl["L_A"] = dict(trials=len(lx), **clx)
-    xs, cxs = PL5.build_cross_trials(P["tok"], cons, ids_a, UP.FAMS); ctrl["X_A"] = dict(trials=len(xs), **cxs)
-    for fmt in FMTS: tc, cc = prep(P, "C", fmt); ctrl[f"C_{fmt}"] = dict(trials=len(tc), underpowered=bool(len(tc) < 150))
+    fm, cfm = D6.build_fm_trials(P["tok"], cons, ids_a, UP.FAMS, "num_orig"); ctrl["Fm_A"] = dict(cfm, n_trials=len(fm))
+    lx, clx = build_special_trials(P["tok"], cons, ids_a, UP.FAMS, "lexical", tag="phase6L"); ctrl["L_A"] = dict(clx, n_trials=len(lx))
+    xs, cxs = PL5.build_cross_trials(P["tok"], cons, ids_a, UP.FAMS); ctrl["X_A"] = dict(cxs, n_trials=len(xs))
+    for fmt in FMTS: tc, cc = prep(P, "C", fmt); ctrl[f"C_{fmt}"] = dict(n_trials=len(tc), underpowered=bool(len(tc) < 150))
     out["control_builders"] = ctrl
     json.dump(out, open(OUT / "pilot.json", "w"), indent=1, default=float); print(json.dumps(out, indent=1, default=float)); log_budget("pilot", time.time() - T0)
 

@@ -1,0 +1,98 @@
+{
+ "regression": {
+  "o|Concl|19": {
+   "new": 0.1686058591315188,
+   "phase5": 0.1686058591315188,
+   "diff": 0.0,
+   "max_abs_margin_diff": 0.0,
+   "ok": true
+  },
+  "o|KV|19": {
+   "new": 0.33717016413879075,
+   "phase5": 0.33717016413879075,
+   "diff": 0.0,
+   "max_abs_margin_diff": 0.0,
+   "ok": true
+  },
+  "u|Concl|19": {
+   "new": 0.5002077706212341,
+   "phase5": 0.5002077706212341,
+   "diff": 0.0,
+   "max_abs_margin_diff": 0.0,
+   "ok": true
+  }
+ },
+ "equality": {
+  "o|Other|0": {
+   "maxdiff": 0.0,
+   "eq_frac": 1.0
+  },
+  "o|Other|10": {
+   "maxdiff": 0.0,
+   "eq_frac": 1.0
+  },
+  "o|Other|19": {
+   "maxdiff": 0.0,
+   "eq_frac": 1.0
+  },
+  "o|Concl_same|0": {
+   "maxdiff": 0.0,
+   "eq_frac": 1.0
+  },
+  "o|Concl_same|19": {
+   "maxdiff": 6.0,
+   "eq_frac": 0.0
+  }
+ },
+ "other_exactly_equal": true,
+ "early_exit": {
+  "stash_equal": true,
+  "logits_after_equal": true
+ },
+ "accounting_max_abs_error": {
+  "free": 0.00593876838684082,
+  "pin_all": 0.005990505218505859
+ },
+ "accounting_ok": true,
+ "pin_verify_max_abs": 0.0,
+ "pin_ok": true,
+ "margin_gap_validation": 27.989898681640625,
+ "validation_coarse": {
+  "o|KV|19": 0.3497834716708769,
+  "o|Concl|10": 0.16510285095633345,
+  "u|Concl|10": 0.5523276795380729,
+  "cd|attn|18|Concl": 0.009563334536268495,
+  "ct|attn|18|Concl": 0.030404186214363044,
+  "cd|mlp|12|Concl": -0.0025261638397690365
+ },
+ "pass": true,
+ "control_builders": {
+  "Fm_A": {
+   "candidates": 448,
+   "rejected": 250,
+   "trials": 396,
+   "pairs": 198,
+   "n_trials": 396
+  },
+  "L_A": {
+   "candidates": 1532,
+   "rejected": 92,
+   "trials": 708,
+   "n_trials": 708
+  },
+  "X_A": {
+   "candidates": 800,
+   "rejected": 418,
+   "trials": 382,
+   "n_trials": 382
+  },
+  "C_num_orig": {
+   "n_trials": 400,
+   "underpowered": false
+  },
+  "C_num_rev": {
+   "n_trials": 400,
+   "underpowered": false
+  }
+ }
+}
