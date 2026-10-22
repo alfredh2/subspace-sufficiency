@@ -1,0 +1,18 @@
+{
+ "files": {
+  "src/causal_subspaces/phase6/early.py": "675f1a8735193b16230a7dc9813a300ae9d6b3efa381010a702ff336d1cc858e",
+  "src/causal_subspaces/phase6/runner.py": "373cdd361fad67385f8cb5acf5a6cd1822cef4bfb0f15b6b2ed100624adeaa69",
+  "src/causal_subspaces/phase6/data.py": "06ed14f11e28cf3d6f9f0d903919a4a9a0d30957fb3d7bdecf328cd7b333c2f9",
+  "src/causal_subspaces/phase6/stats.py": "d53e990087da8332038ab5a30dcb4288fddeecc14ff31ad20acc7e49d1ffdae9",
+  "src/causal_subspaces/phase5/patching.py": "94ff386ab7aa93456b7d4f08bc2f85e5397cde875d6f0ed7e569014a027d97b8",
+  "src/causal_subspaces/phase5/runner.py": "05a87d551a5e16b01967fbaeed36fd5823720c163ea60aed1658667682780ddc",
+  "src/causal_subspaces/upstream/patching.py": "293a2e50841a702f20e9445dc77766a70b8c4988c60f5516e967590ff2b7feeb",
+  "src/causal_subspaces/upstream/stats.py": "ef4f9269c224898b5d36b0247f534fc1ca4a1bf25810c51d01ae5024020df495",
+  "src/causal_subspaces/upstream/data.py": "7ad2d18d372b2d09fc082146f8da53c216dffa4fac8a72a8aa4be09ac40577f9",
+  "scripts/phase6_run.py": "71f864e9667193738ffb232056b1b9f5efeb4ab8ae53d8c8f825e5ba44f9daa2",
+  "docs/phase6_plan.md": "44ab2fdcd270ea436d3000dcaa1b25e55446ab4e2fb66c9685fee37458320cb9",
+  "results/phase6/set_c.json": "ff1121df726c646d74e84fde5b7d12151027a9ab6005977ff24577a9856a3e30",
+  "results/phase5/selection.json": "377a9dec46d9f8f08391871f1737c438301b8cad97784137d7100780ca58d5c7"
+ },
+ "note": "frozen before any Replication-B / set-C computation (docs/phase6_plan.md)"
+}
