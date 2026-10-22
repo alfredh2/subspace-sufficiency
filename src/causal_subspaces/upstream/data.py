@@ -15,13 +15,13 @@ def position_sets(cats: list[str], fd: int, tag: str, trial: int) -> dict:
     g1, g2, sf = c == "conclusion_final_token", c == "template_tail", c == "self"
     summ = g1 | g2 | sf
     var = idx >= fd
-    s = dict(G1=g1, G2=g2, G1G2=g1 | g2, Self=sf, G1G2Self=g1 | g2 | sf, Rule=c == "rule", Fact=c == "fact", Concl=c == "conclusion",
+    s = dict(G1=g1, G2=g2, G1G2=g1 | g2, Self=sf, G1G2Self=g1 | g2 | sf, Rule=c == "rule", Fact=c == "fact", Concl=c == "conclusion", Instr=c == "instruction",
              NonSummary=var & ~summ, All=np.ones(n, bool), AllMinusG1G2=~(g1 | g2), AllMinusG1G2Self=~summ, PreDiff=~var)
-    pool = np.where(s["NonSummary"])[0]; cnt = int(s["G1G2"].sum()); flagged = 0
+    pool = np.where(s["NonSummary"])[0]; cnt = int(s["G1G2"].sum()); flagged = 0; flags = []
     for d in range(N_RAND):
         pos, flag = POS.random_positions(pool, cnt, tag, trial, d)
-        m = np.zeros(n, bool); m[pos] = True; s[f"rand{d}"] = m; flagged += int(flag)
-    s["_rand_flagged"] = flagged
+        m = np.zeros(n, bool); m[pos] = True; s[f"rand{d}"] = m; flagged += int(flag); flags.append(int(flag))
+    s["_rand_flagged"] = flagged; s["_rand_flags"] = flags
     return s
 
 
@@ -64,3 +64,36 @@ def build_trials(tok, contents, content_ids, families, fmt: str, *, max_pairs: i
     census["pairs_kept"] = len(ok_pairs); census["trials"] = len(trials)
     census["rand_flagged"] = sum(t["sets"]["_rand_flagged"] for t in trials)
     return trials, census
+
+
+def build_special_trials(tok, contents, content_ids, families, kind: str, *, tag: str):
+    """kind='lexical': target and source carry the SAME label but different contents (equal token length, alignment-validated);
+    kind='format': target = num_orig prompt, source = the SAME syllogism in the num_rev prompt (label mapping differs). Exploratory/diagnostic controls."""
+    f = P5.FORMATS["num_orig"]; ta, tb = P5.single_token_id(tok, f["valid"]), P5.single_token_id(tok, f["invalid"])
+    pairs = P5.build_pairs(contents, content_ids, families, tok); out = []; census = dict(candidates=0, rejected=0)
+
+    def mk(syl_t, fmt_t, syl_s, fmt_s, pid, p):
+        pt, ps = P5.build_prompt(fmt_t, syl_t), P5.build_prompt(fmt_s, syl_s)
+        ft, fs = format_prompt(tok, pt, False), format_prompt(tok, ps, False)
+        it, is_ = tok(ft, add_special_tokens=False).input_ids, tok(fs, add_special_tokens=False).input_ids
+        census["candidates"] += 1
+        if len(it) != len(is_): census["rejected"] += 1; return
+        ct = POS.categorize(tok, ft, pt, POS.spans_logic(pt, syl_t.split("\n"), p["family"])); cs = POS.categorize(tok, fs, ps, POS.spans_logic(ps, syl_s.split("\n"), p["family"]))
+        fd = next((k for k, (a, b) in enumerate(zip(it, is_)) if a != b), None)
+        if fd is None or ct != cs or POS.check_groups(POS.group_masks(ct)): census["rejected"] += 1; return
+        out.append(dict(pair=pid, content=p["content_id"], family=p["family"], fmt="num_orig", tgt=pt if fmt_t == "num_orig" else pt, src=ps, sigma=1.0, ta=ta, tb=tb,
+                        sets=position_sets(ct, fd, tag, len(out)), fd=fd, n_tok=len(ct), fmt_src=fmt_s))
+    if kind == "format":
+        for k, p in enumerate(pairs):
+            for syl in (p["valid_syl"], p["invalid_syl"]): mk(syl, "num_orig", syl, "num_rev", k, p)
+    else:
+        lc = P5.lexical_controls(contents, pairs, tok, "num_orig", seed=0)
+        for k, d in enumerate(lc):
+            for a, b in ((d["base"]["valid_syl"], d["other"]["valid_syl"]), (d["base"]["invalid_syl"], d["other"]["invalid_syl"])):
+                pt, ps = P5.build_prompt("num_orig", a), P5.build_prompt("num_orig", b)
+                ok, _ = A.pair_alignment(tok, format_prompt(tok, pt), a.split("\n"), format_prompt(tok, ps), b.split("\n"))
+                census["candidates"] += 1
+                if not ok: census["rejected"] += 1; continue
+                mk(a, "num_orig", b, "num_orig", k, d["base"])
+    census["trials"] = len(out)
+    return out, census

@@ -82,7 +82,8 @@ def summarize(boot, trials, base_t, base_s, r, keys=("margin", "c", "rj", "r22")
 
 
 def save_raw(path, trials, base_t, base_s, res):
-    a = dict(sigma=sigma_of(trials), pair=np.array([t["pair"] for t in trials]), content=np.array([t["content"] for t in trials]))
+    a = dict(sigma=sigma_of(trials), pair=np.array([t["pair"] for t in trials]), content=np.array([t["content"] for t in trials]),
+             rflag=np.array([t["sets"]["_rand_flags"] for t in trials]), family=np.array([t["family"] for t in trials]), nsum=np.array([int(t["sets"]["NonSummary"].sum()) for t in trials]))
     for nm, d in (("tgt", base_t), ("src", base_s)):
         for k, v in d.items(): a[f"__{nm}|{k}"] = v
     for jn, d in res.items():
@@ -91,7 +92,7 @@ def save_raw(path, trials, base_t, base_s, res):
 
 
 def load_raw(path):
-    z = np.load(path, allow_pickle=True); trials = dict(sigma=z["sigma"], pair=z["pair"], content=z["content"])
+    z = np.load(path, allow_pickle=True); trials = {k: z[k] for k in ("sigma", "pair", "content", "rflag", "family", "nsum") if k in z.files}
     bt = {k.split("|")[1]: z[k] for k in z.files if k.startswith("__tgt|")}; bs = {k.split("|")[1]: z[k] for k in z.files if k.startswith("__src|")}
     jobs = {}
     for k in z.files:

@@ -113,5 +113,38 @@ elif stage == "repl":
         boot = PL.boot_for(trials); summary[fmt] = dict(census=c, path_indices=idx, jobs={j: PL.summarize(boot, trials, bt, bs_, r) for j, r in res.items()})
         json.dump(summary, open(OUT / "repl.json", "w"), indent=1, default=float); print("B", fmt, "done", f"{time.time() - T0:.0f}s", flush=True)
     log_budget("repl", time.time() - T0)
-else:
-    raise SystemExit("stage not implemented yet: " + stage)
+elif stage in ("stage5", "stage4"):
+    from causal_subspaces.data.logic import build_contents
+    from causal_subspaces.upstream.data import build_special_trials
+    on = json.load(open(OUT / "onsets_A.json")); P = PL.setup(); ctx = P["ctx"]; summary = {}
+    splits = PL.get_splits(P["cfg"]); test_ids = sorted({e.content_id for e in splits["items"]}); contents = build_contents("ordinary")
+    for fmt in ("num_orig", "num_rev"):
+        lon = on[fmt]["G1G2"]["sustained_both"]; idxs = sorted({lon, 22} - {None}) if lon is not None else [16, 22]
+        trials, c = PL.trial_sets(P, "A", fmt); boot = PL.boot_for(trials); summary[fmt] = {}
+        if stage == "stage5":
+            jobs = [dict(name=f"dose|{cd}|{i}|{a}", kind="patch", index=i, cond=cd, alpha=a) for cd in ("G1G2", "rand0") for i in idxs for a in (0.25, 0.5, 0.75, 1.25)]
+            jobs += [dict(name=f"noise|{cd}|{i}", kind="noise", index=i, cond=cd) for cd in ("G1G2", "NonSummary") for i in idxs]
+            bt, bs_, res = run_jobs(ctx, trials, jobs, bs=32, t0=T0, cap=CAP)
+            PL.save_raw(OUT / f"stage5_{fmt}.npz", trials, bt, bs_, res)
+            summary[fmt]["jobs"] = {j: PL.summarize(boot, trials, bt, bs_, r) for j, r in res.items()}
+            if fmt == "num_orig":    # lexical and format-mapping controls are defined on the num_orig prompt
+                for kind in ("lexical", "format"):
+                    tr2, c2 = build_special_trials(P["tok"], contents, test_ids, PL.FAMS, kind, tag=f"phase4{kind}"); print(kind, c2, flush=True)
+                    jobs2 = [dict(name=f"{kind}|{cd}|{i}", kind="patch", index=i, cond=cd) for cd in (["G1G2", "NonSummary", "All"] if kind == "lexical" else ["Instr", "All"]) for i in sorted(set(idxs) | {0})]
+                    bt2, bs2, res2 = run_jobs(ctx, tr2, jobs2, bs=32, t0=T0, cap=CAP)
+                    PL.save_raw(OUT / f"stage5_{kind}.npz", tr2, bt2, bs2, res2)
+                    b2 = PL.boot_for(tr2)
+                    ent = {}
+                    for j, r in res2.items():
+                        e = PL.summarize(b2, tr2, bt2, bs2, r, keys=("margin", "c"))
+                        e["flip_vs_target"] = float(np.mean(np.sign(r["margin"]) != np.sign(bt2["margin"]))); e["mean_abs_dmargin"] = float(np.abs(r["margin"] - bt2["margin"]).mean()); e["mean_abs_dc"] = float(np.abs(r["c"] - bt2["c"]).mean())
+                        ent[j] = e
+                    summary[fmt][kind] = dict(census=c2, jobs=ent)
+        else:
+            lo = lon if lon is not None else 19
+            jobs = [dict(name=f"comp|{w}|L{i - 1}|{cd}", kind="comp", index=i, cond=cd, comp=w, layer=i - 1) for i in sorted({max(1, lo - k) for k in (0, 1, 2, 3)}) for w in ("attn", "mlp") for cd in ("G1", "G2", "G1G2")]
+            bt, bs_, res = run_jobs(ctx, trials, jobs, bs=32, t0=T0, cap=CAP, diag=False)
+            PL.save_raw(OUT / f"stage4_{fmt}.npz", trials, bt, bs_, res)
+            summary[fmt]["jobs"] = {j: PL.summarize(boot, trials, bt, bs_, r) for j, r in res.items()}
+        json.dump(summary, open(OUT / f"{stage}.json", "w"), indent=1, default=float); print(stage, fmt, "done", f"{time.time() - T0:.0f}s", flush=True)
+    log_budget(stage, time.time() - T0)
