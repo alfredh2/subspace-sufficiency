@@ -189,7 +189,7 @@ if "C" in a.phase:
         for fam in ("random", "layer_restricted", "magnitude_matched"):
             for d in range(10): crun(fam, k, d)
         save(); print(f"phase C k={k} done ({time.time() - T0:.0f}s)", flush=True)
-    for fam in ("random", "layer_restricted", "magnitude_matched"):
+    for fam in ("random", "layer_restricted"):   # magnitude-matched is impossible at k = 64: the top-64 heads fill most non-native slots of layer 22
         for d in range(5): crun(fam, 64, d)
     for l in range(19, 23):                                  # k = 1 head-effect map over layers 19-22
         for h in range(H): run(f"map|L{l}H{h}", hfac([(l, h)]))

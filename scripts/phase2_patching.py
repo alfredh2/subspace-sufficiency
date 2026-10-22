@@ -139,7 +139,7 @@ for fmt in ("num_orig", "num_rev"):
     for a_ok, why in ok: reasons[why] = reasons.get(why, 0) + 1
     print(f"{fmt}: {sum(a for a, _ in ok)}/{len(pairs)} pairs pass alignment; reasons {reasons}", flush=True)
 summary["alignment"] = {fmt: dict(n_pairs=len(pairs), n_valid=int(sum(a for a, _ in ok)), reasons={w: sum(1 for _, x in ok if x == w) for w in {x for _, x in ok}}) for fmt, ok in align.items()}
-for fmt, nd in (("num_orig", 30), ("num_rev", 10)):
+for fmt, nd in (("num_orig", 30), ("num_rev", 6)):   # num_rev draws reduced from 10 (budget)
     f = P5.FORMATS[fmt]; trials = []
     for p, (a_ok, _) in zip(pairs, align[fmt]):
         v, i = P5.build_prompt(fmt, p["valid_syl"]), P5.build_prompt(fmt, p["invalid_syl"])

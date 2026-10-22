@@ -86,7 +86,7 @@ def rand_heads(hs, d):
 def rand_units(d):
     return random_units(cnt, m, np.random.default_rng(555_000 + d), exclude=excl)
 for d in range(20): run(f"ctrl_both|random_heads+random_units512|d={d}", combo(rand_heads(heads(8), d), rand_units(d)))
-for d in range(10):
+for d in range(6):   # reduced from 10 (budget): mixed controls
     run(f"ctrl_mixed|S8+random_units512|d={d}", combo(heads(8), rand_units(d)))
     run(f"ctrl_mixed|random_heads+mlp512|d={d}", combo(rand_heads(heads(8), d), U512))
 np.savez_compressed(SP, **STORE); print(f"controls done ({time.time() - T0:.0f}s)", flush=True)

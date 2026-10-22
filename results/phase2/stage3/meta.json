@@ -1,6 +1,6 @@
 {
- "n_conditions": 23,
- "seconds": 348.848673582077,
+ "n_conditions": 401,
+ "seconds": 1653.500953912735,
  "groups": {
   "localizer": 128,
   "logic_num_orig": 384,
