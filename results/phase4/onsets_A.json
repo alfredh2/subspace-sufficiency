@@ -1,0 +1,54 @@
+{
+ "num_orig": {
+  "G1": {
+   "plateau": 0.20480988988157073,
+   "threshold": 0.10240494494078536,
+   "first_crossing": 19,
+   "sustained_pair": 19,
+   "sustained_content": 19,
+   "sustained_both": 19
+  },
+  "G2": {
+   "plateau": 0.22059006856430502,
+   "threshold": 0.11029503428215251,
+   "first_crossing": 20,
+   "sustained_pair": 20,
+   "sustained_content": 20,
+   "sustained_both": 20
+  },
+  "G1G2": {
+   "plateau": 0.6416891751506337,
+   "threshold": 0.32084458757531686,
+   "first_crossing": 20,
+   "sustained_pair": 20,
+   "sustained_content": 20,
+   "sustained_both": 20
+  }
+ },
+ "num_rev": {
+  "G1": {
+   "plateau": 0.20958196927726014,
+   "threshold": 0.10479098463863007,
+   "first_crossing": 19,
+   "sustained_pair": 20,
+   "sustained_content": 20,
+   "sustained_both": 20
+  },
+  "G2": {
+   "plateau": 0.23297658020649709,
+   "threshold": 0.11648829010324854,
+   "first_crossing": 20,
+   "sustained_pair": 20,
+   "sustained_content": 20,
+   "sustained_both": 20
+  },
+  "G1G2": {
+   "plateau": 0.6552505666079074,
+   "threshold": 0.3276252833039537,
+   "first_crossing": 20,
+   "sustained_pair": 20,
+   "sustained_content": 20,
+   "sustained_both": 20
+  }
+ }
+}
