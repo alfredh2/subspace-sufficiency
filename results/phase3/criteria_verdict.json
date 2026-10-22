@@ -1,0 +1,114 @@
+{
+ "per_format": {
+  "num_orig": {
+   "M1_concentration": true,
+   "M2_coordinate_rescue": true,
+   "M3_margin_rescue": true,
+   "M4_beats_controls": true,
+   "M5_transplant": true,
+   "passed": true,
+   "bypass": {
+    "c": 0.3944322673483822,
+    "margin": 0.17848124653569009
+   },
+   "bypass_dominated": {
+    "c": false,
+    "margin": false
+   },
+   "R_full_bound": {
+    "c": 0.6164082713221664,
+    "margin": 0.824598140050502
+   },
+   "interaction_margin_J": 0.24764426926156313
+  },
+  "num_rev": {
+   "M1_concentration": true,
+   "M2_coordinate_rescue": true,
+   "M3_margin_rescue": true,
+   "M4_beats_controls": true,
+   "M5_transplant": true,
+   "passed": true,
+   "bypass": {
+    "c": 0.38741114383518443,
+    "margin": 0.2043647574233328
+   },
+   "bypass_dominated": {
+    "c": false,
+    "margin": false
+   },
+   "R_full_bound": {
+    "c": 0.6229985086455981,
+    "margin": 0.8045594677916599
+   },
+   "interaction_margin_J": 0.21572286224241433
+  }
+ },
+ "holm_adjusted": {
+  "num_orig|random|c": 0.0,
+  "num_orig|random|margin": 0.0,
+  "num_orig|act|c": 0.0,
+  "num_orig|act|margin": 0.0,
+  "num_orig|align|c": 0.0,
+  "num_orig|align|margin": 0.0,
+  "num_rev|random|c": 0.0,
+  "num_rev|random|margin": 0.0,
+  "num_rev|act|c": 0.0,
+  "num_rev|act|margin": 0.0,
+  "num_rev|align|c": 0.0,
+  "num_rev|align|margin": 0.0
+ },
+ "G_generalization": {
+  "evaluated": true,
+  "logic_num_orig|c": true,
+  "logic_num_orig|margin": true,
+  "logic_num_rev|c": true,
+  "logic_num_rev|margin": true,
+  "localizer|c": true,
+  "localizer|margin": false,
+  "passed": false
+ },
+ "V_selectivity": {
+  "evaluated": true,
+  "tasks": {
+   "mmlu_binary": {
+    "TE": -0.515625,
+    "R": 0.4040404233065518,
+    "undefined": true
+   },
+   "stroop": {
+    "TE": -0.0442708320915699,
+    "R": -5.352941354665794,
+    "undefined": true
+   },
+   "word_recall_48": {
+    "TE": -2.5833332538604736,
+    "R": 0.61391128613599,
+    "undefined": true
+   }
+  },
+  "class_gap": {
+   "mmlu_binary": {
+    "TE": 2.1145830154418945,
+    "undefined": true,
+    "R": null
+   },
+   "stroop": {
+    "TE": 0.28473663330078125,
+    "undefined": true,
+    "R": null
+   },
+   "word_recall_48": {
+    "TE": 6.139133453369141,
+    "undefined": false,
+    "R": 0.5112959560365542
+   }
+  },
+  "evaluable": true,
+  "passed": false,
+  "failed_tasks": [
+   "word_recall_48"
+  ]
+ },
+ "M_all_formats": true,
+ "outcome": "MIXED: mediation established in the patching design, but generalization (G) not met / not evaluated"
+}
