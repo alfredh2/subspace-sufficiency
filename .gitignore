@@ -28,3 +28,5 @@ results/*
 !results/phase26/**
 !results/phase3/
 !results/phase3/**
+!results/phase4/
+!results/phase4/**
