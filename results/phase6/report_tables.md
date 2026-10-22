@@ -756,3 +756,41 @@ Row localisation (share of the all-row increase, rows pinned at layers 20–22 w
 Decomposition of the layer-19 write at index 20 (rows G1∪G2): full: T_free 0.343, T_pin 0.563, S_pin 1.64; dc: T_free 0.024, T_pin 0.033, S_pin — (free effect below the 0.05 floor: undefined); orth: T_free 0.278, T_pin 0.472, S_pin 1.70
 Pinned/free ratio by dose α: 0.25: 1.62, 0.5: 1.68, 0.75: 1.75, 1.0: 1.64, 1.25: 1.44, 1.5: 1.32 → within 0.15 across α=0.5, 1, 1.5: False
 Accounting (free run, rows G1∪G2): Δd_c at indices 20–23 = [0.816, 0.69, 0.754, 0.65] (signed toward source); component Δ(d_c writes) layers 20–22 [attn, mlp each]: [0.049, -0.175, 0.085, -0.022, 0.018, -0.122]; identity residual max 0.0059 (0.007 of the local shift) → ok=True.
+
+## Shapley estimate of the pinning increase (set A, num_orig; 24 random orderings of the six components): share of T_pin(all) − T_free
+
+| component | Shapley share | add-one q | LOO q' |
+|---|---|---|---|
+| L20 attn | 0.65 [0.59, 0.73] / [0.58, 0.75] | 0.74 | 0.60 |
+| L20 mlp | 0.17 [0.08, 0.23] / [0.06, 0.23] | 0.35 | -0.02 |
+| L21 attn | -0.11 [-0.13, -0.09] / [-0.13, -0.09] | -0.02 | -0.15 |
+| L21 mlp | 0.21 [0.19, 0.24] / [0.18, 0.26] | 0.32 | 0.15 |
+| L22 attn | 0.08 [0.07, 0.09] / [0.07, 0.09] | 0.08 | 0.08 |
+| L22 mlp | -0.00 [-0.01, 0.01] / [-0.01, 0.00] | 0.01 | 0.03 |
+
+## Shapley estimate of the pinning increase (set A, num_rev; 24 random orderings of the six components): share of T_pin(all) − T_free
+
+| component | Shapley share | add-one q | LOO q' |
+|---|---|---|---|
+| L20 attn | 0.66 [0.58, 0.75] / [0.58, 0.76] | 0.81 | 0.57 |
+| L20 mlp | 0.11 [0.02, 0.19] / [-0.01, 0.19] | 0.35 | -0.12 |
+| L21 attn | -0.15 [-0.18, -0.13] / [-0.19, -0.13] | -0.07 | -0.19 |
+| L21 mlp | 0.27 [0.24, 0.30] / [0.23, 0.32] | 0.41 | 0.18 |
+| L22 attn | 0.08 [0.08, 0.10] / [0.07, 0.10] | 0.08 | 0.09 |
+| L22 mlp | 0.03 [0.02, 0.04] / [0.03, 0.03] | 0.05 | 0.05 |
+
+## Head-level pinning at layer 20 attention (gated Q5; ranking frozen on the 4 validation contents; singles and nested top-k evaluated on held-out sets)
+
+Validation ranking of single heads (pin effect): [9, 19, 3, 13, 18, 7, 11, 1] with effects [0.116, 0.064, 0.014, 0.01, 0.007, 0.007, 0.006, 0.004]
+
+**Set A, num_orig:** T_free 0.348; all layer-20 attention pinned 0.493 (z-pin of all 32 heads: 0.493, identity check diff 0.0000); single-head shares of the attention-pin increase: H9: 0.86, H19: 0.47, H3: 0.10, H13: 0.06, H18: 0.05, H7: 0.05
+Nested top-k share of the attention-pin increase (frozen validation order): k=1: 0.86 [0.81, 0.91], k=2: 1.28 [1.21, 1.35], k=3: 1.41 [1.35, 1.47], k=4: 1.43 [1.36, 1.50], k=6: 1.49 [1.42, 1.57], k=8: 1.65 [1.59, 1.72], k=16: 1.72 [1.66, 1.80], k=32: 1.00 [1.00, 1.00]
+
+**Set A, num_rev:** T_free 0.389; all layer-20 attention pinned 0.540 (z-pin of all 32 heads: 0.540, identity check diff 0.0000); single-head shares of the attention-pin increase: H9: 0.82, H19: 0.48, H3: 0.14, H13: 0.08, H18: 0.05, H7: 0.07
+Nested top-k share of the attention-pin increase (frozen validation order): k=1: 0.82 [0.77, 0.86], k=2: 1.23 [1.17, 1.29], k=3: 1.38 [1.33, 1.44], k=4: 1.41 [1.36, 1.48], k=6: 1.48 [1.42, 1.55], k=8: 1.65 [1.59, 1.71], k=16: 1.71 [1.65, 1.78], k=32: 1.00 [1.00, 1.00]
+
+**Set B, num_orig:** T_free 0.305; all layer-20 attention pinned 0.442 (z-pin of all 32 heads: 0.442, identity check diff 0.0000); single-head shares of the attention-pin increase: H9: 0.91, H19: 0.41, H3: 0.09, H13: 0.07, H18: 0.06, H7: 0.04
+Nested top-k share of the attention-pin increase (frozen validation order): k=1: 0.91 [0.85, 0.97], k=2: 1.35 [1.27, 1.43], k=3: 1.45 [1.37, 1.53], k=4: 1.50 [1.41, 1.58], k=6: 1.57 [1.48, 1.66], k=8: 1.74 [1.66, 1.83], k=16: 1.83 [1.75, 1.92], k=32: 1.00 [1.00, 1.00]
+
+**Set B, num_rev:** T_free 0.343; all layer-20 attention pinned 0.489 (z-pin of all 32 heads: 0.489, identity check diff 0.0000); single-head shares of the attention-pin increase: H9: 0.93, H19: 0.43, H3: 0.12, H13: 0.10, H18: 0.06, H7: 0.05
+Nested top-k share of the attention-pin increase (frozen validation order): k=1: 0.93 [0.87, 0.99], k=2: 1.35 [1.28, 1.43], k=3: 1.47 [1.39, 1.56], k=4: 1.53 [1.45, 1.61], k=6: 1.60 [1.51, 1.69], k=8: 1.75 [1.67, 1.83], k=16: 1.83 [1.75, 1.91], k=32: 1.00 [1.00, 1.00]
