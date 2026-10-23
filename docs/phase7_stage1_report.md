@@ -19,7 +19,7 @@ All 11 planned (task, format) cells pass (L 0.945 / 0.938; S 0.979 / 0.927 / 0.9
 
 ## Sweep (val contents only, 300 steps, seed 0, first format of each task)
 Full 60-row table: `results/phase7/stage1/sweep_table.md`. Passing configurations out of 12: L 1 (hook 23, rank 2), S 1 (hook 25, rank 4), G 0, N 0, M 0. Observations (descriptive; one seed, 300 steps):
-* Rank 1 never retained anything at any hook for any task except M/hook 25 (KL 1.16): retained KL ≈ 0.52–0.68 = the paper's ln 2 plateau for binary tasks. Hooks 19 and 21 also sit on the plateau at 300 steps for L and S. **This is partly a training-budget limit of the sweep**, not necessarily absence of a subspace (Phase 0 trained 1600 steps).
+* Rank 1 never reached retained KL ≤ 0.05 at any hook for any task (binary tasks: KL ≈ 0.52–0.68, the ln 2 plateau; G 1.55–1.59; M 1.16–1.39; N ≈ 6). Hooks 19 and 21 also sit on the plateau at 300 steps for L and S. **This is partly a training-budget limit of the sweep**, not necessarily absence of a subspace (Phase 0 trained 1600 steps).
 * L: ranks 2 and 4 at hook 23 retain (KL 0.015); only rank 2 loses accuracy when ablated (0.98 → 0.51). With rank 4 or at hook 25 the model retains and *survives* ablation (gap 28.5 → 21–23): the information is available elsewhere in the residual (redundancy), a sufficiency-without-necessity pattern.
 * M: the same pattern in the extreme: the rank-2 subspace at hook 25 reproduces the full output distribution (KL 0.000) but ablating it leaves the margin gap unchanged (51.6 → 51.8).
 * N: even rank 4 at hook 25 leaves KL ≈ 6 and chance accuracy. A "pointer" to the answer name cannot live in a fixed low-rank subspace of an unmodified residual stream at these layers under this objective.
