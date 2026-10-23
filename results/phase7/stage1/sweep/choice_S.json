@@ -1,0 +1,14 @@
+{
+ "task": "S",
+ "choice": {
+  "hook": 25,
+  "rank": 4
+ },
+ "literal_choice": {
+  "hook": 25,
+  "rank": 4
+ },
+ "n_pass": 1,
+ "n_pass_literal": 1,
+ "n_total": 12
+}

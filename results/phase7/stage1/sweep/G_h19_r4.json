@@ -1,0 +1,40 @@
+{
+ "task": "G",
+ "fmt": "pres",
+ "hook": 19,
+ "rank": 4,
+ "train": {
+  "kl_last5_median": 1.0492438077926636,
+  "kl_curve": [
+   1.973973093032837,
+   1.3931515216827393,
+   1.2231289499998093
+  ],
+  "seconds": 8.9909086227417,
+  "peak_gb": 19.372945308685303
+ },
+ "val": {
+  "kl_retain": 1.0722863674163818,
+  "kl_ablate": 0.04384287819266319,
+  "acc_intact": 0.98046875,
+  "acc_retain": 1.0,
+  "acc_ablate": 0.9921875,
+  "gacc_intact": 0.34765625,
+  "gacc_retain": 0.55859375,
+  "mass_intact": 0.15144388377666473,
+  "mass_retain": 0.16156387329101562,
+  "racc_intact": 0.98046875,
+  "racc_retain": 1.0,
+  "racc_ablate": 0.9921875,
+  "gap_intact": 8.574877738952637,
+  "gap_retain": 8.847893714904785,
+  "gap_ablate": 9.080333709716797
+ },
+ "gate": {
+  "reduction": -0.5054559707641602,
+  "rel": -0.05894614315817617,
+  "literal": false,
+  "adjusted": false,
+  "kl_ok": false
+ }
+}
