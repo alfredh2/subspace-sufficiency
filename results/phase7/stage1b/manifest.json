@@ -1,0 +1,437 @@
+{
+ "L": {
+  "num_orig": {
+   "n": {
+    "train": 1200,
+    "val": 352,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 30,
+    "val": 4,
+    "test": 14
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 25,
+    "train&test": 22,
+    "val&test": 14
+   },
+   "n_pairs": 160,
+   "hash": {
+    "train": "6ee65744561f27c8",
+    "val": "10f02007ee018b52",
+    "test": "b0e45473d8825238"
+   }
+  },
+  "num_rev": {
+   "n": {
+    "train": 1200,
+    "val": 352,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 30,
+    "val": 4,
+    "test": 14
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 25,
+    "train&test": 22,
+    "val&test": 14
+   },
+   "n_pairs": 160,
+   "hash": {
+    "train": "e71dfd0e4d92f28e",
+    "val": "4fb3fb6fa7f8138c",
+    "test": "9bd66282a49f6870"
+   }
+  }
+ },
+ "S": {
+  "words": {
+   "n": {
+    "train": 1200,
+    "val": 256,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 26,
+    "val": 12,
+    "test": 28
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 80,
+   "hash": {
+    "train": "98d89bc2cb2096b3",
+    "val": "675f3522838d9db1",
+    "test": "1305577103b496f7"
+   }
+  },
+  "num_orig": {
+   "n": {
+    "train": 1200,
+    "val": 256,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 26,
+    "val": 12,
+    "test": 28
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 80,
+   "hash": {
+    "train": "f6b5aef9658d6bc4",
+    "val": "5a72289981f5b3ea",
+    "test": "b462b856a350d916"
+   }
+  },
+  "num_rev": {
+   "n": {
+    "train": 1200,
+    "val": 256,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 26,
+    "val": 12,
+    "test": 28
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 80,
+   "hash": {
+    "train": "c5240fd8d9e512dd",
+    "val": "e1b23f468a461cd9",
+    "test": "dcf2f57e0adc2229"
+   }
+  }
+ },
+ "G": {
+  "pres": {
+   "n": {
+    "train": 1200,
+    "val": 256,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 39,
+    "val": 10,
+    "test": 30
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 156,
+   "hash": {
+    "train": "5535326fde228bd8",
+    "val": "058d2fd1d3765afe",
+    "test": "b5e691515b1c7190"
+   }
+  },
+  "past": {
+   "n": {
+    "train": 1200,
+    "val": 256,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 39,
+    "val": 10,
+    "test": 30
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 156,
+   "hash": {
+    "train": "b45a20a8f7bab6d5",
+    "val": "2da6336657390131",
+    "test": "0b67d10470ed7d39"
+   }
+  }
+ },
+ "N": {
+  "cont": {
+   "n": {
+    "train": 1200,
+    "val": 256,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 19,
+    "val": 6,
+    "test": 14
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 160,
+   "hash": {
+    "train": "6e2c0589fb8062c8",
+    "val": "cb86a2dacf9177d8",
+    "test": "d73a8aa7f0b77d84"
+   }
+  },
+  "qa": {
+   "n": {
+    "train": 1200,
+    "val": 256,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 19,
+    "val": 6,
+    "test": 14
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 160,
+   "hash": {
+    "train": "0965abe81934123a",
+    "val": "f152dc969923e6b3",
+    "test": "787ac1f777740d99"
+   }
+  }
+ },
+ "M": {
+  "letters": {
+   "n": {
+    "train": 1200,
+    "val": 208,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 50,
+    "val": 13,
+    "test": 32
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 96,
+   "hash": {
+    "train": "057c595891bb9a27",
+    "val": "bf4c534b63dfdedd",
+    "test": "293a62962f644cb4"
+   }
+  },
+  "digits": {
+   "n": {
+    "train": 1200,
+    "val": 208,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 50,
+    "val": 13,
+    "test": 32
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 96,
+   "hash": {
+    "train": "eb4226a72e5b063d",
+    "val": "ccb73d56366b2e09",
+    "test": "4eab02dd8b17b47f"
+   }
+  }
+ },
+ "A": {
+  "digits": {
+   "n": {
+    "train": 600,
+    "val": 8,
+    "test": 17
+   },
+   "n_groups": {
+    "train": 30,
+    "val": 8,
+    "test": 17
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 34,
+   "hash": {
+    "train": "86f59bbb6238baf8",
+    "val": "bc3c6799ce4b04b0",
+    "test": "24a76f65a1d8662b"
+   }
+  },
+  "plus": {
+   "n": {
+    "train": 600,
+    "val": 8,
+    "test": 17
+   },
+   "n_groups": {
+    "train": 30,
+    "val": 8,
+    "test": 17
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 34,
+   "hash": {
+    "train": "615c9ca6dd9042b0",
+    "val": "97d2e84bfe548a0d",
+    "test": "82b719153be63484"
+   }
+  }
+ },
+ "N_fixedpool": {
+  "cont": {
+   "n": {
+    "train": 1200,
+    "val": 256,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 199,
+    "val": 40,
+    "test": 80
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 0,
+   "hash": {
+    "train": "afe597865f60897a",
+    "val": "d76f006901b886c8",
+    "test": "64f1532206e6e61e"
+   }
+  },
+  "qa": {
+   "n": {
+    "train": 1200,
+    "val": 256,
+    "test": 384
+   },
+   "n_groups": {
+    "train": 199,
+    "val": 40,
+    "test": 79
+   },
+   "group_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "prompt_overlap": {
+    "train&val": 0,
+    "train&test": 0,
+    "val&test": 0
+   },
+   "n_pairs": 0,
+   "hash": {
+    "train": "8f53174563adcd35",
+    "val": "7faa591c467ed266",
+    "test": "abf7422930f791db"
+   }
+  }
+ },
+ "all_disjoint": true
+}

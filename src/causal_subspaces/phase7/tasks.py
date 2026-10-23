@@ -59,8 +59,8 @@ def data_hash(items):
 
 
 # ---------------------------------------------------------------- L
-def build_L(tok, seed=0, n_train=1200, n_pairs=160):
-    sp = build_splits(seed, 256, 4, 8, False)
+def build_L(tok, seed=0, n_train=1200, n_pairs=160, n_eval=256, n_val_c=4, n_test_c=8):
+    sp = build_splits(seed, n_eval, n_val_c, n_test_c, False)
     ordinary = build_contents("ordinary")
     out = {}
     for fmt in FORMATS["L"]:
@@ -111,12 +111,12 @@ def s_prompt(fmt, sent):
     return f"{S_INSTR[fmt]}\n\nSentence: {sent}"
 
 
-def build_S(tok, seed=0, n_train=1200, n_val=256, n_test=384, n_pairs=160):
+def build_S(tok, seed=0, n_train=1200, n_val=256, n_test=384, n_pairs=160, w_val=5, w_test=8, nn_val=5, nn_test=6):
     rng = random.Random(seed + 11)
     pos = [w for w in POS if len(tok.encode(" " + w, add_special_tokens=False)) == 1]
     neg = [w for w in NEG if len(tok.encode(" " + w, add_special_tokens=False)) == 1]
-    P, N, NO = (_split_list(x, rng, 5, 8) for x in (pos, neg, S_NOUNS))
-    N_ = {k: _split_list(S_NOUNS, random.Random(seed), 5, 6)[k] for k in ("train", "val", "test")}
+    P, N, NO = (_split_list(x, rng, w_val, w_test) for x in (pos, neg, S_NOUNS))
+    N_ = {k: _split_list(S_NOUNS, random.Random(seed), nn_val, nn_test)[k] for k in ("train", "val", "test")}
     specs = {}
     for sp, n_items in (("train", n_train), ("val", n_val), ("test", n_test)):
         lst, seen = [], set()
@@ -175,10 +175,10 @@ def _pl(w):
     return w + "s"
 
 
-def build_G(tok, seed=0, n_train=1200, n_val=256, n_test=384, n_pairs=160):
+def build_G(tok, seed=0, n_train=1200, n_val=256, n_test=384, n_pairs=160, p_val=10, p_test=24):
     rng = random.Random(seed + 22)
     nouns = [w for w in G_NOUNS if len(tok.encode(" " + w, add_special_tokens=False)) == 1 and len(tok.encode(" " + _pl(w), add_special_tokens=False)) <= 2]
-    pools = _split_list(nouns, rng, 10, 24)
+    pools = _split_list(nouns, rng, p_val, p_test)
     verbs = {"pres": (" is", " are", ""), "past": (" was", " were", "Yesterday, the")}
     specs = {}
     for sp, n_items in (("train", n_train), ("val", n_val), ("test", n_test)):
@@ -233,10 +233,10 @@ N_TEMPL = ["Then, {f} and {s} went to the {p}. {g} gave a {o} to",
 N_QA = "{pre} the other person. Who received the {o}? Answer with just the name and nothing else."
 
 
-def build_N(tok, seed=0, n_train=1200, n_val=256, n_test=384, n_pairs=160):
+def build_N(tok, seed=0, n_train=1200, n_val=256, n_test=384, n_pairs=160, p_val=10, p_test=18):
     rng = random.Random(seed + 33)
     names = [n for n in NAMES if len(tok.encode(" " + n, add_special_tokens=False)) == 1 and len(tok.encode(n, add_special_tokens=False)) == 1]
-    pools = _split_list(names, rng, 10, 18)
+    pools = _split_list(names, rng, p_val, p_test)
     specs = {}
     for sp, n_items in (("train", n_train), ("val", n_val), ("test", n_test)):
         lst, seen = [], set()
@@ -316,10 +316,10 @@ def m_prompt(fmt, q, opts):
     return f"{q}\n{body}\n{M_END[fmt]}"
 
 
-def build_M(tok, seed=0, n_train=1200):
+def build_M(tok, seed=0, n_train=1200, cap=(6, 14), elem=(4, 8)):
     rng = random.Random(seed + 44)
     rel = {"cap": CAPITALS, "elem": ELEMENTS}
-    ent = {r: _split_list(list(d), rng, 6 if r == "cap" else 4, 14 if r == "cap" else 8) for r, d in rel.items()}
+    ent = {r: _split_list(list(d), rng, *(cap if r == "cap" else elem)) for r, d in rel.items()}
     out = {}
     specs = {}
     for sp, reps in (("train", None), ("val", 4), ("test", 3)):

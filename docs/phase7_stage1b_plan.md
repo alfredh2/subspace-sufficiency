@@ -164,3 +164,8 @@ Justified extension (needs a written reason in the report): up to +1.5 h for add
 
 * 1b cannot show that no low-dimensional representation exists for G, N or M; it can show that none was found within ≤ 8 dimensions, four hooks, five seeds and the stated objective.
 * Choices where I would like your veto or edit: (a) inclusion of A as a sixth candidate; (b) the rank-8 cap and hook set {21, 23, 25, 27}; (c) N-fixedpool and candidate-restricted objective as diagnostic-only, tier-2; (d) the overlap threshold O ≥ 0.5; (e) the budget cap.
+
+## Amendment A14 (written before any model run; data details)
+* N: the finite single-token name list has only 39 names. Stage 1 used 10 val / 18 test names and therefore **only 11 training names**. A13's 20 confirm / 8 val names would have left 11 again; 1b uses **14 confirm / 6 val / 19 train names** (disclosed; a better-conditioned training pool than Stage 1, which also makes the N comparison with Stage 1 not like-for-like).
+* The leakage test requires disjoint **content groups** between train / val / confirm. Identical content-free prompts (L's semi-formal P/W family has no lexical content; 14–25 prompts recur across splits, as in Stage 1 and Phases 0–6) are reported but are not counted as leakage.
+* Dev evaluation of the Arm A grid uses a fixed random subset of at most 256 val items per task (cost); confirm uses all confirm items. Validation KL is measured at the end of each fit (not every 200 steps); the dense train-KL curve (every 25 steps) is the convergence record.
