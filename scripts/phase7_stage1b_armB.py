@@ -97,7 +97,7 @@ def reduction(cl, intact_cl, gold):
     return dict(rel=(gi - ga) / gi, abs=gi - ga, gap=ga)
 
 
-def analyse(name, t, fmt, h, r, seeds, data, ref, full):
+def analyse(name, t, fmt, h, r, seeds, data, ref, full, r2s=(2, 4, 8)):
     mu = ref["mu"].cuda()
     d = data[fmt]; test = d["test"]; gold = gold_array(test)
     intact = run_stats(model, tok, test); icl = intact["cand_logits"]
@@ -141,7 +141,7 @@ def analyse(name, t, fmt, h, r, seeds, data, ref, full):
                 sr[f"ablate_all_a{al}"] = reduction(stats_ctx(test, lambda: dose(h, U, mu, al, False)), icl, gold)
             sr["ablate_last_a1"] = reduction(stats_ctx(test, lambda: dose(h, U, mu, 1.0, True)), icl, gold)
         # complement fits
-        for r2 in (2, 4, 8):
+        for r2 in r2s:
             f2 = R / "armB" / f"{name}_U2_r{r2}_s{s}.pt"
             if f2.exists():
                 U2 = torch.load(f2).cuda()
@@ -175,7 +175,9 @@ def analyse(name, t, fmt, h, r, seeds, data, ref, full):
     return res
 
 
-for name, t, fmt, cellspec, full in [("M_sel", "M", "letters", None, True), ("M_h25_r2", "M", "letters", (25, 2), True), ("L_sel", "L", "num_orig", None, False), ("S_sel", "S", "words", None, False)]:
+# budget-driven reductions (declared in the report): contrast tasks one seed and complement rank 8 only; M_h25_r2 two seeds, complement ranks 2 and 8
+for name, t, fmt, cellspec, full, seeds_, r2s_ in [("M_sel", "M", "letters", None, True, [0, 1, 2], (2, 4, 8)), ("M_h25_r2", "M", "letters", (25, 2), True, [0, 1], (2, 8)),
+                                                  ("L_sel", "L", "num_orig", None, False, [0], (8,)), ("S_sel", "S", "words", None, False, [0], (8,))]:
     ch = sel[t]["choice"]
     if cellspec is None:
         if ch is None:
@@ -188,6 +190,5 @@ for name, t, fmt, cellspec, full in [("M_sel", "M", "letters", None, True), ("M_
     cfg["mvs"]["residual_index"] = h
     ref = get_reference(model, tok, cfg, rev, "cuda")
     data = build_1b(t, tok)
-    seeds = [0, 1, 2] if full else [0, 1]
-    analyse(name, t, fmt, h, r, seeds, data, ref, full)
+    analyse(name, t, fmt, h, r, seeds_, data, ref, full, r2s_)
 print("ARM B DONE", flush=True)

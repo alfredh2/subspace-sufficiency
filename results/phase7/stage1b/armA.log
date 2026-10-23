@@ -1,0 +1,107 @@
+W1023 12:35:21.657000 3520536 site-packages/torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1023 12:35:21.672000 3520536 site-packages/torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 23547.92it/s]
+reference 21 0 s
+reference 23 0 s
+reference 25 0 s
+[transformers] Token indices sequence length is longer than the specified maximum sequence length for this model (2517232 > 131072). Running this sequence through the model will result in indexing errors
+reference 27 65 s
+TASK G pres val n 256 intact dev acc 0.977
+G 21 4 0 trainKL 0.541 valKL 1.0320 slope 0.10 accI/R/A 0.98/1.00/0.97 gap 8.7->8.4 50s
+G 21 4 1 trainKL 0.470 valKL 1.0692 slope 0.11 accI/R/A 0.98/1.00/0.96 gap 8.7->7.9 49s
+G 21 8 0 trainKL 0.337 valKL 0.9993 slope 0.14 accI/R/A 0.98/1.00/0.98 gap 8.7->8.1 49s
+G 21 8 1 trainKL 0.261 valKL 0.9193 slope 0.14 accI/R/A 0.98/1.00/0.96 gap 8.7->7.2 49s
+G 23 4 0 trainKL 0.531 valKL 1.0475 slope 0.09 accI/R/A 0.98/1.00/0.98 gap 8.7->8.2 48s
+G 23 4 1 trainKL 0.416 valKL 1.0134 slope 0.10 accI/R/A 0.98/1.00/0.97 gap 8.7->7.7 48s
+G 23 8 0 trainKL 0.362 valKL 0.9226 slope 0.13 accI/R/A 0.98/1.00/0.96 gap 8.7->6.3 47s
+G 23 8 1 trainKL 0.251 valKL 0.9160 slope 0.12 accI/R/A 0.98/1.00/0.92 gap 8.7->5.9 47s
+G 25 4 0 trainKL 0.581 valKL 1.0783 slope 0.09 accI/R/A 0.98/1.00/0.96 gap 8.7->7.9 46s
+G 25 4 1 trainKL 0.392 valKL 1.0232 slope 0.10 accI/R/A 0.98/1.00/0.98 gap 8.7->8.0 46s
+G 25 8 0 trainKL 0.341 valKL 0.9562 slope 0.14 accI/R/A 0.98/1.00/0.97 gap 8.7->7.5 46s
+G 25 8 1 trainKL 0.226 valKL 0.8630 slope 0.12 accI/R/A 0.98/1.00/0.98 gap 8.7->7.4 46s
+G 27 4 0 trainKL 0.589 valKL 1.0848 slope 0.09 accI/R/A 0.98/1.00/0.96 gap 8.7->7.5 44s
+G 27 4 1 trainKL 0.374 valKL 1.0455 slope 0.10 accI/R/A 0.98/0.98/0.98 gap 8.7->7.5 44s
+G 27 8 0 trainKL 0.319 valKL 0.9040 slope 0.12 accI/R/A 0.98/0.98/0.93 gap 8.7->6.1 44s
+G 27 8 1 trainKL 0.229 valKL 0.8956 slope 0.11 accI/R/A 0.98/1.00/0.95 gap 8.7->6.9 44s
+TASK N cont val n 256 intact dev acc 1.000
+N 21 4 0 trainKL 0.119 valKL 4.8151 slope 0.20 accI/R/A 1.00/0.84/1.00 gap 19.3->14.7 77s
+N 21 4 1 trainKL 0.281 valKL 5.6309 slope 0.27 accI/R/A 1.00/0.86/1.00 gap 19.3->17.3 77s
+N 21 8 0 trainKL 0.064 valKL 3.9126 slope 0.24 accI/R/A 1.00/0.82/0.99 gap 19.3->14.0 77s
+N 21 8 1 trainKL 0.296 valKL 5.2158 slope 0.52 accI/R/A 1.00/0.66/1.00 gap 19.3->16.5 77s
+N 23 4 0 trainKL 0.234 valKL 4.6752 slope 0.42 accI/R/A 1.00/0.84/1.00 gap 19.3->16.1 74s
+N 23 4 1 trainKL 0.271 valKL 5.8075 slope 0.44 accI/R/A 1.00/0.66/1.00 gap 19.3->10.2 74s
+N 23 8 0 trainKL 0.064 valKL 3.8060 slope 0.24 accI/R/A 1.00/0.89/0.96 gap 19.3->7.2 74s
+N 23 8 1 trainKL 0.069 valKL 3.7535 slope 0.20 accI/R/A 1.00/0.85/0.96 gap 19.3->6.1 72s
+N 25 4 0 trainKL 0.350 valKL 6.1575 slope 0.32 accI/R/A 1.00/0.80/1.00 gap 19.3->16.1 66s
+N 25 4 1 trainKL 0.243 valKL 4.6694 slope 0.26 accI/R/A 1.00/0.82/1.00 gap 19.3->13.9 69s
+N 25 8 0 trainKL 0.063 valKL 4.1015 slope 0.22 accI/R/A 1.00/0.81/1.00 gap 19.3->12.9 71s
+N 25 8 1 trainKL 0.053 valKL 3.5704 slope 0.17 accI/R/A 1.00/0.89/1.00 gap 19.3->11.3 67s
+N 27 4 0 trainKL 0.435 valKL 5.3636 slope 0.44 accI/R/A 1.00/0.76/1.00 gap 19.3->18.2 63s
+N 27 4 1 trainKL 0.186 valKL 4.8913 slope 0.31 accI/R/A 1.00/0.80/1.00 gap 19.3->14.1 65s
+N 27 8 0 trainKL 0.066 valKL 4.2807 slope 0.19 accI/R/A 1.00/0.77/1.00 gap 19.3->12.5 68s
+N 27 8 1 trainKL 0.054 valKL 4.1181 slope 0.15 accI/R/A 1.00/0.80/1.00 gap 19.3->14.1 68s
+TASK S words val n 256 intact dev acc 0.969
+S 21 4 0 trainKL 0.005 valKL 0.0086 slope 0.31 accI/R/A 0.97/0.98/1.00 gap 29.9->25.2 164s
+S 21 4 1 trainKL 0.003 valKL 0.0357 slope 0.39 accI/R/A 0.97/1.00/0.98 gap 29.9->27.3 164s
+S 21 8 0 trainKL 0.006 valKL 0.0080 slope 0.46 accI/R/A 0.97/0.98/0.78 gap 29.9->14.5 163s
+S 21 8 1 trainKL 0.002 valKL 0.0216 slope 0.44 accI/R/A 0.97/0.99/0.80 gap 29.9->20.3 163s
+S 23 4 0 trainKL 0.005 valKL 0.0088 slope 0.53 accI/R/A 0.97/0.98/0.94 gap 29.9->14.4 157s
+S 23 4 1 trainKL 0.001 valKL 0.0066 slope 0.61 accI/R/A 0.97/0.98/0.80 gap 29.9->13.9 157s
+S 23 8 0 trainKL 0.003 valKL 0.0055 slope 0.63 accI/R/A 0.97/0.98/0.80 gap 29.9->9.9 157s
+S 23 8 1 trainKL 0.001 valKL 0.0065 slope 0.68 accI/R/A 0.97/0.97/0.83 gap 29.9->8.6 157s
+S 25 4 0 trainKL 0.001 valKL 0.0042 slope 0.52 accI/R/A 0.97/0.98/0.97 gap 29.9->13.5 151s
+S 25 4 1 trainKL 0.001 valKL 0.0032 slope 0.35 accI/R/A 0.97/0.97/0.58 gap 29.9->13.0 151s
+S 25 8 0 trainKL 0.000 valKL 0.0035 slope 0.53 accI/R/A 0.97/0.97/0.07 gap 29.9->7.5 151s
+S 25 8 1 trainKL 0.000 valKL 0.0026 slope 0.40 accI/R/A 0.97/0.97/0.00 gap 29.9->7.8 151s
+S 27 4 0 trainKL 0.000 valKL 0.0031 slope 0.58 accI/R/A 0.97/0.98/0.81 gap 29.9->9.6 144s
+S 27 4 1 trainKL 0.001 valKL 0.0034 slope 0.22 accI/R/A 0.97/0.98/0.79 gap 29.9->18.0 144s
+S 27 8 0 trainKL 0.000 valKL 0.0027 slope 0.67 accI/R/A 0.97/0.97/1.00 gap 29.9->10.7 144s
+S 27 8 1 trainKL 0.000 valKL 0.0035 slope 0.21 accI/R/A 0.97/0.98/0.79 gap 29.9->9.8 144s
+TASK L num_orig val n 256 intact dev acc 0.961
+L 21 4 0 trainKL 0.005 valKL 0.0302 slope 0.52 accI/R/A 0.96/0.97/0.75 gap 28.6->18.0 279s
+L 21 4 1 trainKL 0.001 valKL 0.0361 slope 0.64 accI/R/A 0.96/0.97/0.71 gap 28.6->18.0 278s
+L 21 8 0 trainKL 0.005 valKL 0.0281 slope 0.55 accI/R/A 0.96/0.97/0.77 gap 28.6->17.8 278s
+L 21 8 1 trainKL 0.002 valKL 0.0366 slope 0.60 accI/R/A 0.96/0.96/0.76 gap 28.6->15.4 279s
+L 23 4 0 trainKL 0.003 valKL 0.0063 slope 0.63 accI/R/A 0.96/0.96/0.55 gap 28.6->11.8 267s
+L 23 4 1 trainKL 0.000 valKL 0.0049 slope 0.51 accI/R/A 0.96/0.96/0.52 gap 28.6->11.2 267s
+L 23 8 0 trainKL 0.001 valKL 0.0081 slope 0.63 accI/R/A 0.96/0.96/0.53 gap 28.6->8.4 267s
+L 23 8 1 trainKL 0.000 valKL 0.0106 slope 0.79 accI/R/A 0.96/0.96/0.75 gap 28.6->12.2 267s
+L 25 4 0 trainKL 0.000 valKL 0.0011 slope 0.54 accI/R/A 0.96/0.96/0.96 gap 28.6->17.4 255s
+L 25 4 1 trainKL 0.001 valKL 0.0007 slope 0.42 accI/R/A 0.96/0.96/0.55 gap 28.6->11.2 255s
+L 25 8 0 trainKL 0.000 valKL 0.0012 slope 0.58 accI/R/A 0.96/0.96/0.56 gap 28.6->11.0 255s
+L 25 8 1 trainKL 0.001 valKL 0.0010 slope 0.46 accI/R/A 0.96/0.96/0.80 gap 28.6->12.4 255s
+L 27 4 0 trainKL 0.001 valKL 0.0009 slope 0.21 accI/R/A 0.96/0.96/0.98 gap 28.6->14.0 243s
+L 27 4 1 trainKL 0.002 valKL 0.0004 slope 0.31 accI/R/A 0.96/0.96/0.91 gap 28.6->15.4 243s
+L 27 8 0 trainKL 0.000 valKL 0.0007 slope 0.49 accI/R/A 0.96/0.96/0.71 gap 28.6->9.0 243s
+L 27 8 1 trainKL 0.001 valKL 0.0004 slope 0.29 accI/R/A 0.96/0.96/0.60 gap 28.6->9.1 243s
+TASK M letters val n 208 intact dev acc 1.000
+M 21 4 0 trainKL 0.000 valKL 0.0000 slope 0.21 accI/R/A 1.00/1.00/1.00 gap 51.3->58.6 177s
+M 21 4 1 trainKL 0.000 valKL 0.0000 slope 0.14 accI/R/A 1.00/1.00/1.00 gap 51.3->44.4 177s
+M 21 8 0 trainKL 0.000 valKL 0.0000 slope 0.21 accI/R/A 1.00/1.00/1.00 gap 51.3->40.3 177s
+M 21 8 1 trainKL 0.000 valKL 0.0000 slope 0.25 accI/R/A 1.00/1.00/1.00 gap 51.3->60.4 177s
+M 25 4 0 trainKL 0.000 valKL 0.0000 slope 0.18 accI/R/A 1.00/1.00/1.00 gap 51.3->50.6 162s
+M 25 4 1 trainKL 0.000 valKL 0.0000 slope 0.20 accI/R/A 1.00/1.00/1.00 gap 51.3->48.0 162s
+M 25 8 0 trainKL 0.000 valKL 0.0000 slope 0.21 accI/R/A 1.00/1.00/1.00 gap 51.3->43.7 162s
+M 25 8 1 trainKL 0.000 valKL 0.0000 slope 0.22 accI/R/A 1.00/1.00/1.00 gap 51.3->41.8 162s
+M 27 4 0 trainKL 0.000 valKL 0.0000 slope 0.18 accI/R/A 1.00/1.00/1.00 gap 51.3->55.3 154s
+M 27 4 1 trainKL 0.000 valKL 0.0000 slope 0.13 accI/R/A 1.00/1.00/1.00 gap 51.3->62.5 155s
+M 27 8 0 trainKL 0.000 valKL 0.0000 slope 0.12 accI/R/A 1.00/1.00/1.00 gap 51.3->56.9 155s
+M 27 8 1 trainKL 0.000 valKL 0.0000 slope 0.04 accI/R/A 1.00/1.00/1.00 gap 51.3->56.7 155s
+TASK A digits val n 8 intact dev acc 1.000
+A 21 4 0 trainKL 0.000 valKL 6.3902 slope 0.26 accI/R/A 1.00/0.12/1.00 gap 38.2->38.7 95s
+A 21 4 1 trainKL 0.000 valKL 3.3481 slope 0.25 accI/R/A 1.00/0.62/1.00 gap 38.2->37.9 94s
+A 21 8 0 trainKL 0.000 valKL 4.1338 slope 0.24 accI/R/A 1.00/0.38/1.00 gap 38.2->37.1 96s
+A 21 8 1 trainKL 0.000 valKL 4.2372 slope 0.35 accI/R/A 1.00/0.50/1.00 gap 38.2->25.6 99s
+A 23 4 0 trainKL 0.001 valKL 2.5777 slope 0.73 accI/R/A 1.00/0.62/1.00 gap 38.2->31.9 95s
+A 23 4 1 trainKL 0.001 valKL 0.3998 slope 0.46 accI/R/A 1.00/0.88/1.00 gap 38.2->33.1 95s
+A 23 8 0 trainKL 0.000 valKL 2.5759 slope 0.32 accI/R/A 1.00/0.50/1.00 gap 38.2->24.3 95s
+A 23 8 1 trainKL 0.000 valKL 5.8890 slope 0.31 accI/R/A 1.00/0.38/1.00 gap 38.2->30.7 93s
+A 25 4 0 trainKL 0.000 valKL 0.7410 slope 0.27 accI/R/A 1.00/0.88/1.00 gap 38.2->37.5 92s
+A 25 4 1 trainKL 0.000 valKL 0.0665 slope 0.25 accI/R/A 1.00/1.00/1.00 gap 38.2->33.9 92s
+A 25 8 0 trainKL 0.000 valKL 1.2271 slope 0.27 accI/R/A 1.00/0.75/1.00 gap 38.2->35.3 91s
+A 25 8 1 trainKL 0.000 valKL 2.9864 slope 0.10 accI/R/A 1.00/0.75/1.00 gap 38.2->30.4 92s
+A 27 4 0 trainKL 0.000 valKL 0.0037 slope 0.18 accI/R/A 1.00/1.00/1.00 gap 38.2->35.4 88s
+A 27 4 1 trainKL 0.000 valKL 0.0009 slope 0.26 accI/R/A 1.00/1.00/1.00 gap 38.2->31.8 87s
+A 27 8 0 trainKL 0.000 valKL 0.0003 slope 0.21 accI/R/A 1.00/1.00/0.75 gap 38.2->29.2 84s
+A 27 8 1 trainKL 0.000 valKL 1.2813 slope 0.07 accI/R/A 1.00/0.88/1.00 gap 38.2->31.7 81s
+ARM A DONE
