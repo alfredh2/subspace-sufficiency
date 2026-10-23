@@ -256,3 +256,104 @@ def curve_slope(curve, frac=0.25):
     n = max(2, int(len(curve) * frac))
     a, b = np.mean(curve[-2 * n:-n]), np.mean(curve[-n:])
     return float((a - b) / max(a, 1e-9))
+
+
+# ------------------------------------------------------------------ confirm-set evaluation (per-item arrays saved for the hierarchical bootstrap)
+def eval_confirm(model, tok, items, pairs, hook, Us, mu, intact, rank, n_rand_abl=4, n_rand_tr=20, positions=("all",)):
+    """Us: dict seed -> U. Returns dict of per-item arrays: intact candidate logits, per-seed retained/ablated candidate logits and
+    per-item retained KL, random-subspace ablations, and per-trial transplant numerators/denominators for seeds and random subspaces."""
+    from causal_subspaces.phase7.stage1 import haar_subspace, pair_trials, transplant
+    out = dict(cl_intact=intact["cand_logits"], greedy_intact=intact["greedy"], lse_intact=intact["lse"], gold=gold_array(items),
+               groups=np.array([i.group for i in items]), raw=np.array(items[0].raw),
+               gold_tok=cand_array(items)[np.arange(len(items)), gold_array(items)])
+    mu = mu.cuda()
+    for s, U in Us.items():
+        ret = run_stats(model, tok, items, hook, "retain", U, mu, with_kl=True)
+        abl = run_stats(model, tok, items, hook, "ablate", U, mu, with_kl=True)
+        out[f"cl_ret_{s}"], out[f"kl_ret_{s}"], out[f"greedy_ret_{s}"] = ret["cand_logits"], ret["kl"], ret["greedy"]
+        out[f"cl_abl_{s}"], out[f"kl_abl_{s}"], out[f"greedy_abl_{s}"] = abl["cand_logits"], abl["kl"], abl["greedy"]
+        out[f"lse_ret_{s}"] = ret["lse"]
+    d = next(iter(Us.values())).shape[0]
+    for k in range(n_rand_abl):
+        Ur = haar_subspace(d, rank, 2000 + k)
+        abl = run_stats(model, tok, items, hook, "ablate", Ur, mu)
+        out[f"cl_rabl_{k}"] = abl["cand_logits"]
+    if pairs:
+        trials = pair_trials(pairs)
+        subs = {f"s{s}": U for s, U in Us.items()}
+        for k in range(n_rand_tr):
+            subs[f"rand{k}"] = haar_subspace(d, rank, 1000 + k)
+        res = transplant(model, tok, trials, hook, subs, bs=16, positions=positions)
+        out["tr_group"] = res["group"]
+        out["tr_den"] = res["m_src"] - res["m_tgt"]
+        for nm in subs:
+            for p in positions:
+                out[f"tr_num_{nm}_{p}"] = res[f"m|{nm}|{p}"] - res["m_tgt"]
+    return out
+
+
+# ------------------------------------------------------------------ gates (amendment A6)
+THR = dict(kl=0.05, acc_ratio=0.9, rel=0.5, abs=5.0, rand_rel=0.1, transfer=0.25, rand_transfer=0.05, seeds_S=4, seeds_N=3, seeds_T=4)
+
+
+def _acc(cl, greedy, z):
+    return float(((cl.argmax(1) if bool(z["raw"]) else greedy) == (z["gold"] if bool(z["raw"]) else z["gold_tok"])).mean())
+
+
+def _verdict(support_ok, median_ok, bound_ok):
+    if support_ok and bound_ok:
+        return "PASS"
+    if (not support_ok) and (not median_ok):
+        return "FAIL"
+    return "INCONCLUSIVE"
+
+
+def cell_gates(z, seeds, nb=300, intact_min=0.9):
+    """Per-seed values, seed-support rules, hierarchical-bootstrap bounds and PASS/FAIL/INCONCLUSIVE for sufficiency (1b-S), necessity
+    (1b-N) and transplantation (1b-G(i)) of one (task, format) cell on the confirm contents. z: eval_confirm arrays."""
+    g, grp = z["gold"], z["groups"]
+    ci = z["cl_intact"]
+    acc_i = _acc(ci, z["greedy_intact"], z)
+    rows = {}
+    n_rand = len([k for k in z if k.startswith("cl_rabl_")])
+    for s in seeds:
+        gi, ga = class_gap(ci, g), class_gap(z[f"cl_abl_{s}"], g)
+        rr = [(gi - class_gap(z[f"cl_rabl_{k}"], g)) / gi for k in range(n_rand)]
+        row = dict(kl=float(z[f"kl_ret_{s}"].mean()), acc_ret=_acc(z[f"cl_ret_{s}"], z[f"greedy_ret_{s}"], z), acc_abl=_acc(z[f"cl_abl_{s}"], z[f"greedy_abl_{s}"], z),
+                   gap_intact=gi, gap_abl=ga, rel=(gi - ga) / gi, abs=gi - ga, rand_rel=float(np.mean(rr)) if rr else float("nan"))
+        row["suff"] = bool(row["kl"] <= THR["kl"] and row["acc_ret"] >= THR["acc_ratio"] * acc_i)
+        row["nec"] = bool(row["rel"] >= THR["rel"] and row["abs"] >= THR["abs"] and (not rr or row["rand_rel"] < THR["rand_rel"]))
+        if "tr_den" in z:
+            den = z["tr_den"]
+            row["transfer"] = float(z[f"tr_num_s{s}_all"].sum() / den.sum())
+            row["rand_transfer_max"] = float(max(z[f"tr_num_rand{k}_all"].sum() / den.sum() for k in range(len([q for q in z if q.startswith("tr_num_rand")]))))
+            row["tr"] = bool(row["transfer"] >= THR["transfer"] and row["rand_transfer_max"] <= THR["rand_transfer"])
+        rows[s] = row
+    med = lambda key: float(np.median([rows[s][key] for s in seeds]))
+    out = dict(seeds=rows, acc_intact=acc_i, intact_ok=bool(acc_i >= intact_min), median={k: med(k) for k in ("kl", "rel", "abs") + (("transfer",) if "tr_den" in z else ())})
+    # sufficiency
+    st_kl = lambda s, ix: float(z[f"kl_ret_{s}"][ix].mean())
+    lo, hi = hier_ci(st_kl, list(seeds), grp, nb)
+    n_s = sum(rows[s]["suff"] for s in seeds)
+    out["S"] = dict(n_seeds_ok=n_s, median_ok=bool(out["median"]["kl"] <= THR["kl"]), ci_kl=(lo, hi),
+                    verdict=_verdict(n_s >= THR["seeds_S"], out["median"]["kl"] <= THR["kl"], hi <= THR["kl"]))
+    # necessity: relative and absolute reduction, both with their own bounds
+    gi = lambda ix: class_gap(ci[ix], g[ix])
+    rel = lambda s, ix: (gi(ix) - class_gap(z[f"cl_abl_{s}"][ix], g[ix])) / gi(ix)
+    ab = lambda s, ix: gi(ix) - class_gap(z[f"cl_abl_{s}"][ix], g[ix])
+    lo_r, hi_r = hier_ci(rel, list(seeds), grp, nb)
+    lo_a, hi_a = hier_ci(ab, list(seeds), grp, nb)
+    n_n = sum(rows[s]["nec"] for s in seeds)
+    med_ok = out["median"]["rel"] >= THR["rel"] and out["median"]["abs"] >= THR["abs"]
+    out["N"] = dict(n_seeds_ok=n_n, median_ok=bool(med_ok), ci_rel=(lo_r, hi_r), ci_abs=(lo_a, hi_a),
+                    literal10_median_ok=bool(out["median"]["rel"] >= THR["rel"] and out["median"]["abs"] >= min(10.0, 0.5 * np.mean([rows[s]["gap_intact"] for s in seeds]))),
+                    verdict=_verdict(n_n >= THR["seeds_N"], med_ok, bool(lo_r >= THR["rel"] and lo_a >= THR["abs"])))
+    if "tr_den" in z:
+        tg, den = z["tr_group"], z["tr_den"]
+        tr_stat = lambda s, ix: float(z[f"tr_num_s{s}_all"][ix].sum() / den[ix].sum())
+        lo_t, hi_t = hier_ci(tr_stat, list(seeds), tg, nb)
+        n_t = sum(rows[s]["tr"] for s in seeds)
+        out["T"] = dict(n_seeds_ok=n_t, median_ok=bool(out["median"]["transfer"] >= THR["transfer"]), ci=(lo_t, hi_t),
+                        rand_max=float(max(r["rand_transfer_max"] for r in rows.values())),
+                        verdict=_verdict(n_t >= THR["seeds_T"], out["median"]["transfer"] >= THR["transfer"], lo_t >= THR["transfer"]))
+    return out
