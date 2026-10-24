@@ -1,0 +1,32 @@
+{
+ "u1_orth_err": {
+  "h25_s0": 4.76837158203125e-07,
+  "h25_s1": 3.5762786865234375e-07,
+  "h25_s2": 3.5762786865234375e-07,
+  "h25_s3": 2.384185791015625e-07,
+  "h25_s4": 7.152557373046875e-07,
+  "h21_s0": 2.980232238769531e-07,
+  "h21_s1": 4.76837158203125e-07
+ },
+ "retain_plus_ablate_minus_h_minus_mu_max": 3.372218766450885e-07,
+ "idempotence_err": 1.951563910473908e-17,
+ "union_projector_equals_sum_err": 1.734723475976807e-18,
+ "cross_gram_err": 9.194034422677078e-17,
+ "batch_noise": {
+  "max_abs_logit_diff_bs32_vs_bs5": 2.5,
+  "gap_bs32": 51.235416412353516,
+  "gap_bs5": 51.36758804321289,
+  "gap_abs_diff": 0.132171630859375,
+  "max_abs_logit_diff_bs32_vs_bs1_first64": 1.75,
+  "greedy_agree_bs32_bs5": 1.0
+ },
+ "noop_hook_max_abs_diff": 0.0,
+ "bf16_cast_rel_err_retain": 0.001872904715128243,
+ "u1_s0_dev_retain": {
+  "kl": 4.929671376885381e-06,
+  "acc": 1.0,
+  "acc_intact": 1.0
+ },
+ "effect_threshold_note": "all effect thresholds must exceed 2 x batch_noise.gap_abs_diff (logits); intact gap = 51.2",
+ "noise_floor_gap_logits": 0.132171630859375
+}
