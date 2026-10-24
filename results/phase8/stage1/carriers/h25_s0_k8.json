@@ -1,0 +1,24 @@
+{
+ "hook": 25,
+ "seed": 0,
+ "k": 8,
+ "sufficient": true,
+ "retry_used": false,
+ "attempts": [
+  {
+   "init_seed": 800,
+   "retry": 0,
+   "train_kl": 7.365382043644786e-05,
+   "seconds": 161.64959335327148,
+   "orth_err": 4.260800778865814e-08,
+   "self_orth_err": 2.384185791015625e-07,
+   "dev_kl": 5.965955278952606e-05,
+   "dev_acc": 1.0,
+   "dev_acc_intact": 1.0,
+   "sufficient": true
+  }
+ ],
+ "dev_kl": 5.965955278952606e-05,
+ "dev_acc": 1.0,
+ "dev_acc_intact": 1.0
+}

@@ -1,0 +1,11 @@
+{
+ "hook": 25,
+ "seed": 3,
+ "parallel": true,
+ "orth_err_to_U1": 2.130400389432907e-08,
+ "train_kl": 9.920995580614544e-06,
+ "dev_kl": 1.2440523278200999e-05,
+ "dev_acc": 1.0,
+ "dev_acc_intact": 1.0,
+ "sufficient": true
+}

@@ -1,0 +1,432 @@
+{
+ "rules": {
+  "sufficient": "dev (val + fresh-dev) retained KL <= 0.05 and primary accuracy >= 0.9 x intact; one retry with init seed +1000; chain stops at first double failure; cap K=8 (hook 25), K=4 (hook 21)",
+  "confirm_carrier_sufficient": "fresh-confirm retained KL <= 0.05 and accuracy >= 0.9 x intact, point estimate; additionally the entity-cluster bootstrap (1000 resamples) 95% upper bound of KL <= 0.05 for the MSR verdict",
+  "kstar_confirm": "number of consecutive carriers from k=1 that are confirm-sufficient, within the frozen dev chain (cannot exceed K*_dev)",
+  "MSR": "PASS: median K*_confirm >= 4 and K*_confirm >= 4 in >= 4 of 5 chains (hook 25) with the bootstrap upper-bound condition on carriers 1-4 of those chains; FAIL: median K*_confirm <= 2; else INCONCLUSIVE. K* is a search-dependent lower bound (B3).",
+  "readout_like": "logit-lens (final norm + unembedding of the four letter tokens) of the RETAINED residual at the hook, final position: accuracy >= 0.9",
+  "semantic_duplicate": "two carriers of a chain are flagged when both decode the answer letter on confirm with accuracy >= 0.9 and their retained-logit-deviation cosine >= 0.5 (descriptive flag only; S1 makes no SCR/JCD claim)",
+  "anomaly_gates": "numerical-validation failure; orthogonality violation; median K*_dev < 2; determinism refit max-angle cosine < 0.99 or KL differing by > 2x; < 36 confirm entities; hook-21 chains infeasible"
+ },
+ "chains": {
+  "h21_s0": {
+   "carriers": {
+    "1": {
+     "sufficient": true,
+     "dev_kl": 1.7196312910527922e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase7/stage1b/armA/M_h21_r4_s0.pt",
+     "sha256": "63493ab635f28c15"
+    },
+    "2": {
+     "sufficient": true,
+     "dev_kl": 0.0022438829764723778,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h21_s0_k2.pt",
+     "sha256": "456ca3ff59f65b19"
+    },
+    "3": {
+     "sufficient": true,
+     "dev_kl": 7.512471347581595e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h21_s0_k3.pt",
+     "sha256": "3973bc2830150f4c"
+    },
+    "4": {
+     "sufficient": true,
+     "dev_kl": 7.487394759664312e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h21_s0_k4.pt",
+     "sha256": "ec80e19a50035e02"
+    }
+   },
+   "kstar_dev": 4
+  },
+  "h21_s1": {
+   "carriers": {
+    "1": {
+     "sufficient": true,
+     "dev_kl": 3.4391585359117016e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase7/stage1b/armA/M_h21_r4_s1.pt",
+     "sha256": "3ca99dfa35e3beff"
+    },
+    "2": {
+     "sufficient": true,
+     "dev_kl": 0.0006368785398080945,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h21_s1_k2.pt",
+     "sha256": "9dfcca0cf05050d8"
+    },
+    "3": {
+     "sufficient": true,
+     "dev_kl": 0.0002632941759657115,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h21_s1_k3.pt",
+     "sha256": "9082459466c2b0bd"
+    },
+    "4": {
+     "sufficient": true,
+     "dev_kl": 0.0007462450885213912,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h21_s1_k4.pt",
+     "sha256": "146376383b29a138"
+    }
+   },
+   "kstar_dev": 4
+  },
+  "h25_s0": {
+   "carriers": {
+    "1": {
+     "sufficient": true,
+     "dev_kl": 4.929671376885381e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase7/stage1b/armA/M_h25_r4_s0.pt",
+     "sha256": "81d26ad287e3776c"
+    },
+    "2": {
+     "sufficient": true,
+     "dev_kl": 3.0096491627773503e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s0_k2.pt",
+     "sha256": "fbb5daf070902638"
+    },
+    "3": {
+     "sufficient": true,
+     "dev_kl": 3.8097867218311876e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s0_k3.pt",
+     "sha256": "e58575f636ba3e94"
+    },
+    "4": {
+     "sufficient": true,
+     "dev_kl": 2.04196749109542e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s0_k4.pt",
+     "sha256": "394c252bbd107214"
+    },
+    "5": {
+     "sufficient": true,
+     "dev_kl": 0.00012473190145101398,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s0_k5.pt",
+     "sha256": "0581468e5cce13b6"
+    },
+    "6": {
+     "sufficient": true,
+     "dev_kl": 1.0735612704593223e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s0_k6.pt",
+     "sha256": "0d4531da90ceb9a6"
+    },
+    "7": {
+     "sufficient": true,
+     "dev_kl": 3.595960151869804e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s0_k7.pt",
+     "sha256": "c7b3da2f836d3e19"
+    },
+    "8": {
+     "sufficient": true,
+     "dev_kl": 5.965955278952606e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s0_k8.pt",
+     "sha256": "51ab9f2db2876bd8"
+    }
+   },
+   "kstar_dev": 8
+  },
+  "h25_s1": {
+   "carriers": {
+    "1": {
+     "sufficient": true,
+     "dev_kl": 7.3474784585414454e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase7/stage1b/armA/M_h25_r4_s1.pt",
+     "sha256": "2ea142e0bf786d9a"
+    },
+    "2": {
+     "sufficient": true,
+     "dev_kl": 8.58813450577145e-07,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s1_k2.pt",
+     "sha256": "79f3b9aac5850520"
+    },
+    "3": {
+     "sufficient": true,
+     "dev_kl": 7.41819121685694e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s1_k3.pt",
+     "sha256": "76b3a6c3a0ac4428"
+    },
+    "4": {
+     "sufficient": true,
+     "dev_kl": 0.00041782588232308626,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s1_k4.pt",
+     "sha256": "7413ff8f63a873aa"
+    },
+    "5": {
+     "sufficient": true,
+     "dev_kl": 5.403758768807165e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s1_k5.pt",
+     "sha256": "71b66e73dbe5bd38"
+    },
+    "6": {
+     "sufficient": true,
+     "dev_kl": 0.00014403281966224313,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s1_k6.pt",
+     "sha256": "746e792ebd483027"
+    },
+    "7": {
+     "sufficient": true,
+     "dev_kl": 0.00023870859877206385,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s1_k7.pt",
+     "sha256": "fca061185c12085a"
+    },
+    "8": {
+     "sufficient": true,
+     "dev_kl": 5.9724494349211454e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s1_k8.pt",
+     "sha256": "a16282d02d49d223"
+    }
+   },
+   "kstar_dev": 8
+  },
+  "h25_s2": {
+   "carriers": {
+    "1": {
+     "sufficient": true,
+     "dev_kl": 1.533610202386626e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase7/stage1b/final/M_letters_h25_r4_s2.pt",
+     "sha256": "ccad23e8451437ad"
+    },
+    "2": {
+     "sufficient": true,
+     "dev_kl": 2.9953475859656464e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s2_k2.pt",
+     "sha256": "9dc1e6b711cdde0a"
+    },
+    "3": {
+     "sufficient": true,
+     "dev_kl": 2.68794519797666e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s2_k3.pt",
+     "sha256": "f25f1d2f35d96407"
+    },
+    "4": {
+     "sufficient": true,
+     "dev_kl": 4.717971387435682e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s2_k4.pt",
+     "sha256": "c3413b6e830cb9fc"
+    },
+    "5": {
+     "sufficient": true,
+     "dev_kl": 2.7251864594290964e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s2_k5.pt",
+     "sha256": "1c459421936473c1"
+    },
+    "6": {
+     "sufficient": true,
+     "dev_kl": 2.4595685317763127e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s2_k6.pt",
+     "sha256": "0ad0643159a6636d"
+    },
+    "7": {
+     "sufficient": true,
+     "dev_kl": 5.798006895929575e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s2_k7.pt",
+     "sha256": "ff39feaf5e214710"
+    },
+    "8": {
+     "sufficient": true,
+     "dev_kl": 0.00016133706958498806,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s2_k8.pt",
+     "sha256": "3937fa60b89e49a0"
+    }
+   },
+   "kstar_dev": 8
+  },
+  "h25_s3": {
+   "carriers": {
+    "1": {
+     "sufficient": true,
+     "dev_kl": 3.1713725547888316e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase7/stage1b/final/M_letters_h25_r4_s3.pt",
+     "sha256": "ed0ad2ac4317f782"
+    },
+    "2": {
+     "sufficient": true,
+     "dev_kl": 5.834692728967639e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s3_k2.pt",
+     "sha256": "33ed5fd2aa841324"
+    },
+    "3": {
+     "sufficient": true,
+     "dev_kl": 1.0476506759005133e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s3_k3.pt",
+     "sha256": "1d26f5ec50b80b15"
+    },
+    "4": {
+     "sufficient": true,
+     "dev_kl": 1.9561994122341275e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s3_k4.pt",
+     "sha256": "c938ddd81e7130c2"
+    },
+    "5": {
+     "sufficient": true,
+     "dev_kl": 2.3712998881819658e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s3_k5.pt",
+     "sha256": "d8dbe08b3fe2f6c1"
+    },
+    "6": {
+     "sufficient": true,
+     "dev_kl": 3.0623625207226723e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s3_k6.pt",
+     "sha256": "1d7248dd50e6f5e5"
+    },
+    "7": {
+     "sufficient": true,
+     "dev_kl": 5.8272806199966e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s3_k7.pt",
+     "sha256": "8c516e55a4d66a91"
+    },
+    "8": {
+     "sufficient": true,
+     "dev_kl": 0.00013899507757741958,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s3_k8.pt",
+     "sha256": "298468e93af6dd4d"
+    }
+   },
+   "kstar_dev": 8
+  },
+  "h25_s4": {
+   "carriers": {
+    "1": {
+     "sufficient": true,
+     "dev_kl": 1.1966106285399292e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase7/stage1b/final/M_letters_h25_r4_s4.pt",
+     "sha256": "5e07ca034d503874"
+    },
+    "2": {
+     "sufficient": true,
+     "dev_kl": 2.5713885065670183e-07,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s4_k2.pt",
+     "sha256": "bcdd6bcce1a10a3b"
+    },
+    "3": {
+     "sufficient": true,
+     "dev_kl": 4.23585697717499e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s4_k3.pt",
+     "sha256": "e2476572dfaca2ab"
+    },
+    "4": {
+     "sufficient": true,
+     "dev_kl": 2.1106941403559176e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s4_k4.pt",
+     "sha256": "7387a34131c7c96d"
+    },
+    "5": {
+     "sufficient": true,
+     "dev_kl": 6.914750429132255e-06,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s4_k5.pt",
+     "sha256": "291d1ab34a37f688"
+    },
+    "6": {
+     "sufficient": true,
+     "dev_kl": 0.0004043980152346194,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s4_k6.pt",
+     "sha256": "acb5eac58ef8029b"
+    },
+    "7": {
+     "sufficient": true,
+     "dev_kl": 3.459549407125451e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s4_k7.pt",
+     "sha256": "fed5a891ed8cd929"
+    },
+    "8": {
+     "sufficient": true,
+     "dev_kl": 2.8177842978038825e-05,
+     "dev_acc": 1.0,
+     "retry_used": false,
+     "file": "results/phase8/stage1/carriers/h25_s4_k8.pt",
+     "sha256": "a2dd375885236a6b"
+    }
+   },
+   "kstar_dev": 8
+  }
+ }
+}

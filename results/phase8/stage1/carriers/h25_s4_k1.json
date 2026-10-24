@@ -1,0 +1,10 @@
+{
+ "hook": 25,
+ "seed": 4,
+ "k": 1,
+ "source": "results/phase7/stage1b/final/M_letters_h25_r4_s4.pt",
+ "dev_kl": 1.1966106285399292e-05,
+ "dev_acc": 1.0,
+ "dev_acc_intact": 1.0,
+ "sufficient": true
+}

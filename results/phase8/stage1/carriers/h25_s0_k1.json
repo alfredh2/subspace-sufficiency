@@ -1,0 +1,10 @@
+{
+ "hook": 25,
+ "seed": 0,
+ "k": 1,
+ "source": "results/phase7/stage1b/armA/M_h25_r4_s0.pt",
+ "dev_kl": 4.929671376885381e-06,
+ "dev_acc": 1.0,
+ "dev_acc_intact": 1.0,
+ "sufficient": true
+}
