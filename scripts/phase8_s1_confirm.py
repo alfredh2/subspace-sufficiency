@@ -105,7 +105,7 @@ for h in (25, 21):
         ch["probe_union_first4"] = dict(letter=probe_acc((X_tr @ Uu).numpy(), gold_of(sub_train), (Xs["fresh_conf"] @ Uu).numpy(), gold_of(sets["fresh_conf"])),
                                          relation=probe_acc((X_tr @ Uu).numpy(), rel_of(sub_train), (Xs["fresh_conf"] @ Uu).numpy(), rel_of(sets["fresh_conf"])))
         ch["probe_full_residual"] = dict(letter=probe_acc(X_tr.numpy(), gold_of(sub_train), Xs["fresh_conf"].numpy(), gold_of(sets["fresh_conf"])))
-        rnd = [haar_subspace(4096, 4, 900 + i).float() for i in range(5)]
+        rnd = [haar_subspace(4096, 4, 900 + i).float().cpu() for i in range(5)]
         ch["probe_random4_letter_mean"] = float(np.mean([probe_acc((X_tr @ r_).numpy(), gold_of(sub_train), (Xs["fresh_conf"] @ r_).numpy(), gold_of(sets["fresh_conf"])) for r_ in rnd]))
         # coordinate predictability (ridge R2, train->confirm) and canonical correlations between carrier pairs
         pr, cc = {}, {}
