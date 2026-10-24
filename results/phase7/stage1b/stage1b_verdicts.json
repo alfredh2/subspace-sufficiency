@@ -1,0 +1,78 @@
+{
+ "L": {
+  "cell": {
+   "hook": 23,
+   "rank": 4
+  },
+  "S": "PASS",
+  "N": "FAIL",
+  "T": "PASS",
+  "second_format_S": "PASS",
+  "G": "PASS",
+  "intact_ok": true,
+  "verdict": "FAIL"
+ },
+ "S": {
+  "cell": {
+   "hook": 25,
+   "rank": 4
+  },
+  "S": "FAIL",
+  "N": "INCONCLUSIVE",
+  "T": "PASS",
+  "second_format_S": "PASS",
+  "G": "PASS",
+  "intact_ok": true,
+  "verdict": "FAIL"
+ },
+ "G": {
+  "verdict": "FAIL (no sufficient dev cell)",
+  "S": "not reached",
+  "N": "not run",
+  "G": "not run",
+  "labels": {
+   "opt": true,
+   "gen": true,
+   "cap": false,
+   "ext_gain": 0.021851756388419172
+  }
+ },
+ "N": {
+  "verdict": "FAIL (no sufficient dev cell)",
+  "S": "not reached",
+  "N": "not run",
+  "G": "not run",
+  "labels": {
+   "opt": true,
+   "gen": true,
+   "cap": false,
+   "ext_gain": 0.03847628295461222
+  }
+ },
+ "M": {
+  "cell": {
+   "hook": 25,
+   "rank": 4
+  },
+  "S": "PASS",
+  "N": "FAIL",
+  "T": "FAIL",
+  "second_format_S": "NOT RUN",
+  "G": "FAIL",
+  "intact_ok": true,
+  "verdict": "FAIL"
+ },
+ "A": {
+  "cell": {
+   "hook": 27,
+   "rank": 4
+  },
+  "S": "FAIL",
+  "N": "FAIL",
+  "T": "FAIL",
+  "second_format_S": "NOT RUN",
+  "G": "FAIL",
+  "intact_ok": true,
+  "verdict": "FAIL"
+ }
+}

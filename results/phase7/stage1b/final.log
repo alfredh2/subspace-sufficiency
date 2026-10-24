@@ -1,0 +1,40 @@
+W1023 16:07:31.065000 3795893 site-packages/torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1023 16:07:31.079000 3795893 site-packages/torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 23215.06it/s]
+L num_orig fit seed 2 trainKL 0.0038 265s
+L num_orig fit seed 3 trainKL 0.0109 266s
+L num_orig fit seed 4 trainKL 0.0021 266s
+CONFIRM L num_orig h23 r4 intact acc 0.969 S PASS 5 N FAIL 2 T PASS 5 median kl 0.0060 rel 0.44 abs 13.0 transfer 0.63
+L num_rev fit seed 0 trainKL 0.0031 266s
+L num_rev fit seed 1 trainKL 0.0042 266s
+L num_rev fit seed 2 trainKL 0.0060 266s
+L num_rev fit seed 3 trainKL 0.0071 266s
+L num_rev fit seed 4 trainKL 0.0027 265s
+CONFIRM L num_rev h23 r4 intact acc 0.969 S PASS 5 N FAIL 2 T PASS 5 median kl 0.0084 rel 0.36 abs 8.8 transfer 0.67
+S words fit seed 2 trainKL 0.0025 150s
+S words fit seed 3 trainKL 0.0009 150s
+S words fit seed 4 trainKL 0.0006 150s
+CONFIRM S words h25 r4 intact acc 0.961 S FAIL 0 N INCONCLUSIVE 3 T PASS 5 median kl 0.1328 rel 0.55 abs 16.5 transfer 0.62
+S num_orig fit seed 0 trainKL 0.0007 184s
+S num_orig fit seed 1 trainKL 0.0006 184s
+S num_orig fit seed 2 trainKL 0.0032 184s
+S num_orig fit seed 3 trainKL 0.0016 184s
+S num_orig fit seed 4 trainKL 0.0024 184s
+CONFIRM S num_orig h25 r4 intact acc 0.938 S PASS 5 N FAIL 0 T PASS 5 median kl 0.0029 rel 0.45 abs 10.8 transfer 0.71
+S num_rev fit seed 0 trainKL 0.0019 184s
+S num_rev fit seed 1 trainKL 0.0011 184s
+S num_rev fit seed 2 trainKL 0.0001 184s
+S num_rev fit seed 3 trainKL 0.0001 184s
+S num_rev fit seed 4 trainKL 0.0002 184s
+CONFIRM S num_rev h25 r4 intact acc 0.995 S PASS 5 N FAIL 0 T PASS 5 median kl 0.0021 rel 0.38 abs 8.6 transfer 0.68
+M letters fit seed 2 trainKL 0.0000 161s
+M letters fit seed 3 trainKL 0.0000 162s
+M letters fit seed 4 trainKL 0.0000 162s
+CONFIRM M letters h25 r4 intact acc 1.000 S PASS 5 N FAIL 0 T FAIL 0 median kl 0.0000 rel 0.05 abs 2.8 transfer 0.09
+M digits skipped: primary-format gates not all PASS (A5 ii)
+A digits fit seed 2 trainKL 0.0002 87s
+A digits fit seed 3 trainKL 0.0000 87s
+A digits fit seed 4 trainKL 0.0000 87s
+CONFIRM A digits h27 r4 intact acc 1.000 S FAIL 2 N FAIL 0 T FAIL 0 median kl 0.1378 rel 0.13 abs 5.2 transfer 0.05
+A plus skipped: primary-format gates not all PASS (A5 ii)
+FINAL DONE

@@ -1,0 +1,22 @@
+W1023 17:44:55.541000 3921979 site-packages/torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1023 17:44:55.555000 3921979 site-packages/torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 24422.14it/s]
+TASK G best cell 27 8
+G long4800 0 trainKL 0.183 valKL 0.8846 candKL 0.0499 accR 0.99 gap 8.7->6.2 slope 0.12 131s
+G long4800 1 trainKL 0.230 valKL 0.8757 candKL 0.0452 accR 0.99 gap 8.7->6.8 slope 0.13 131s
+G lda_init 0 trainKL 0.331 valKL 0.8955 candKL 0.0377 accR 0.99 gap 8.7->6.9 slope 0.11 44s
+G lda_init 1 trainKL 0.213 valKL 0.8875 candKL 0.0356 accR 0.99 gap 8.7->7.5 slope 0.11 44s
+G LDA reference rank 1 valKL 4.709 accR 0.46
+G tier2_candobj 0 trainKL 0.001 valKL 3.6331 candKL 0.0270 accR 1.00 gap 8.7->5.5 slope 0.44 42s
+G tier2_candobj 1 trainKL 0.001 valKL 3.6438 candKL 0.0274 accR 1.00 gap 8.7->5.8 slope 0.39 42s
+TASK N best cell 23 8
+N long4800 0 trainKL 0.027 valKL 3.9448 candKL 0.3186 accR 0.86 gap 19.3->7.8 slope 0.26 221s
+N long4800 1 trainKL 0.025 valKL 3.8564 candKL 0.3709 accR 0.81 gap 19.3->6.8 slope 0.28 213s
+N lda_init 0 trainKL 0.064 valKL 3.6354 candKL 0.2076 accR 0.93 gap 19.3->8.5 slope 0.22 74s
+N lda_init 1 trainKL 0.090 valKL 3.6332 candKL 0.4298 accR 0.79 gap 19.3->6.5 slope 0.20 74s
+N LDA reference rank 1 valKL 11.041 accR 0.48
+N tier2_candobj 0 trainKL 0.002 valKL 10.8252 candKL 0.9604 accR 0.63 gap 19.3->15.6 slope 0.24 72s
+N tier2_candobj 1 trainKL 0.002 valKL 10.1245 candKL 0.8957 accR 0.70 gap 19.3->17.0 slope 0.16 72s
+Nfix tier2_fixedpool 0 trainKL 0.113 valKL 0.1514 candKL 0.0066 accR 1.00 gap 18.8->7.2 slope 0.20 74s
+Nfix tier2_fixedpool 1 trainKL 0.094 valKL 0.1624 candKL 0.0099 accR 1.00 gap 18.8->7.5 slope 0.19 74s
+EXT DONE

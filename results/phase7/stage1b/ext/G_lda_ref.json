@@ -1,0 +1,22 @@
+{
+ "task": "G",
+ "rank": 1,
+ "val": {
+  "kl_retain": 4.708609580993652,
+  "kl_ablate": 0.002387242391705513,
+  "acc_intact": 0.9765625,
+  "acc_retain": 0.46484375,
+  "acc_ablate": 0.97265625,
+  "gacc_intact": 0.44140625,
+  "gacc_retain": 0.0,
+  "mass_intact": 0.18185675144195557,
+  "mass_retain": 0.0011463339906185865,
+  "racc_intact": 0.9765625,
+  "racc_retain": 0.46484375,
+  "racc_ablate": 0.97265625,
+  "gap_intact": 8.667523384094238,
+  "gap_retain": 0.2809547185897827,
+  "gap_ablate": 8.350759506225586,
+  "cand_kl_retain": 0.949028062391117
+ }
+}

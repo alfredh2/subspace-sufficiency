@@ -1,0 +1,38 @@
+W1023 18:07:40.545000 3951300 site-packages/torch/utils/_pytree.py:630] <enum 'KernelPreference'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+W1023 18:07:40.559000 3951300 site-packages/torch/utils/_pytree.py:630] <enum 'ScaleCalculationMode'> is an Enum subclass and is now natively supported by torch.compile as an opaque value type. Calling register_constant() on Enum subclasses is deprecated and will be an error in a future release.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 21144.01it/s]
+L joint fit 0 trainKL 0.5935
+L joint fit 1 trainKL 0.6841
+L joint fit 2 trainKL 0.6396
+L joint fit 3 trainKL 0.6390
+L joint fit 4 trainKL 0.6556
+L num_orig -> num_orig KL 0.0060 rel 0.44 abs 13.0 transfer 0.63 | S PASS N FAIL T PASS
+L num_orig -> num_rev KL 11.3713 rel 0.32 abs 7.7 transfer 0.46 | S FAIL N FAIL T PASS
+L num_rev -> num_orig KL 9.6429 rel 0.24 abs 7.0 transfer 0.59 | S FAIL N FAIL T PASS
+L num_rev -> num_rev KL 0.0084 rel 0.36 abs 8.8 transfer 0.67 | S PASS N FAIL T PASS
+L joint -> num_orig KL 0.6407 rel -0.32 abs -9.3 transfer 0.00 | S FAIL N FAIL T FAIL
+L joint -> num_rev KL 0.6654 rel -0.38 abs -9.3 transfer -0.00 | S FAIL N FAIL T FAIL
+L angles within 0.22335381474140573 cross 0.18505263663079607 haar 0.0009612867943243292
+L cross-transplant num_orig -> num_rev {'n_trials_total': 640, 'n_opp': 320, 'n_same': 320, 'mean_den_opp': 24.8359375, 'semantic_transfer': {'s0': 0.469, 's1': 0.465, 's2': 0.395, 's3': 0.485, 's4': 0.395}, 'token_flip': {'s0': 0.006, 's1': 0.006, 's2': 0.005, 's3': 0.005, 's4': 0.008}}
+L cross-transplant num_rev -> num_orig {'n_trials_total': 640, 'n_opp': 320, 'n_same': 320, 'mean_den_opp': 29.853125, 'semantic_transfer': {'s0': 0.521, 's1': 0.573, 's2': 0.567, 's3': 0.627, 's4': 0.398}, 'token_flip': {'s0': 0.005, 's1': 0.011, 's2': 0.008, 's3': 0.012, 's4': 0.006}}
+S joint fit 0 trainKL 0.0004
+S joint fit 1 trainKL 0.0003
+S joint fit 2 trainKL 0.0034
+S joint fit 3 trainKL 0.0020
+S joint fit 4 trainKL 0.0009
+S words -> words KL 0.1328 rel 0.55 abs 16.5 transfer 0.62 | S FAIL N INCONCLUSIVE T PASS
+S words -> num_orig KL 21.5527 rel 0.16 abs 3.9 transfer 0.15 | S FAIL N FAIL T FAIL
+S words -> num_rev KL 20.4705 rel 0.07 abs 1.6 transfer 0.01 | S FAIL N FAIL T FAIL
+S num_orig -> words KL 34.1007 rel 0.03 abs 1.0 transfer 0.07 | S FAIL N FAIL T FAIL
+S num_orig -> num_orig KL 0.0029 rel 0.45 abs 10.8 transfer 0.71 | S PASS N FAIL T PASS
+S num_orig -> num_rev KL 0.0880 rel 0.08 abs 1.9 transfer 0.11 | S FAIL N FAIL T FAIL
+S num_rev -> words KL 39.5504 rel -0.02 abs -0.5 transfer 0.02 | S FAIL N FAIL T FAIL
+S num_rev -> num_orig KL 0.4656 rel 0.01 abs 0.3 transfer 0.02 | S FAIL N FAIL T FAIL
+S num_rev -> num_rev KL 0.0021 rel 0.38 abs 8.6 transfer 0.68 | S PASS N FAIL T PASS
+S joint -> words KL 0.1494 rel 0.14 abs 4.1 transfer 0.31 | S FAIL N FAIL T INCONCLUSIVE
+S joint -> num_orig KL 0.0033 rel 0.29 abs 7.0 transfer 0.50 | S PASS N FAIL T PASS
+S joint -> num_rev KL 0.0022 rel 0.15 abs 3.5 transfer 0.29 | S PASS N FAIL T INCONCLUSIVE
+S angles within 0.26785192199702323 cross 0.11153741059370195 haar 0.0009612867943243292
+S cross-transplant num_orig -> num_rev {'n_trials_total': 320, 'n_opp': 160, 'n_same': 160, 'mean_den_opp': 21.3546875, 'semantic_transfer': {'s0': -0.054, 's1': -0.047, 's2': -0.056, 's3': -0.063, 's4': -0.054}, 'token_flip': {'s0': 0.234, 's1': 0.257, 's2': 0.25, 's3': 0.255, 's4': 0.271}}
+S cross-transplant num_rev -> num_orig {'n_trials_total': 320, 'n_opp': 160, 'n_same': 160, 'mean_den_opp': 20.9359375, 'semantic_transfer': {'s0': -0.103, 's1': -0.094, 's2': -0.103, 's3': -0.102, 's4': -0.118}, 'token_flip': {'s0': 0.159, 's1': 0.197, 's2': 0.211, 's3': 0.182, 's4': 0.236}}
+ARM C DONE
