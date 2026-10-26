@@ -8,7 +8,7 @@ ap = argparse.ArgumentParser(); ap.add_argument("--hook", type=int, default=25);
 a = ap.parse_args(); h = a.hook
 S = pickle.load(open(R2 / f"conf_h{h}_shared.pkl", "rb")); M = json.load(open(R2 / f"match_h{h}.json"))
 chains = {}
-for p in sorted(R2.glob(f"conf_h{h}_s*.pkl")):
+for p in sorted(R2.glob(f"conf_h{h}_s[0-9].pkl")):
     chains[int(p.stem.split("_s")[1])] = pickle.load(open(p, "rb"))
 sids = sorted(chains)
 meta = S["meta"]; gold, groups, tgroups, cl_int = meta["gold"], meta["groups"], meta["tgroups"], meta["cl_int"]
