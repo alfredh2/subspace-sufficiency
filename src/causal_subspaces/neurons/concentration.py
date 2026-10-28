@@ -1,4 +1,4 @@
-"""Concentration (|Delta| only) and signed reconstruction / cancellation metrics. See docs/phase1_plan.md section 2."""
+"""Concentration (|Delta| only) and signed reconstruction / cancellation metrics. See docs/plans/phase1_plan.md section 2."""
 import numpy as np
 import torch
 

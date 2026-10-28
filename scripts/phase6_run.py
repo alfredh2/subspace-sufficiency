@@ -1,4 +1,4 @@
-"""Phase 6 staged runner (docs/phase6_plan.md). Usage: python scripts/phase6_run.py {pilot|stage2|stage3|freeze|stage4|stage5}"""
+"""Phase 6 staged runner (docs/plans/phase6_plan.md). Usage: python scripts/phase6_run.py {pilot|stage2|stage3|freeze|stage4|stage5}"""
 import json
 import os
 import sys
@@ -24,7 +24,7 @@ DENSE = list(range(20))
 NULL_IDX = [0, 8, 14, 17, 19]
 FROZEN = ["src/causal_subspaces/phase6/early.py", "src/causal_subspaces/phase6/runner.py", "src/causal_subspaces/phase6/data.py", "src/causal_subspaces/phase6/stats.py",
           "src/causal_subspaces/phase5/patching.py", "src/causal_subspaces/phase5/runner.py", "src/causal_subspaces/upstream/patching.py", "src/causal_subspaces/upstream/stats.py",
-          "src/causal_subspaces/upstream/data.py", "scripts/phase6_run.py", "docs/phase6_plan.md", "results/phase6/set_c.json", "results/phase5/selection.json"]
+          "src/causal_subspaces/upstream/data.py", "scripts/phase6_run.py", "docs/plans/phase6_plan.md", "results/phase6/set_c.json", "results/phase5/selection.json"]
 sel = json.load(open(ROOT / "results/phase5/selection.json")); Hs = sel["H_star"]; mats = sel["null_matched"]
 ACC = [(l, c) for l in (20, 21, 22) for c in ("attn", "mlp")]
 
@@ -160,7 +160,7 @@ elif stage == "stage3":
     for name, tr in sets.items(): run_set(c5, tr, jobs_ctrl(), f"stage3_{name}")
 
 elif stage == "freeze":
-    fz = dict(files=UP.file_hashes(FROZEN), note="frozen before any Replication-B / set-C computation (docs/phase6_plan.md)"); json.dump(fz, open(OUT / "frozen_config.json", "w"), indent=1); print("frozen", len(fz["files"]))
+    fz = dict(files=UP.file_hashes(FROZEN), note="frozen before any Replication-B / set-C computation (docs/plans/phase6_plan.md)"); json.dump(fz, open(OUT / "frozen_config.json", "w"), indent=1); print("frozen", len(fz["files"]))
 
 elif stage == "stage4":
     fz = json.load(open(OUT / "frozen_config.json")); now = UP.file_hashes(FROZEN); amend = OUT / "frozen_config_amendment.json"

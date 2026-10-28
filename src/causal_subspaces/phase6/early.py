@@ -1,4 +1,4 @@
-"""Early-exit forward passes for Phase 6 (docs/phase6_plan.md): stop right after the input of a layer's attention (or after a layer's output) and return the
+"""Early-exit forward passes for Phase 6 (docs/plans/phase6_plan.md): stop right after the input of a layer's attention (or after a layer's output) and return the
 activations. Hooks are always removed; a controlled exception is the only control flow."""
 from contextlib import ExitStack, contextmanager
 

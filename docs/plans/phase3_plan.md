@@ -48,4 +48,4 @@ Primary comparisons: U22 rescue vs the three pre-intervention control families (
 **Pilot gate:** continue to Stage 2 only if tests pass, TE_c ≥ 2.0 and TE_m ≥ 5 logits, the self-restore floor is met and rescue is measurable; if all rescue ratios are ≤ 0.05 the minimal confirmatory set is run and the negative result is reported. Total ≈ 1.2 h; hard cap 1.5 h; stages stop at their gates.
 
 ## 10. Deliverables
-`docs/phase3_report.md` reporting, for U22: whether it mediates the heads' effect on the verdict coordinate and on final answers, how much effect bypasses it, whether mediation holds in both numeric formats, and whether the pathway is verdict-selective — each separately, with negative results. Commit without co-author trailers; no push; no upstream tracing.
+`docs/reports/phase3_report.md` reporting, for U22: whether it mediates the heads' effect on the verdict coordinate and on final answers, how much effect bypasses it, whether mediation holds in both numeric formats, and whether the pathway is verdict-selective — each separately, with negative results. Commit without co-author trailers; no push; no upstream tracing.

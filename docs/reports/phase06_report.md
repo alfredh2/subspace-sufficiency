@@ -1,7 +1,7 @@
 # Phase 0.6 report — does logical validity have a representation beyond the shared verdict direction?
 
 **Bottom line: no credible, causally selective logic target was found at this layer.** Validity is linearly decodable from the layer-23 residual after removing the verdict direction (so *information* exists
-outside it), but the causal search produced only format-specific, non-transplantable ablation effects, and no candidate satisfies the pre-registered rule (`docs/phase06_plan.md`, decision rule fixed before any run).
+outside it), but the causal search produced only format-specific, non-transplantable ablation effects, and no candidate satisfies the pre-registered rule (`docs/plans/phase06_plan.md`, decision rule fixed before any run).
 Setting: frozen Qwen3-8B; Phase 0 / 0.5 checkpoints and results untouched; same benchmark (re-created; validity is a function of argument form, which limits what any probe/search can show); hook `residual_index=23`.
 Code: `src/causal_subspaces/phase06.py`, `scripts/phase06_*.py`; tables: `results/phase06/report_tables*.md`, `decodability.json`, `evaluation*.json`; 56 tests pass (`tests/test_phase06.py` adds the orthogonality, probe/INLP, loss and collection tests).
 

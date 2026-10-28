@@ -1,5 +1,5 @@
 """Phase 7 Stage 0: held-out concentration statistics under a train-rank / test-evaluate protocol, for arbitrary contrasts and target directions
-(docs/phase7_plan.md section 11). Pure tensor code: all functions take class-contrast vectors and gain vectors, so they can be tested without a model."""
+(docs/plans/phase7_plan.md section 11). Pure tensor code: all functions take class-contrast vectors and gain vectors, so they can be tested without a model."""
 import torch
 
 

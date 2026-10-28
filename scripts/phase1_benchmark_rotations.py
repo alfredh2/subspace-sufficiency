@@ -1,4 +1,4 @@
-"""Phase 1 Stage 0: cost of true Haar generation at m = 12288 (and the cheaper nulls). Decides the draw counts (docs/phase1_plan.md section 5)."""
+"""Phase 1 Stage 0: cost of true Haar generation at m = 12288 (and the cheaper nulls). Decides the draw counts (docs/plans/phase1_plan.md section 5)."""
 import json
 import time
 

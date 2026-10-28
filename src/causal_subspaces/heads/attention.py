@@ -1,6 +1,6 @@
 """Validated recomputation of Qwen3 attention for head-level analysis (Phase 2): attention weights, per-head value projections, routing/content
 decomposition and A/V patching. The causal+padding mask is built here from the 2D attention mask (never from HF internals).
-Everything here is only used after the recompute gate (docs/phase2_plan.md section 2) has passed on real Qwen3 batches."""
+Everything here is only used after the recompute gate (docs/plans/phase2_plan.md section 2) has passed on real Qwen3 batches."""
 from contextlib import contextmanager
 
 import numpy as np

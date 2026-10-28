@@ -1,5 +1,5 @@
 """Phase 1 Stage 4: causal ablation of top-k native MLP units (mean replacement, all positions) vs random / activation-matched /
-alignment-matched / rotated-coordinate controls. Resumable; budget-tracked; early-stop gate per docs/phase1_plan.md section 3.
+alignment-matched / rotated-coordinate controls. Resumable; budget-tracked; early-stop gate per docs/plans/phase1_plan.md section 3.
 Everything is stored per example so effects, bootstrap CIs and matched-strength comparisons are computed in the report script.
 Usage: python scripts/phase1_stage4_causal.py [--phase A B C D]"""
 import argparse

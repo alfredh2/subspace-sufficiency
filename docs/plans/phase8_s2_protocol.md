@@ -1,6 +1,6 @@
 # Phase 8 Stage S2: operational protocol (frozen before any S2 confirm-set evaluation)
 
-Authorisation: user approval of S2 with the existing frozen K=8 hook-25 carriers (five chains), no cap extension, hook 21 kept as the contrast (K=4, 2 chains), stop after S2. This file only **operationalises** the criteria already frozen in `docs/phase8_multiplicity_pilot_plan.md` (section 9 and B2, B5-B13). It changes no threshold. Anything marked *exploratory* is not an input to any verdict. The S1 discovery freeze (`d2fd7bc`) and every earlier artifact are read-only.
+Authorisation: user approval of S2 with the existing frozen K=8 hook-25 carriers (five chains), no cap extension, hook 21 kept as the contrast (K=4, 2 chains), stop after S2. This file only **operationalises** the criteria already frozen in `docs/plans/phase8_multiplicity_pilot_plan.md` (section 9 and B2, B5-B13). It changes no threshold. Anything marked *exploratory* is not an input to any verdict. The S1 discovery freeze (`d2fd7bc`) and every earlier artifact are read-only.
 
 ## 0. Scope and declared deviations
 * In S2 now: natural-strength single, pairwise and cumulative ablations with all three control families plus the on-manifold family; single, union and conditional transplants with controls; conditional co-ablation (CG) with matched controls; layerwise answer traces with final-LayerNorm and magnitude controls; out-of-sample carrier-overlap analysis; the dev-gated compensation test (B8); the same measurements at hook 21 (K<=4, 2 chains).

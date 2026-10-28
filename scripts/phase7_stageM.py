@@ -1,4 +1,4 @@
-"""Phase 7 Stage M (docs/phase7_plan.md section 11): verdict-aligned versus orthogonal contributions of the layer-19 write, with norm/dose controls and a
+"""Phase 7 Stage M (docs/plans/phase7_plan.md section 11): verdict-aligned versus orthogonal contributions of the layer-19 write, with norm/dose controls and a
 geometric-versus-causal ranking comparison. Usage: python scripts/phase7_stageM.py {select|eval}"""
 import json
 import sys

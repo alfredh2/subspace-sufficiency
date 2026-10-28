@@ -1,4 +1,4 @@
-"""Phase 4 report tables + mechanical criteria (docs/phase4_plan.md section 6). Reads results/phase4/*.npz; writes report_tables.md and criteria_verdict.json."""
+"""Phase 4 report tables + mechanical criteria (docs/plans/phase4_plan.md section 6). Reads results/phase4/*.npz; writes report_tables.md and criteria_verdict.json."""
 import json
 
 import numpy as np
@@ -207,6 +207,6 @@ def outcome():
         b_ok = all(V["B"][f]["plateau"] >= 0.5 for f in V["B"]) and all(V["B"][f]["onset"]["sustained_both"] is not None and a3["exists_both"] and abs(V["B"][f]["onset"]["sustained_both"] - crit[f]["onset_sustained_both"]) <= 2 for f in V["B"])
         if not b_ok: notes.append("Replication B does not reproduce plateau/onset")
     return "SUPPORTED" if not notes else "MIXED: " + "; ".join(notes)
-V["outcome"] = outcome(); ml(f"\n## Outcome (mechanical, docs/phase4_plan.md section 6)\n**{V['outcome']}**")
+V["outcome"] = outcome(); ml(f"\n## Outcome (mechanical, docs/plans/phase4_plan.md section 6)\n**{V['outcome']}**")
 (OUT / "report_tables.md").write_text("\n".join(md)); json.dump(V, open(OUT / "criteria_verdict.json", "w"), indent=1, default=lambda o: bool(o) if isinstance(o, np.bool_) else float(o))
 print("\n".join(md)[:6000])

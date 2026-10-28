@@ -1,4 +1,4 @@
-"""Phase 3 Stage 0 preflight + Stage 1 pilot (docs/phase3_plan.md): validation-content aligned pairs, num_orig, S8_L22 and L22H5, U22 with matched
+"""Phase 3 Stage 0 preflight + Stage 1 pilot (docs/plans/phase3_plan.md): validation-content aligned pairs, num_orig, S8_L22 and L22H5, U22 with matched
 controls (5 draws per family), complement, full MLP22, dose-response, delta-matched and oracle sets (derived from the pilot response). Usage: python scripts/phase3_pilot.py"""
 import json
 import time

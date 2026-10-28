@@ -1,4 +1,4 @@
-"""Phase 6 report tables and mechanical criteria (docs/phase6_plan.md sections 7 and 11). Reads results/phase6/*.npz."""
+"""Phase 6 report tables and mechanical criteria (docs/plans/phase6_plan.md sections 7 and 11). Reads results/phase6/*.npz."""
 import json
 import sys
 

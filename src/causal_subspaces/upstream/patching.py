@@ -1,4 +1,4 @@
-"""Residual position-set patching, component (attn/mlp output) patching, last-row head freezing with direct verification (docs/phase4_plan.md).
+"""Residual position-set patching, component (attn/mlp output) patching, last-row head freezing with direct verification (docs/plans/phase4_plan.md).
 Hook index i = HF hidden_states[i] (0 = embedding output, i>=1 = output of layers[i-1]); layer l reads hidden_states[l]."""
 from contextlib import contextmanager
 

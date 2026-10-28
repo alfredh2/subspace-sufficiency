@@ -1,4 +1,4 @@
-"""Phase 7 Stage 1b library (plan: docs/phase7_stage1b_plan.md incl. amendments A1-A13).
+"""Phase 7 Stage 1b library (plan: docs/plans/phase7_stage1b_plan.md incl. amendments A1-A13).
 
 Data: the 1b content repartition (partition seed 1001; 'test' = confirm), A with a second format, N-fixedpool.
 Fitting: Phase-0 recipe with dense logging, optional LDA initialisation, candidate-restricted objective and an

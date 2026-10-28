@@ -36,3 +36,10 @@ results/*
 !results/phase6/**
 !results/phase7/
 !results/phase7/**
+
+# raw arrays >5 MB, kept locally only (regenerate with the phase scripts)
+results/phase1/stage1_vectors.npz
+results/phase1/stage2_3.json
+results/phase1/stage4/conditions.npz
+results/phase2/stage1.json
+results/phase2/stage3/conditions.npz

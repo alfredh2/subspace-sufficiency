@@ -1,4 +1,4 @@
-"""Batched execution of Phase-4 patch / pathway-freeze / writer jobs (docs/phase4_plan.md sections 3-5)."""
+"""Batched execution of Phase-4 patch / pathway-freeze / writer jobs (docs/plans/phase4_plan.md sections 3-5)."""
 import time
 import zlib
 from contextlib import ExitStack

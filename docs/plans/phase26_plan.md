@@ -42,4 +42,4 @@ Per set, condition, format and query setting: (a) *direct* head-output change of
 Mixed outcomes across formats are reported as such. All outcomes, including failures, are reported. Secondary query setting, individual heads, Self and Remaining-excluding-Self are descriptive.
 
 ## Deliverables and stop
-`docs/phase26_report.md` (findings, validation details, limitations, recommendations); commit without co-author trailers; no push. **Stop after the report; the head → MLP mediation study is not started.**
+`docs/reports/phase26_report.md` (findings, validation details, limitations, recommendations); commit without co-author trailers; no push. **Stop after the report; the head → MLP mediation study is not started.**

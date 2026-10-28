@@ -1,4 +1,4 @@
-"""Phase 1 report: tables + mechanical application of the frozen criteria in docs/phase1_plan.md. No thresholds are chosen here."""
+"""Phase 1 report: tables + mechanical application of the frozen criteria in docs/plans/phase1_plan.md. No thresholds are chosen here."""
 import json
 from pathlib import Path
 

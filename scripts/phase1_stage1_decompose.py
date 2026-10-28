@@ -1,5 +1,5 @@
 """Phase 1 Stage 1: layerwise decomposition of the verdict coordinate c = d.h at the hook into embedding / attention / MLP writes (all layers < hook),
-identity check, per-unit class-difference vectors, frozen layer selection and scope gate (docs/phase1_plan.md section 3).
+identity check, per-unit class-difference vectors, frozen layer selection and scope gate (docs/plans/phase1_plan.md section 3).
 Training prompts only. Usage: python scripts/phase1_stage1_decompose.py"""
 import json
 import time

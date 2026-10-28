@@ -1,4 +1,4 @@
-"""Phase 3 report: applies the preregistered gates (docs/phase3_plan.md section 8) mechanically and writes results/phase3/report_tables.md + criteria_verdict.json."""
+"""Phase 3 report: applies the preregistered gates (docs/plans/phase3_plan.md section 8) mechanically and writes results/phase3/report_tables.md + criteria_verdict.json."""
 import json
 from pathlib import Path
 
@@ -136,6 +136,6 @@ elif Mp: outcome = "MIXED: mediation established, specificity (V) not establishe
 elif partial: outcome = "MIXED / PARTIAL"
 else: outcome = "MEDIATION NOT SUPPORTED"
 verdict["outcome"] = outcome
-ml(f"\n## Outcome (mechanical, docs/phase3_plan.md section 8)\nM (both formats): {Mp}; G: {G.get('passed')}; V: {V.get('passed')} (evaluable: {V.get('evaluable')}).\n**{outcome}.**")
+ml(f"\n## Outcome (mechanical, docs/plans/phase3_plan.md section 8)\nM (both formats): {Mp}; G: {G.get('passed')}; V: {V.get('passed')} (evaluable: {V.get('evaluable')}).\n**{outcome}.**")
 (R / "report_tables.md").write_text("\n".join(md)); json.dump(verdict, open(R / "criteria_verdict.json", "w"), indent=1, default=lambda o: bool(o) if isinstance(o, np.bool_) else float(o))
 print("\n".join(md[-60:]))

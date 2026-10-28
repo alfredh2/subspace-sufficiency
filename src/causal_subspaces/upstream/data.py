@@ -1,4 +1,4 @@
-"""Aligned valid/invalid trials with validated token-span position sets for Phase 4 (docs/phase4_plan.md section 2-3)."""
+"""Aligned valid/invalid trials with validated token-span position sets for Phase 4 (docs/plans/phase4_plan.md section 2-3)."""
 import numpy as np
 
 from causal_subspaces import phase05 as P5

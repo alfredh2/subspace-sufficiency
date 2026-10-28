@@ -1,4 +1,4 @@
-"""Phase 5 report tables + mechanical criteria (docs/phase5_plan.md sections 6 and 9). Reads results/phase5/*.npz and selection.json."""
+"""Phase 5 report tables + mechanical criteria (docs/plans/phase5_plan.md sections 6 and 9). Reads results/phase5/*.npz and selection.json."""
 import json
 
 import numpy as np

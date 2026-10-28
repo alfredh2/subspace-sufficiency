@@ -1,4 +1,4 @@
-"""Aggregated interventional mediation quantities (docs/phase3_plan.md sections 2 and 7). Ratios are formed from AGGREGATED signed effects with paired
+"""Aggregated interventional mediation quantities (docs/plans/phase3_plan.md sections 2 and 7). Ratios are formed from AGGREGATED signed effects with paired
 bootstrap CIs, never averaged per example, and are 'undefined' below the validity floors."""
 import numpy as np
 from scipy import stats

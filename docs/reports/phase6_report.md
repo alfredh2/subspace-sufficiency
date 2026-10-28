@@ -1,6 +1,6 @@
 # Phase 6 report: where does the value content that H\* = {L19H10, L19H17, L19H31} read at the conclusion line come from?
 
-Plan: `docs/phase6_plan.md` (committed with the 12 approval amendments before implementation). Tables: `results/phase6/report_tables.md`; mechanical scoring: `results/phase6/criteria_verdict.json`; raw per-trial arrays: `results/phase6/*.npz`; frozen unseen set C: `results/phase6/set_c.json`. Earlier results, checkpoints, the frozen H\* and all earlier verdicts are unchanged. GPU: **2.72 h** of logged job time (soft budget 3–4 h; model loading adds a few tenths of an hour).
+Plan: `docs/plans/phase6_plan.md` (committed with the 12 approval amendments before implementation). Tables: `results/phase6/report_tables.md`; mechanical scoring: `results/phase6/criteria_verdict.json`; raw per-trial arrays: `results/phase6/*.npz`; frozen unseen set C: `results/phase6/set_c.json`. Earlier results, checkpoints, the frozen H\* and all earlier verdicts are unchanged. GPU: **2.72 h** of logged job time (soft budget 3–4 h; model loading adds a few tenths of an hour).
 
 ## Outcome: **MIXED**, reported as scored under the frozen criteria
 * **O1 (early, verdict-related origin): not supported.** The restricted-path sufficiency of the conclusion-body residual is already large at the embedding level, `F(4, Concl)` = 0.63 / 0.77 (set A `num_orig` / `num_rev`), 0.74 / 0.85 (B), 0.82 / 0.92 (C), but the same-label controls change the H\* readout about as much, so the early content is flagged **lexical (O1-lexical)** where the controls exist.

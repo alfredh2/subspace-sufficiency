@@ -1,4 +1,4 @@
-"""Phase 8 S2 step 3: mechanical application of the frozen criteria (docs/phase8_s2_protocol.md) to the saved confirm arrays. No model needed."""
+"""Phase 8 S2 step 3: mechanical application of the frozen criteria (docs/plans/phase8_s2_protocol.md) to the saved confirm arrays. No model needed."""
 import argparse, json, pickle
 import numpy as np
 from causal_subspaces.phase7.stage1 import class_gap

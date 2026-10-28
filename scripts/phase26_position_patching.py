@@ -1,4 +1,4 @@
-"""Phase 2.6 (EXPLORATORY): position-restricted V-only patching of the frozen S8 heads. Implements docs/phase26_plan.md.
+"""Phase 2.6 (EXPLORATORY): position-restricted V-only patching of the frozen S8 heads. Implements docs/plans/phase26_plan.md.
 Order: validation V1-V3 (stored diagnostics) -> mask checks -> self-patch noise floor (V4) -> full-mask reproduction of the Phase 2.5 V-only transfer ->
 restricted conditions -> same-label lexical controls -> statistics. Aborts at 27 minutes."""
 import json

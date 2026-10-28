@@ -1,4 +1,4 @@
-"""Applies the pre-registered Phase 0.6 decision rule (docs/phase06_plan.md) to results/phase06/evaluation.json and writes
+"""Applies the pre-registered Phase 0.6 decision rule (docs/plans/phase06_plan.md) to results/phase06/evaluation.json and writes
 results/phase06/report_tables.md. No thresholds are chosen here; they are the ones fixed in the plan."""
 import argparse
 import json

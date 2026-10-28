@@ -1,4 +1,4 @@
-"""Stage M (docs/phase7_plan.md section 11): decomposition of the layer-19 write at the summary rows into d_c-aligned, effect-optimal, principal and
+"""Stage M (docs/plans/phase7_plan.md section 11): decomposition of the layer-19 write at the summary rows into d_c-aligned, effect-optimal, principal and
 orthogonal components, with norm- and dose-matched controls. Pure tensor helpers + a gradient estimator that hooks a layer output."""
 import zlib
 from contextlib import contextmanager

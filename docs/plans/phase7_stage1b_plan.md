@@ -1,6 +1,6 @@
 # Phase 7 Stage 1b plan (PREREGISTERED; proposal for review, nothing implemented or run)
 
-**Status and standing.** Stage 1 (report `docs/phase7_stage1_report.md`, commits up to `9044f62`) is closed with its outcome intact: L PASS, S INCONCLUSIVE, G / N / M FAIL, panel "insufficient". Stage 1b is a **new, separately preregistered diagnostic stage**. It does not change, re-score or re-label any Stage 1 threshold, choice, verdict or artifact, and a Stage 1b success is new evidence, never a retroactive Stage 1 pass. Original Stage 2 is not started. Commits carry no co-author trailers; nothing is pushed.
+**Status and standing.** Stage 1 (report `docs/reports/phase7_stage1_report.md`, commits up to `9044f62`) is closed with its outcome intact: L PASS, S INCONCLUSIVE, G / N / M FAIL, panel "insufficient". Stage 1b is a **new, separately preregistered diagnostic stage**. It does not change, re-score or re-label any Stage 1 threshold, choice, verdict or artifact, and a Stage 1b success is new evidence, never a retroactive Stage 1 pass. Original Stage 2 is not started. Commits carry no co-author trailers; nothing is pushed.
 
 
 ## Amendments A1–A12 (approved review decisions; BINDING; they take precedence over any conflicting wording below; committed before any implementation)

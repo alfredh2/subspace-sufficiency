@@ -1,6 +1,6 @@
 # Phase 7 Stage 1b report: diagnosing why low-dimensional MVS discovery failed or was unstable
 
-Scope: Stage 1b only, as preregistered in `docs/phase7_stage1b_plan.md` (amendments A1–A14 committed before implementation or any fit; selection committed before any confirm content was evaluated). Stage 1 verdicts (L PASS, S INCONCLUSIVE, G/N/M FAIL, insufficient panel) are untouched; nothing below is a retroactive Stage 1 result. Stage 2–4 were not started. No pushes, no co-author trailers.
+Scope: Stage 1b only, as preregistered in `docs/plans/phase7_stage1b_plan.md` (amendments A1–A14 committed before implementation or any fit; selection committed before any confirm content was evaluated). Stage 1 verdicts (L PASS, S INCONCLUSIVE, G/N/M FAIL, insufficient panel) are untouched; nothing below is a retroactive Stage 1 result. Stage 2–4 were not started. No pushes, no co-author trailers.
 
 ## Headline
 * **Four-task gate: not met. 0 of 6 candidate tasks (L, S, G, N, M, A) are 1b-PASS at tier 1.** Per the preregistered rule, the recommendation is to **stop the multi-task fixed-basis programme and consolidate** (section 7).

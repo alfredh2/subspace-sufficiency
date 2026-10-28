@@ -1,5 +1,5 @@
 """Capture / restore of MLP unit activations (inputs of `down_proj`) and per-block verdict-direction writes, with an optional hook-order log.
-Ordering guarantee (docs/phase3_plan.md section 5): inside a decoder layer the module order is  o_proj(pre) -> self_attn(out) -> [residual add, norm]
+Ordering guarantee (docs/plans/phase3_plan.md section 5): inside a decoder layer the module order is  o_proj(pre) -> self_attn(out) -> [residual add, norm]
 -> mlp.down_proj(pre) -> mlp(out); unit capture/restore fires at down_proj(pre), i.e. AFTER the layer's attention output and BEFORE the MLP write."""
 from contextlib import contextmanager
 

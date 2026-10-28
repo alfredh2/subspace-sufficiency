@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "causal-subspaces"
+name = "subspace-sufficiency"
 version = "0.1.0"
-description = "From logical subspaces to native neurons: Phase 0 reproduction of the Qwen3-8B logic MVS"
+description = "Auditing what a fitted minimal viable subspace (MVS) licenses in Qwen3-8B: sufficiency vs necessity vs transplantability"
 requires-python = ">=3.10"
 dependencies = ["torch", "transformers", "numpy", "pandas", "matplotlib", "pyyaml", "datasets"]
 

@@ -1,4 +1,4 @@
-"""Unit populations for restoration / transplant (docs/phase3_plan.md section 4). All draws are deterministic (crc32 seeds) and exclude the native set.
+"""Unit populations for restoration / transplant (docs/plans/phase3_plan.md section 4). All draws are deterministic (crc32 seeds) and exclude the native set.
 Pre-intervention-defined: random, activation-matched, alignment-matched, complement, full layer, dose-response (top-k in Phase-1 rank).
 Response-selected (diagnostic only): delta-matched, oracle."""
 import zlib

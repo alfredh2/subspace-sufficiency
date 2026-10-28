@@ -1,4 +1,4 @@
-"""Batch runner for the 2x2 interventional cells (docs/phase3_plan.md section 2): clean (Y00), intervened (Y11), rescue (Y10: head intervention + units
+"""Batch runner for the 2x2 interventional cells (docs/plans/phase3_plan.md section 2): clean (Y00), intervened (Y11), rescue (Y10: head intervention + units
 restored to their clean activations), transplant (Y01: clean run with units overwritten by their intervened activations)."""
 from contextlib import ExitStack
 

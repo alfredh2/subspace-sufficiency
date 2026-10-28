@@ -1,4 +1,4 @@
-"""Phase 2 Stage 3: causal head ablations on the CONFIRMATORY set (resumable; budget-tracked; gate S3). docs/phase2_plan.md section 5.
+"""Phase 2 Stage 3: causal head ablations on the CONFIRMATORY set (resumable; budget-tracked; gate S3). docs/plans/phase2_plan.md section 5.
 Phases: A (regression, references, native conditions), B (k=8 controls, then gate S3), C (k grid controls + k=1 head-effect map), D (generation checks).
 Usage: python scripts/phase2_stage3_causal.py --phase A B C D"""
 import argparse

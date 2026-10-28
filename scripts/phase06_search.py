@@ -1,5 +1,5 @@
 """Phase 0.6 Part B: small pilot search for logic-selective subspaces orthogonal to the frozen consensus verdict direction.
-Objective and weights are pre-registered in docs/phase06_plan.md. Only the candidate basis is trained; the model is frozen.
+Objective and weights are pre-registered in docs/plans/phase06_plan.md. Only the candidate basis is trained; the model is frozen.
 Usage: python scripts/phase06_search.py --ranks 1 2 4 --seeds 0 1 --steps 300"""
 import argparse
 import json

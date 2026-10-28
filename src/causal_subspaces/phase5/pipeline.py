@@ -1,4 +1,4 @@
-"""Phase-5 setup, descriptive head statistics, null-set construction, scalar-model utilities (docs/phase5_plan.md)."""
+"""Phase-5 setup, descriptive head statistics, null-set construction, scalar-model utilities (docs/plans/phase5_plan.md)."""
 import json
 import zlib
 

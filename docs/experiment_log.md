@@ -58,27 +58,27 @@ Intact (.945/.977/.953) is seed-independent.
 
 ## 2026-10-21 — Phase 0.5 (verdict/answer-token confound; no retraining)
 Scripts: `phase05_formats_bias.py` (Exp 1+4), `phase05_directions.py` (Exp 2), `phase05_patching.py` (Exp 3), `phase05_patching_nonverdict.py` (Exp 3b), `phase05_report.py` (tables).
-Narrative + numbers: `docs/phase05_report.md`; tables: `results/phase05/report_tables.md`. Headline: retention is bound to the 1→valid mapping; ablation = shift toward the
+Narrative + numbers: `docs/reports/phase05_report.md`; tables: `results/phase05/report_tables.md`. Headline: retention is bound to the 1→valid mapping; ablation = shift toward the
 affirmative verdict with ranking (AUC≥0.95) preserved; same signature on the language localizer and PrOntoQA; the shared rank-1 direction alone reproduces the collapse across seeds;
 MVS patching transfers a verdict-like signal on matched pairs (random subspaces: nothing) but also on localizer/PrOntoQA, and not on verdict-free tasks.
 
 ## 2026-10-21 — Phase 0.6 (validity beyond the verdict direction)
-Plan with pre-registered decision rule: `docs/phase06_plan.md` (+ Amendment 1 for pilot 2). Report: `docs/phase06_report.md`. Outputs: `results/phase06/` (decodability.json, search/ and search2/ candidates, evaluation*.json, report_tables*.md).
+Plan with pre-registered decision rule: `docs/plans/phase06_plan.md` (+ Amendment 1 for pilot 2). Report: `docs/reports/phase06_report.md`. Outputs: `results/phase06/` (decodability.json, search/ and search2/ candidates, evaluation*.json, report_tables*.md).
 Result: validity decodable (~0.97) outside d_c, the MVS span and after 12 INLP directions; 12 searched candidates (2 pilots) give format-specific AUC drops with no transplantable patching effect; none passes criteria 1–4 → no credible logic-selective target found.
 
 ## 2026-10-21 — Phase 1 (native-unit implementation of the verdict direction)
-Frozen plan `docs/phase1_plan.md`; report `docs/phase1_report.md`; outputs `results/phase1/`. Stage 1: MLP share 0.557, selected layers 22/21/20/19; Stage 2–3: top-1 % |Δ| share 0.49 vs Haar 0.126, N_eff 60 vs 11.7k, top-512 reconstructs 98 % of the signed class difference;
+Frozen plan `docs/plans/phase1_plan.md`; report `docs/reports/phase1_report.md`; outputs `results/phase1/`. Stage 1: MLP share 0.557, selected layers 22/21/20/19; Stage 2–3: top-1 % |Δ| share 0.49 vs Haar 0.126, N_eff 60 vs 11.7k, top-512 reconstructs 98 % of the signed class difference;
 Stage 4: top-512 ablation reproduces 41 % / 59 % of full d_c-ablation gap loss (logic num_orig / num_rev), controls ≈0–0.18; C4 fails narrowly (Stroop +1.13 logits). Frozen rule → mixed/inconclusive (G-sparse, C-mixed). ~1.2 GPU-hours used.
 Operational notes: the first Stage-4 run crashed in the last cross-task step (key-name mismatch `localizer` vs `language_localizer`); fixed and rerun with resume (phase D only), no other conditions were affected. For the full d_c-ablation condition the captured residual precedes the intervention hook (hook order), so its stored `c`/`dh` are not used; its effect enters only through margins.
 
 ## 2026-10-21/22 — Phase 2 (attention heads and the verdict direction)
-Frozen plan `docs/phase2_plan.md`; report `docs/phase2_report.md`; outputs `results/phase2/`. Recompute gate FAILED (worst-case d_c-contribution error 2.7 %/2.4 % vs 2 %) → routing/content, source-position and A/V patching not run.
+Frozen plan `docs/plans/phase2_plan.md`; report `docs/reports/phase2_report.md`; outputs `results/phase2/`. Recompute gate FAILED (worst-case d_c-contribution error 2.7 %/2.4 % vs 2 %) → routing/content, source-position and A/V patching not run.
 Stage 1: S8 holds 78 % of |Δ| mass, reconstructs 87 % of the held-out net; Stage 3: S8 ablation E_gap 0.86/1.14 (controls ≤ 0.29), side effects fail C3; patching transfer 0.90 (random max 0.126 → H-patching fails the < 0.02 rule); Stage 4: attention+MLP combined 1.12 (sub-additive on logic, super-additive on localizer).
 Mechanical verdict: mixed / inconclusive. Bugs found and fixed during the phase: non-deterministic control seeds (k=8 controls rerun), silent skipping of all-position patches (aligned-only rerun). ≈3.0 of 4 GPU-hours.
 
 ## 2026-10-22 — Phase 2.5 (recompute diagnosis, source positions, exploratory A/V patching)
-Plan `docs/phase25_plan.md` (Amendments 1, 2); report `docs/phase25_report.md`; outputs `results/phase25/`. The Phase 2 verdict (mixed) and the failed gate are preserved. Diagnosis: the recompute-vs-SDPA discrepancy (rel. L2 1.8e-3) is at the bf16 output-quantisation floor (1.65e-3); masks/GQA/RoPE exact; HF eager is 7× further from SDPA; S8 contribution errors ≤ 1.5 % of own std.
+Plan `docs/plans/phase25_plan.md` (Amendments 1, 2); report `docs/reports/phase25_report.md`; outputs `results/phase25/`. The Phase 2 verdict (mixed) and the failed gate are preserved. Diagnosis: the recompute-vs-SDPA discrepancy (rel. L2 1.8e-3) is at the bf16 output-quantisation floor (1.65e-3); masks/GQA/RoPE exact; HF eager is 7× further from SDPA; S8 contribution errors ≤ 1.5 % of own std.
 Descriptive (model's own eager attention): positive S8 heads read their contribution from the conclusion's final token and the generation-prompt tail; routing/content accounting ≈ 4 % / 96 % for L22H5. Exploratory A/V patching (criterion V1–V5 fixed beforehand, all passed): value-only patch transfers 0.89, attention-weight-only 0.01, A+V = full-z (0.904).
 
 ## 2026-10-22 — Phase 2.6 (position-restricted value patching of S8; exploratory)
-Plan `docs/phase26_plan.md`; report `docs/phase26_report.md`; outputs `results/phase26/`. Primary (last query row): F(G1∪G2) = 0.900 / 0.915, F(Remaining) = −0.005 / −0.018, random count-matched ≤ 0.006 → localization criteria met in both formats. G1 and G2 alone ≈ 0.26–0.32 (super-additive jointly); all-query-row setting: F(Remaining) ≈ 0.4. ≈ 0.41 of 0.5 GPU-hours (one bug-induced rerun).
+Plan `docs/plans/phase26_plan.md`; report `docs/reports/phase26_report.md`; outputs `results/phase26/`. Primary (last query row): F(G1∪G2) = 0.900 / 0.915, F(Remaining) = −0.005 / −0.018, random count-matched ≤ 0.006 → localization criteria met in both formats. G1 and G2 alone ≈ 0.26–0.32 (super-additive jointly); all-query-row setting: F(Remaining) ≈ 0.4. ≈ 0.41 of 0.5 GPU-hours (one bug-induced rerun).

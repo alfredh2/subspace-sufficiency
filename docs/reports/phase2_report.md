@@ -1,7 +1,7 @@
 # Phase 2 report — attention-head contributions to the consensus *verdict direction*
 
 **Wording.** The target is the verdict direction `d_c` (hook `residual_index 23`), an accept/reject verdict channel shared by logic, the language localizer and PrOntoQA; nothing here supports "logic heads". Phase 0–1 results, checkpoints and the Phase 1 verdict (**mixed / inconclusive**) are unchanged.
-Plan and frozen rules: `docs/phase2_plan.md` (committed before any result). Tables: `results/phase2/report_tables.md`; criteria: `results/phase2/criteria_verdicts.json`. ≈ 3.0 of the 4 GPU-hours were used (≈1.2 h of that went to two bug-induced reruns, below). 85+ tests pass.
+Plan and frozen rules: `docs/plans/phase2_plan.md` (committed before any result). Tables: `results/phase2/report_tables.md`; criteria: `results/phase2/criteria_verdicts.json`. ≈ 3.0 of the 4 GPU-hours were used (≈1.2 h of that went to two bug-induced reruns, below). 85+ tests pass.
 
 ## Bottom line (frozen rule): **mixed / inconclusive — very strong geometric and causal evidence for a small set of native heads, but two preregistered criteria fail narrowly and the routing/content analysis was cancelled**
 | frozen component | result |

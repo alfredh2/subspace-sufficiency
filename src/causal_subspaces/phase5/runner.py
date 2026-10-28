@@ -1,4 +1,4 @@
-"""Batched execution of Phase-5 jobs (docs/phase5_plan.md): row-set head patches, row-restricted A/V patches, residual patches, summary-row pinning."""
+"""Batched execution of Phase-5 jobs (docs/plans/phase5_plan.md): row-set head patches, row-restricted A/V patches, residual patches, summary-row pinning."""
 import time
 import zlib
 from contextlib import ExitStack

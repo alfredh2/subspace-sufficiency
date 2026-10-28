@@ -1,4 +1,4 @@
-"""Phase 5 interventions at layer-19 attention (docs/phase5_plan.md): row-set head-output patch (model-native), row-restricted delta-form
+"""Phase 5 interventions at layer-19 attention (docs/plans/phase5_plan.md): row-set head-output patch (model-native), row-restricted delta-form
 A/V recompute patch, summary-row pinning of later components."""
 from contextlib import ExitStack, contextmanager
 

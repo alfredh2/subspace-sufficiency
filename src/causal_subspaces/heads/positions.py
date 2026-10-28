@@ -1,4 +1,4 @@
-"""Source-position groups for position-restricted value patching (Phase 2.6, docs/phase26_plan.md).
+"""Source-position groups for position-restricted value patching (Phase 2.6, docs/plans/phase26_plan.md).
 Groups (over the eligible = non-padding source positions of a prompt):
   G1 = final token of the conclusion line, G2 = generation-prompt tail excluding the query token, Self = the query (last) token,
   Remaining = complement of G1 u G2 (INCLUDES Self), RemExSelf = Remaining minus Self, All = every eligible position."""

@@ -1,5 +1,5 @@
 """Phase 8 S2 library: world loading, extended forward runner (layerwise lens, displacement), random-subspace samplers and matching,
-gap/necessity statistics. Operational definitions: docs/phase8_s2_protocol.md."""
+gap/necessity statistics. Operational definitions: docs/plans/phase8_s2_protocol.md."""
 import json, pickle
 import numpy as np, torch
 from contextlib import ExitStack

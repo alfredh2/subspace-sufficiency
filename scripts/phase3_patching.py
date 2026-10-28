@@ -1,4 +1,4 @@
-"""Phase 3 Stage 2: confirmatory interventional mediation by PATCHING (docs/phase3_plan.md), test-content aligned pairs, both formats.
+"""Phase 3 Stage 2: confirmatory interventional mediation by PATCHING (docs/plans/phase3_plan.md), test-content aligned pairs, both formats.
 S8_L22 with 20 draws per pre-intervention control family; L22H5 and S8 (joint) with reduced controls. Usage: python scripts/phase3_patching.py"""
 import json
 import time

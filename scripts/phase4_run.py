@@ -1,4 +1,4 @@
-"""Phase 4 staged runner (docs/phase4_plan.md). Usage: python scripts/phase4_run.py {pilot|stage2|stage3|freeze|repl|stage5|stage4}"""
+"""Phase 4 staged runner (docs/plans/phase4_plan.md). Usage: python scripts/phase4_run.py {pilot|stage2|stage3|freeze|repl|stage5|stage4}"""
 import json
 import os
 import sys
@@ -96,7 +96,7 @@ elif stage == "stage3":
     log_budget("stage3", time.time() - T0)
 
 elif stage == "freeze":
-    on = onsets_A(); cfgf = dict(files=PL.file_hashes(PL.FROZEN_FILES), onsets_A=on, grid_B=GRID_B, note="frozen before any Replication-B computation (docs/phase4_plan.md section 8)")
+    on = onsets_A(); cfgf = dict(files=PL.file_hashes(PL.FROZEN_FILES), onsets_A=on, grid_B=GRID_B, note="frozen before any Replication-B computation (docs/plans/phase4_plan.md section 8)")
     json.dump(cfgf, open(OUT / "frozen_config.json", "w"), indent=1, default=float); print("frozen", json.dumps(on, default=float))
 
 elif stage == "repl":

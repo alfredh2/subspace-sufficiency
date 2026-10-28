@@ -1,4 +1,4 @@
-"""Phase 7 Stage-0 falsification pilot (docs/phase7_plan.md section 11): is native-basis concentration of the verdict-direction write specific to the behaviour,
+"""Phase 7 Stage-0 falsification pilot (docs/plans/phase7_plan.md section 11): is native-basis concentration of the verdict-direction write specific to the behaviour,
 or does it also arise for shuffled labels, random / irrelevant target directions and verdict-irrelevant contrasts? Logic data only; held-out evaluation.
 Usage: python scripts/phase7_stage0.py"""
 import json

@@ -1,5 +1,5 @@
 """Phase 0.6 helpers: residual collection, linear probes / INLP, subspaces orthogonal to the verdict direction,
-and the logic-selective search objective (pre-registered in docs/phase06_plan.md)."""
+and the logic-selective search objective (pre-registered in docs/plans/phase06_plan.md)."""
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -159,7 +159,7 @@ def ctrl_loss(m, m0, lpm, lpm0):
 
 def search_loss(m_valid, m_invalid, m_valid0, m_invalid0, lpmass_pair, lpmass_pair0, ctrl_m, ctrl_m0, ctrl_lpm, ctrl_lpm0,
                 gap_scale: float, w_bias: float = 0.5, w_ctrl: float = 1.0) -> dict:
-    """Full objective = L_disc + w_bias*L_bias + w_ctrl*L_ctrl (weights fixed in docs/phase06_plan.md)."""
+    """Full objective = L_disc + w_bias*L_bias + w_ctrl*L_ctrl (weights fixed in docs/plans/phase06_plan.md)."""
     pl = pair_loss(m_valid, m_invalid, m_valid0, m_invalid0, lpmass_pair, lpmass_pair, lpmass_pair0, lpmass_pair0, gap_scale, w_bias)
     lc = ctrl_loss(ctrl_m, ctrl_m0, ctrl_lpm, ctrl_lpm0)
     return dict(total=pl["total"] + w_ctrl * lc, disc=pl["disc"], bias=pl["bias"], ctrl=lc)

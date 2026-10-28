@@ -1,4 +1,4 @@
-"""Transfer ratios with pair-level and content-clustered bootstrap, leave-one-content-out ranges, onset detection (docs/phase4_plan.md sections 1-2)."""
+"""Transfer ratios with pair-level and content-clustered bootstrap, leave-one-content-out ranges, onset detection (docs/plans/phase4_plan.md sections 1-2)."""
 import numpy as np
 
 

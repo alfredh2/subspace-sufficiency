@@ -1,5 +1,5 @@
 """Phase 2 Stage 3 (patching): counterfactual patching of head OUTPUTS z_h (full-z only; A-only / V-only patching and routing/content are cancelled because
-the attention-recompute gate failed). Aligned pairs only for all-position patches (docs/phase2_plan.md section 4). Reports direct (immediate) and downstream
+the attention-recompute gate failed). Aligned pairs only for all-position patches (docs/plans/phase2_plan.md section 4). Reports direct (immediate) and downstream
 (after recomputation) changes of the verdict coordinate separately. Usage: python scripts/phase2_patching.py"""
 import argparse
 import json

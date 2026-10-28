@@ -1,4 +1,4 @@
-"""Phase 5 staged runner (docs/phase5_plan.md). Usage: python scripts/phase5_run.py {pilot|select|stage1|stage2|stage3|freeze|stage4}"""
+"""Phase 5 staged runner (docs/plans/phase5_plan.md). Usage: python scripts/phase5_run.py {pilot|select|stage1|stage2|stage3|freeze|stage4}"""
 import json
 import os
 import sys
@@ -15,7 +15,7 @@ from causal_subspaces.utils.config import ROOT
 
 stage = sys.argv[1]; T0 = time.time(); OUT = PL.OUT; OUT.mkdir(exist_ok=True)
 FMTS = ("num_orig", "num_rev")
-FROZEN = ["src/causal_subspaces/phase5/patching.py", "src/causal_subspaces/phase5/runner.py", "src/causal_subspaces/phase5/pipeline.py", "src/causal_subspaces/upstream/patching.py", "src/causal_subspaces/upstream/stats.py", "src/causal_subspaces/upstream/data.py", "src/causal_subspaces/upstream/pipeline.py", "scripts/phase5_run.py", "docs/phase5_plan.md", "results/phase5/selection.json"]
+FROZEN = ["src/causal_subspaces/phase5/patching.py", "src/causal_subspaces/phase5/runner.py", "src/causal_subspaces/phase5/pipeline.py", "src/causal_subspaces/upstream/patching.py", "src/causal_subspaces/upstream/stats.py", "src/causal_subspaces/upstream/data.py", "src/causal_subspaces/upstream/pipeline.py", "scripts/phase5_run.py", "docs/plans/phase5_plan.md", "results/phase5/selection.json"]
 
 
 def log_budget(name, secs):
@@ -196,7 +196,7 @@ elif stage == "cross":
     print("cross done", flush=True)
 
 elif stage == "freeze":
-    fz = dict(files=UP.file_hashes(FROZEN), note="frozen before any Replication-B (set B) computation (docs/phase5_plan.md)")
+    fz = dict(files=UP.file_hashes(FROZEN), note="frozen before any Replication-B (set B) computation (docs/plans/phase5_plan.md)")
     json.dump(fz, open(OUT / "frozen_config.json", "w"), indent=1); print("frozen", len(fz["files"]), "files")
 
 else:

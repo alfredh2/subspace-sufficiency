@@ -1,4 +1,4 @@
-"""Phase 2.5 step 1: diagnose the worst-case attention-recompute error on real padded Qwen3-8B batches (docs/phase25_plan.md).
+"""Phase 2.5 step 1: diagnose the worst-case attention-recompute error on real padded Qwen3-8B batches (docs/plans/phase25_plan.md).
 All comparisons use the SAME bf16 layer input. References: the model's own SDPA output (captured at o_proj), HF eager on identical q/k/v, my own SDPA calls,
 and an FP32 reference (projections, q/k norm, RoPE and attention in fp32)."""
 import json

@@ -1,4 +1,4 @@
-"""Phase 2 Stage 4: attention heads + MLP units, same confirmatory examples and the same d_c-ablation denominator (docs/phase2_plan.md section 6).
+"""Phase 2 Stage 4: attention heads + MLP units, same confirmatory examples and the same d_c-ablation denominator (docs/plans/phase2_plan.md section 6).
 Conditional on gate S3. Usage: python scripts/phase2_stage4_combined.py"""
 import json
 import time

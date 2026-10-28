@@ -1,4 +1,4 @@
-"""Shared Phase-4 setup, job builders, raw-array IO and curve analysis (docs/phase4_plan.md)."""
+"""Shared Phase-4 setup, job builders, raw-array IO and curve analysis (docs/plans/phase4_plan.md)."""
 import hashlib
 import json
 import time
@@ -140,4 +140,4 @@ def file_hashes(paths):
 
 
 FROZEN_FILES = ["src/causal_subspaces/upstream/patching.py", "src/causal_subspaces/upstream/stats.py", "src/causal_subspaces/upstream/data.py", "src/causal_subspaces/upstream/runner.py",
-                "src/causal_subspaces/upstream/pipeline.py", "scripts/phase4_run.py", "docs/phase4_plan.md"]
+                "src/causal_subspaces/upstream/pipeline.py", "scripts/phase4_run.py", "docs/plans/phase4_plan.md"]

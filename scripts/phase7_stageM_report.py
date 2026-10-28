@@ -1,4 +1,4 @@
-"""Stage M report: tables and the preregistered M-A / M-B / M-C rules (docs/phase7_plan.md section 11) plus the geometric-versus-causal head ranking comparison."""
+"""Stage M report: tables and the preregistered M-A / M-B / M-C rules (docs/plans/phase7_plan.md section 11) plus the geometric-versus-causal head ranking comparison."""
 import json
 
 import numpy as np

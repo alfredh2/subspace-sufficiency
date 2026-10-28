@@ -1,4 +1,4 @@
-"""Phase 6 job runner (docs/phase6_plan.md): two-pass restricted origin experiments, unrestricted residual/component patches, pinning with accounting,
+"""Phase 6 job runner (docs/plans/phase6_plan.md): two-pass restricted origin experiments, unrestricted residual/component patches, pinning with accounting,
 d_c / orthogonal decomposition of the layer-19 write."""
 import time
 import zlib

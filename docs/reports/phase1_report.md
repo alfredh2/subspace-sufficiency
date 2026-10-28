@@ -1,7 +1,7 @@
 # Phase 1 report — native MLP-unit implementation of the consensus *verdict direction*
 
 **Scope and wording.** The object is the *verdict direction* `d_c` (consensus rank-1 direction of the three Phase-0 MVS checkpoints, hook `residual_index 23`). It is an accept/reject verdict channel, shared by logic, the language localizer and PrOntoQA; nothing here supports "logic neurons".
-All decision rules were frozen in `docs/phase1_plan.md` (committed before any result). Tables: `results/phase1/report_tables.md`; criteria: `results/phase1/criteria_verdicts.json`. Pilot cost ≈1.2 GPU-hours of the 5-hour ceiling; no exhaustive run was launched.
+All decision rules were frozen in `docs/plans/phase1_plan.md` (committed before any result). Tables: `results/phase1/report_tables.md`; criteria: `results/phase1/criteria_verdicts.json`. Pilot cost ≈1.2 GPU-hours of the 5-hour ceiling; no exhaustive run was launched.
 Code: `src/causal_subspaces/{neurons,rotations,interventions}`, `scripts/phase1_*.py`; 74 tests pass (decomposition identities, down-proj capture, ablation ≡ manual surgery, k=0 no-op, layer-ordering guard, direct-change identity, Haar orthogonality/reproducibility, function-preserving rotation, `Δ^rot=(Rδ)⊙(Rg)`, sampler-vs-Haar KS, structured rotation, rank-k rotated ablation ≡ explicit projection, concentration/reconstruction closed forms, matched-control samplers, empirical-p/bootstrap).
 
 ## Bottom line (frozen rule): **mixed / inconclusive — geometrically sparse, causally selective but incomplete**

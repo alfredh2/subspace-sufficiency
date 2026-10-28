@@ -1,6 +1,6 @@
 # Phase 3 report: do the layer-22 MLP units (U22) mediate the late attention heads' effect on the verdict direction?
 
-Plan: `docs/phase3_plan.md`. Auto-generated tables: `results/phase3/report_tables.md`; gate verdicts: `results/phase3/criteria_verdict.json`.
+Plan: `docs/plans/phase3_plan.md`. Auto-generated tables: `results/phase3/report_tables.md`; gate verdicts: `results/phase3/criteria_verdict.json`.
 Compute: about 0.91 GPU-hours of the 1.5 h cap (`results/phase3/budget.json`). No upstream tracing was started.
 
 ## Design in one paragraph

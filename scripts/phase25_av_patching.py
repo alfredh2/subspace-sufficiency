@@ -1,5 +1,5 @@
 """Phase 2.5 step 3 (EXPLORATORY): A-only / V-only / A+V head patching on alignment-validated valid/invalid pairs, gated by the Amendment-2 criterion
-(docs/phase25_plan.md). V1-V3 are re-checked from the stored diagnostics; V4 (self-patch noise floor) is measured BEFORE any A/V effect is computed and stops the
+(docs/plans/phase25_plan.md). V1-V3 are re-checked from the stored diagnostics; V4 (self-patch noise floor) is measured BEFORE any A/V effect is computed and stops the
 script if it fails. Nothing here can change the Phase 2 verdict."""
 import json
 import time

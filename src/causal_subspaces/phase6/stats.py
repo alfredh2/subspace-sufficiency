@@ -1,4 +1,4 @@
-"""Curve statistics for Phase 6 (docs/phase6_plan.md section 11): signed transfer curves with pair/content replicates, F and R normalisations, onsets,
+"""Curve statistics for Phase 6 (docs/plans/phase6_plan.md section 11): signed transfer curves with pair/content replicates, F and R normalisations, onsets,
 closing index, trajectory classes, RMS ratios."""
 import numpy as np
 

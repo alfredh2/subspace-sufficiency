@@ -1,4 +1,4 @@
-"""Phase 2 hard gate: attention recompute vs the original implementation on REAL Qwen3-8B padded batches (docs/phase2_plan.md section 2).
+"""Phase 2 hard gate: attention recompute vs the original implementation on REAL Qwen3-8B padded batches (docs/plans/phase2_plan.md section 2).
 Interpretation of the preregistered tolerances: per layer, relative L2 error over all real query positions and heads <= 0.02, median per-head relative
 error <= 0.005, attention rows sum to 1 +- 1e-3, error of the d_c contribution <= 2 % of its std. Also measures the self-patch noise floor of
 attention_patch on final-answer margins."""
